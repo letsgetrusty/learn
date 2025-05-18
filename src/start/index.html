@@ -6,54 +6,63 @@
     <title>RustEdu</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body class="min-h-screen">
-    <div class="flex flex-col md:flex-row min-h-screen">
+  <body class="min-h-screen flex flex-col relative">
+    <!-- Navigation -->
+    <nav class="absolute top-0 left-0 right-0 z-50 p-4">
+      <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <img src="lgr_logo.png" alt="LGR Logo" class="h-10 w-auto mr-3">
+          <!-- <span class="text-2xl font-bold text-white">RustEdu</span> -->
+        </div>
+        <!-- Navigation Links -->
+        <div class="flex space-x-6 md:space-x-8 text-base md:text-md text-white">
+          <a href="#" class="hover:underline">About</a>
+          <a href="#" class="hover:underline">Courses</a>
+          <a href="#" class="hover:underline">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex flex-col md:flex-row flex-grow">
       <!-- Left Side: Company -->
-      <div class="w-full md:w-1/2 flex flex-col justify-between bg-gradient-to-br from-slate-800 to-slate-700 p-8 md:p-12 text-white">
-        <div>
-          <!-- Logo -->
-          <div class="flex items-center mb-12 md:mb-16 justify-center md:justify-start">
-            <div class="w-8 h-8 border-2 border-white rounded-full flex items-center justify-center mr-3">
-              <div class="w-4 h-4 border-2 border-white rounded-full"></div>
-            </div>
-            <span class="text-2xl font-bold">RustEdu</span>
-          </div>
-          <div class="mt-8 md:mt-16 text-center md:text-left">
-            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">Are you a<br class="hidden md:block" />company?</h1>
+      <div class="w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-700 p-8 md:p-12 text-white">
+        <div class="max-w-xl w-full">
+          <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">Are you a company?</h1>
             <p class="text-lg md:text-xl mb-8">Upskill your team with industry-leading Rust training tailored for enterprise needs.</p>
-            <ul class="mb-10 space-y-3 text-left inline-block">
+            <ul class="mb-10 space-y-3 inline-block text-left">
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Custom training programs for your team</li>
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Consulting on Rust implementation</li>
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Enterprise-grade support</li>
             </ul>
-            <div class="flex justify-center md:justify-start">
+            <div class="flex justify-center">
               <button class="bg-white text-slate-800 font-semibold px-8 py-3 rounded-lg shadow hover:bg-slate-100 transition">Learn More</button>
             </div>
           </div>
         </div>
-        <footer class="text-center text-slate-400 text-sm mt-12 md:mt-16">© 2023 RustEdu. <span class="text-slate-300">All rights reserved.</span></footer>
       </div>
       <!-- Right Side: Engineer -->
-      <div class="w-full md:w-1/2 flex flex-col justify-between bg-gradient-to-br from-orange-900 to-orange-700 p-8 md:p-12 text-white relative">
-        <nav class="absolute md:static top-8 right-8 md:top-12 md:right-12 flex justify-center md:justify-end space-x-6 md:space-x-8 text-base md:text-lg w-full md:w-auto">
-          <a href="#" class="hover:underline">About</a>
-          <a href="#" class="hover:underline">Courses</a>
-          <a href="#" class="hover:underline">Contact</a>
-        </nav>
-        <div class="mt-20 md:mt-28 text-center md:text-left">
-          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">Are you an<br class="hidden md:block" />engineer?</h1>
-          <p class="text-lg md:text-xl mb-8">Master Rust programming with our comprehensive courses and hands-on projects.</p>
-          <ul class="mb-10 space-y-3 text-left inline-block">
-            <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Self-paced learning paths</li>
-            <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Real-world project portfolio</li>
-            <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Community support & mentorship</li>
-          </ul>
-          <div class="flex justify-center md:justify-start">
-            <button class="bg-white text-orange-900 font-semibold px-8 py-3 rounded-lg shadow hover:bg-orange-100 transition">Start Learning</button>
+      <div class="w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-orange-900 to-orange-700 p-8 md:p-12 text-white">
+        <div class="max-w-xl w-full">
+          <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">Are you an engineer?</h1>
+            <p class="text-lg md:text-xl mb-8">Master Rust programming with our comprehensive courses and hands-on projects.</p>
+            <ul class="mb-10 space-y-3 inline-block text-left">
+              <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Self-paced learning paths</li>
+              <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Real-world project portfolio</li>
+              <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Community support & mentorship</li>
+            </ul>
+            <div class="flex justify-center">
+              <button class="bg-white text-orange-900 font-semibold px-8 py-3 rounded-lg shadow hover:bg-orange-100 transition">Start Learning</button>
+            </div>
           </div>
         </div>
-        <div></div>
       </div>
     </div>
+    <!-- Footer -->
+    <footer class="absolute bottom-0 left-0 right-0 text-center text-slate-400 text-sm py-4 z-50">
+      © 2025 LET'S GET RUSTY All rights reserved.
+    </footer>
   </body>
 </html>
