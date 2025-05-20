@@ -10,11 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #181c23;
+            --primary-color: #111827;
             --secondary-color: #232936;
             --accent-color: #ff8e3d;
             --accent-hover: #ff8e3d;
-            --text-color: #f8fafc;
+            --text-color: #f9fafb;
             --text-secondary: #a0aec0;
             --border-color: #232936;
             --hover-color: #232936;
@@ -22,10 +22,11 @@
             --shadow-color: rgba(0, 0, 0, 0.18);
             --card-bg: #232936;
             --card-hover: #232936;
-            --header-bg: #181c23;
+            --header-bg: #111827;
             --toggle-bg: #2d3748;
             --toggle-thumb: #ff8e3d;
             --toggle-border: #2d3748;
+            --header-text-color: #e5e7eb;
         }
         
         .light-mode {
@@ -45,6 +46,7 @@
             --toggle-bg: #e2e8f0;
             --toggle-thumb: #f97316;
             --toggle-border: #e2e8f0;
+            --header-text-color: var(--text-color);
         }
 
         * {
@@ -63,13 +65,14 @@
         }
 
         .navbar {
-            width: 100%;
-            background: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 0;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 10;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: var(--header-bg);
+            color: var(--header-text-color);
+            height: 4.75rem;
         }
         .navbar-inner {
             max-width: 1400px;
@@ -79,6 +82,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            height: 100%;
         }
         .navbar-left {
             display: flex;
@@ -92,8 +96,8 @@
             color: var(--accent-color);
             background: var(--card-bg);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -125,7 +129,7 @@
             margin-left: auto;
         }
         .nav-link {
-            color: var(--text-color);
+            color: var(--header-text-color);
             text-decoration: none;
             font-weight: 400;
             font-size: 0.97rem;
@@ -150,8 +154,8 @@
         }
         .toggle-switch {
             position: relative;
-            width: 48px;
-            height: 24px;
+            width: 40px;
+            height: 20px;
             background: var(--toggle-bg);
             border-radius: 12px;
             cursor: pointer;
@@ -164,9 +168,9 @@
         .toggle-thumb {
             position: absolute;
             top: 2px;
-            left: 26px;
-            width: 20px;
-            height: 20px;
+            left: 22px;
+            width: 16px;
+            height: 16px;
             background: var(--accent-color);
             border-radius: 50%;
             transition: left 0.3s, background 0.3s;
@@ -346,6 +350,87 @@
                 padding: 1rem 1rem;
             }
         }
+
+        .banner {
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 0.75rem 2rem;
+            text-align: center;
+            position: fixed;
+            top: 4.75rem;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .banner.visible {
+            display: flex;
+        }
+        .banner:not(.visible) {
+            display: none;
+        }
+        .banner-toggle {
+            position: fixed;
+            right: 0;
+            top: 4.75rem;
+            background: rgba(255, 142, 61, 0.8); /* faded accent color */
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 1.3rem;
+            font-weight: 400;
+            font-family: Arial, 'Helvetica Neue', Arial, sans-serif;
+            opacity: 1;
+            border-radius: 999px 0 0 999px;
+            box-shadow: none;
+            text-decoration: none;
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, opacity 0.2s;
+            letter-spacing: 0.01em;
+            padding: 0;
+        }
+        .banner-toggle.show-message {
+            display: flex;
+        }
+        .banner-toggle:hover {
+            background: var(--accent-color);
+            opacity: 1;
+        }
+        .banner-content {
+            flex: 1;
+            text-align: center;
+        }
+        .banner-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.25rem;
+            font-size: 1.25rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .banner-close:hover {
+            opacity: 1;
+        }
+        /* Remove the container margin since banner is now relative */
+        .container {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -366,7 +451,12 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="banner visible" id="welcome-banner">
+        <div class="banner-content">Congrats, you've applied to join our Rust Live Accelerator program! Enjoy your free gift below!</div>
+        <button class="banner-close" id="banner-close" aria-label="Close banner">×</button>
+    </div>
+    <button class="banner-toggle" id="banner-toggle" aria-label="Show message">&#8249;</button>
+    <div class="container" style="padding-top:7.5rem">
         <div class="header">
             <h1>Rust Career Starter Pack</h1>
             <p>Your journey to becoming a Rust developer starts here</p>
@@ -648,6 +738,36 @@
                 loadVideo(playlistItems[0].dataset.videoId);
             }
         });
+
+        // Banner Management
+        function initBanner() {
+            const welcomeBanner = document.getElementById('welcome-banner');
+            const bannerToggle = document.getElementById('banner-toggle');
+            const bannerClose = document.getElementById('banner-close');
+
+            function showBanner() {
+                welcomeBanner.classList.add('visible');
+                bannerToggle.classList.remove('show-message');
+            }
+
+            function hideBanner() {
+                welcomeBanner.classList.remove('visible');
+                bannerToggle.classList.add('show-message');
+            }
+
+            // Always show banner on page load
+            showBanner();
+
+            // Add click handlers
+            bannerToggle.addEventListener('click', showBanner);
+            bannerClose.addEventListener('click', hideBanner);
+
+            // Add show banner function to window for potential reuse
+            window.showBanner = showBanner;
+        }
+
+        // Initialize banner
+        initBanner();
     </script>
 </body>
 </html>
