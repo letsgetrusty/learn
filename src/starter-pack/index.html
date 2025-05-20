@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#181c23">
+    <title>Rust Career Starter Pack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #181c23;
+            --secondary-color: #232936;
+            --accent-color: #ff8e3d;
+            --accent-hover: #ff8e3d;
+            --text-color: #f8fafc;
+            --text-secondary: #a0aec0;
+            --border-color: #232936;
+            --hover-color: #232936;
+            --active-color: #2d3748;
+            --shadow-color: rgba(0, 0, 0, 0.18);
+            --card-bg: #232936;
+            --card-hover: #232936;
+            --header-bg: #181c23;
+            --toggle-bg: #2d3748;
+            --toggle-thumb: #ff8e3d;
+            --toggle-border: #2d3748;
+        }
+        
+        .light-mode {
+            --primary-color: #f6f8fa;
+            --secondary-color: #fff;
+            --accent-color: #f97316;
+            --accent-hover: #ea580c;
+            --text-color: #232936;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --hover-color: #f1f5f9;
+            --active-color: #f1f5f9;
+            --shadow-color: rgba(0,0,0,0.06);
+            --card-bg: #fff;
+            --card-hover: #f1f5f9;
+            --header-bg: #fff;
+            --toggle-bg: #e2e8f0;
+            --toggle-thumb: #f97316;
+            --toggle-border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .navbar {
+            width: 100%;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .navbar-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .navbar-logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.03em;
+            color: var(--accent-color);
+            background: var(--card-bg);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .navbar-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        .navbar-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-left: auto;
+        }
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.97rem;
+            padding: 0;
+            border-radius: 4px;
+            transition: color 0.18s;
+            display: inline-block;
+            line-height: 1.2;
+        }
+        .nav-link:hover {
+            color: var(--accent-color);
+            background: none;
+        }
+        .nav-link.active {
+            color: var(--text-color);
+            cursor: default;
+        }
+        .nav-link.disabled {
+            color: var(--text-secondary);
+            cursor: default;
+            pointer-events: none;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background: var(--toggle-bg);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            border: 1.5px solid var(--toggle-border);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        .toggle-thumb {
+            position: absolute;
+            top: 2px;
+            left: 26px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            transition: left 0.3s, background 0.3s;
+            box-shadow: 0 1px 4px var(--shadow-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .toggle-switch.active .toggle-thumb {
+            left: 2px;
+            background: var(--accent-color);
+        }
+        .toggle-icon { display: none; }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.25rem;
+            padding: 0.5rem 0 0.5rem 0;
+        }
+        .header h1 {
+            color: var(--text-color);
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        .content {
+            display: flex;
+            gap: 2rem;
+            min-height: calc(100vh - 200px);
+        }
+
+        .playlist {
+            flex: 1;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+            box-shadow: 0 4px 16px var(--shadow-color);
+            order: 1;
+            border: 1px solid var(--border-color);
+        }
+        .playlist-header {
+            padding: 1.5rem 1.5rem 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--secondary-color);
+        }
+        .playlist-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: -0.01em;
+        }
+        .playlist-item {
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--card-bg);
+            border-left: 3px solid transparent;
+        }
+        .playlist-item:hover {
+            background-color: var(--card-hover);
+        }
+        .playlist-item.active {
+            background-color: var(--active-color);
+            border-left: 3px solid var(--accent-color);
+        }
+        .playlist-item-number {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            min-width: 24px;
+        }
+        .playlist-item-info {
+            flex: 1;
+        }
+        .playlist-item-info h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+            color: var(--text-color);
+        }
+        .playlist-item-info p {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .video-container {
+            flex: 2;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px var(--shadow-color);
+            order: 2;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: #000;
+            position: relative;
+        }
+        .video-info {
+            padding: 1.5rem 2rem;
+        }
+        .video-info h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        .video-info p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 1rem;
+            }
+            .navbar-inner {
+                padding: 0.75rem 1rem;
+            }
+            .content {
+                flex-direction: column;
+            }
+            .video-container, .playlist {
+                flex: none;
+                width: 100%;
+                order: unset;
+            }
+            .playlist {
+                max-height: 500px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 640px) {
+            .navbar-inner {
+                padding: 0.75rem 0.5rem;
+            }
+            .header {
+                padding: 1rem 0 0.5rem 0;
+                margin-bottom: 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .playlist-item {
+                padding: 0.75rem 1rem;
+            }
+            .video-info {
+                padding: 1rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-inner">
+            <div class="navbar-left">
+                <div class="navbar-logo" role="img" aria-label="Let's Get Rusty Logo"><img src="lgr_logo.png" alt="Let's Get Rusty Logo"></div>
+            </div>
+            <div class="navbar-center">
+                <a href="#" class="nav-link active" aria-current="page">Home</a>
+                <a href="https://youtube.com/letsgetrusty" class="nav-link" target="_blank" rel="noopener">YouTube</a>
+                <a href="https://jobs.letsgetrusty.com" class="nav-link" target="_blank" rel="noopener">Job Board</a>
+            </div>
+            <div class="navbar-right">
+                <button class="toggle-switch" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+                    <span class="toggle-thumb"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="header">
+            <h1>Rust Career Starter Pack</h1>
+            <p>Your journey to becoming a Rust developer starts here</p>
+        </div>
+        <div class="content">
+            <div class="playlist" role="list" aria-label="Video playlist">
+                <div class="playlist-header">
+                    <h2>Playlist</h2>
+                </div>
+                <div class="playlist-item active" data-video-id="VIDEO_ID_1" role="listitem" tabindex="0">
+                    <span class="playlist-item-number" aria-hidden="true">01</span>
+                    <div class="playlist-item-info">
+                        <h3>The 3-step Rust roadmap revisited</h3>
+                        <p>Exact steps to becoming a Rust developer</p>
+                    </div>
+                </div>
+                <div class="playlist-item" data-video-id="VIDEO_ID_2">
+                    <span class="playlist-item-number">02</span>
+                    <div class="playlist-item-info">
+                        <h3>Top 4 mistakes when learning Rust</h3>
+                        <p>A few big no-no's when learning Rust</p>
+                    </div>
+                </div>
+                <div class="playlist-item" data-video-id="VIDEO_ID_3">
+                    <span class="playlist-item-number">03</span>
+                    <div class="playlist-item-info">
+                        <h3>Understanding the Rust job market</h3>
+                        <p>Where & how Rust is used in the real world</p>
+                    </div>
+                </div>
+                <div class="playlist-item" data-video-id="VIDEO_ID_4">
+                    <span class="playlist-item-number">04</span>
+                    <div class="playlist-item-info">
+                        <h3>Why & how our students succeed in Rust</h3>
+                        <p>How you can also have a killer Rust career</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-container">
+                <div class="video-player">
+                    <video id="main-video" 
+                            width="100%" 
+                            height="100%" 
+                            controls>
+                        <source src="https://d11n7da8rpqbjy.cloudfront.net/letsgetrusty/31009813_17476423026503-step_roadmap.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-info">
+                    <h2 id="video-title">Loading...</h2>
+                    <p id="video-description">Select a video from the playlist to start learning.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Constants and Configuration
+        const VIDEO_DATA = {
+            'VIDEO_ID_1': {
+                title: 'The 3-step Rust roadmap revisited',
+                description: 'Exact steps to becoming a Rust developer',
+                source: 'custom',
+                videoId: 'https://d11n7da8rpqbjy.cloudfront.net/letsgetrusty/31009813_17476423026503-step_roadmap.mp4'
+            },
+            'VIDEO_ID_2': {
+                title: 'Top 4 mistakes when learning Rust',
+                description: 'A few big no-no\'s when learning Rust',
+                source: 'coming-soon',
+                releaseDate: '2025-06-01'
+            },
+            'VIDEO_ID_3': {
+                title: 'Understanding the Rust job market',
+                description: 'Where & how Rust is used in the real world',
+                source: 'coming-soon',
+                releaseDate: '2025-06-15'
+            },
+            'VIDEO_ID_4': {
+                title: 'Why & how our students succeed in Rust',
+                description: 'How you can also have a killer Rust career',
+                source: 'coming-soon',
+                releaseDate: '2025-07-01'
+            }
+        };
+
+        // Theme Management
+        const themeToggle = document.getElementById('theme-toggle');
+        const toggleThumb = themeToggle.querySelector('.toggle-thumb');
+
+        function setTheme(mode) {
+            const isDark = mode === 'dark';
+            document.body.classList.toggle('light-mode', !isDark);
+            themeToggle.classList.toggle('active', !isDark);
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#181c23' : '#f6f8fa');
+            localStorage.setItem('theme', mode);
+        }
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        setTheme(initialTheme);
+
+        // Theme event listeners
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.contains('light-mode');
+            setTheme(isDark ? 'dark' : 'light');
+        });
+
+        // Video Management
+        document.addEventListener('DOMContentLoaded', function() {
+            const playlistItems = document.querySelectorAll('.playlist-item');
+            const videoTitle = document.getElementById('video-title');
+            const videoDescription = document.getElementById('video-description');
+
+            function createVideoPoster(title) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 1280;  // 16:9 aspect ratio
+                canvas.height = 720;
+                const ctx = canvas.getContext('2d');
+                
+                // Fill background
+                ctx.fillStyle = '#000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Add text
+                ctx.fillStyle = '#fff';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                // Add title with fallback fonts
+                ctx.font = 'bold 48px Inter, -apple-system, BlinkMacSystemFont, sans-serif';
+                const words = title.split(' ');
+                let lines = [];
+                let currentLine = words[0];
+                
+                // Calculate max width based on canvas size and padding
+                const maxWidth = canvas.width - 160; // 80px padding on each side
+                
+                for (let i = 1; i < words.length; i++) {
+                    const word = words[i];
+                    const width = ctx.measureText(currentLine + ' ' + word).width;
+                    if (width < maxWidth) {
+                        currentLine += ' ' + word;
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    }
+                }
+                lines.push(currentLine);
+                
+                // Adjust font size if too many lines
+                if (lines.length > 3) {
+                    ctx.font = 'bold 36px Inter, -apple-system, BlinkMacSystemFont, sans-serif';
+                }
+                
+                // Draw each line
+                const lineHeight = ctx.measureText('M').width * 1.5; // More dynamic line height
+                const totalHeight = lines.length * lineHeight;
+                const startY = (canvas.height - totalHeight) / 2;
+                
+                lines.forEach((line, i) => {
+                    ctx.fillText(line, canvas.width / 2, startY + (i * lineHeight));
+                });
+                
+                // Add subtitle
+                ctx.font = '32px Inter, -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.fillStyle = '#a0aec0';
+                ctx.fillText('Click to play', canvas.width / 2, startY + (lines.length * lineHeight) + 40);
+                
+                return canvas.toDataURL();
+            }
+
+            function createVideoElement(container, videoUrl) {
+                const video = document.createElement('video');
+                video.controls = true;
+                video.style.cssText = 'width: 100%; height: 100%; display: block;';
+                
+                // Set poster using the current video's title
+                const currentVideoId = playlistItems[0].dataset.videoId;
+                video.poster = createVideoPoster(VIDEO_DATA[currentVideoId].title);
+                
+                const source = document.createElement('source');
+                source.src = videoUrl;
+                source.type = 'video/mp4';
+                
+                video.appendChild(source);
+                container.appendChild(video);
+            }
+
+            function createComingSoonMessage(container, releaseDate) {
+                const comingSoonDiv = document.createElement('div');
+                comingSoonDiv.style.cssText = `
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #000;
+                    color: #fff;
+                    padding: 2rem;
+                    text-align: center;
+                `;
+                
+                const icon = document.createElement('div');
+                icon.innerHTML = '⏳';
+                icon.style.cssText = 'font-size: 3rem; margin-bottom: 1rem; color: #fff;';
+                
+                const title = document.createElement('h2');
+                title.textContent = 'Coming Soon';
+                title.style.cssText = 'font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff;';
+                
+                const date = document.createElement('p');
+                date.textContent = `Releasing on ${new Date(releaseDate).toLocaleDateString()}`;
+                date.style.cssText = 'color: #a0aec0;';
+                
+                comingSoonDiv.append(icon, title, date);
+                container.appendChild(comingSoonDiv);
+            }
+
+            function loadVideo(videoId) {
+                const video = VIDEO_DATA[videoId];
+                if (!video) return;
+
+                const videoContainer = document.querySelector('.video-player');
+                videoContainer.innerHTML = '';
+                
+                // Update title and description
+                videoTitle.textContent = video.title;
+                videoDescription.textContent = video.description;
+                
+                // Update active state in playlist
+                playlistItems.forEach(item => {
+                    item.classList.toggle('active', item.dataset.videoId === videoId);
+                });
+
+                // Handle different video sources
+                switch (video.source) {
+                    case 'coming-soon':
+                        createComingSoonMessage(videoContainer, video.releaseDate);
+                        break;
+                    case 'custom':
+                        createVideoElement(videoContainer, video.videoId);
+                        break;
+                    case 'youtube':
+                        createIframe(videoContainer, `https://www.youtube.com/embed/${video.videoId}?autoplay=1&rel=0`);
+                        break;
+                    case 'vimeo':
+                        createIframe(videoContainer, `https://player.vimeo.com/video/${video.videoId}?autoplay=1`);
+                        break;
+                    default:
+                        console.error('Unsupported video source:', video.source);
+                }
+            }
+
+            function createIframe(container, videoUrl) {
+                const iframe = document.createElement('iframe');
+                iframe.style.cssText = 'width: 100%; height: 100%; display: block;';
+                iframe.frameBorder = '0';
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                iframe.allowFullscreen = true;
+                iframe.src = videoUrl;
+                
+                container.appendChild(iframe);
+            }
+
+            // Add click event listeners to playlist items
+            playlistItems.forEach(item => {
+                item.addEventListener('click', () => loadVideo(item.dataset.videoId));
+            });
+
+            // Load the first video
+            if (playlistItems.length > 0) {
+                loadVideo(playlistItems[0].dataset.videoId);
+            }
+        });
+    </script>
+</body>
+</html>
