@@ -144,10 +144,6 @@
             color: var(--accent-color);
             background: none;
         }
-        .nav-link.active {
-            color: var(--text-color);
-            cursor: default;
-        }
         .nav-link.disabled {
             color: var(--text-secondary);
             cursor: default;
@@ -441,7 +437,7 @@
                 <div class="navbar-logo" role="img" aria-label="Let's Get Rusty Logo"><img src="lgr_logo.png" alt="Let's Get Rusty Logo"></div>
             </div>
             <div class="navbar-center">
-                <a href="#" class="nav-link active" aria-current="page">Home</a>
+                <a href="#" id="home-button" class="nav-link">Home</a>
                 <a href="https://youtube.com/letsgetrusty" class="nav-link" target="_blank" rel="noopener">YouTube</a>
                 <a href="https://jobs.letsgetrusty.com" class="nav-link" target="_blank" rel="noopener">Job Board</a>
             </div>
@@ -737,6 +733,14 @@
             // Load the first video
             if (playlistItems.length > 0) {
                 loadVideo(playlistItems[0].dataset.videoId);
+            }
+
+            const homeBtn = document.getElementById('home-button');
+            if (homeBtn) {
+                homeBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    window.location.href = window.location.pathname;
+                });
             }
         });
 
