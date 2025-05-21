@@ -7,7 +7,7 @@
     <title>Let's Get Rusty</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body class="min-h-screen flex flex-col relative">
+  <body class="min-h-screen flex flex-col relative bg-gradient-to-br from-amber-700 to-amber-600">
     <!-- Navigation -->
     <nav class="absolute top-0 left-0 right-0 z-50 p-4">
       <div class="container mx-auto flex items-center justify-between">
@@ -26,42 +26,42 @@
 
     <div class="flex flex-col md:flex-row flex-grow">
       <!-- Left Side: Company -->
-      <div class="w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-700 p-8 md:p-12 text-white">
+      <div class="w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-800 p-8 md:p-12 text-white">
         <div class="max-w-xl w-full">
           <div class="text-center">
             <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">Are you a company?</h1>
             <p class="text-lg md:text-xl mb-8">Are you a team lead, manager, VP or CTO?</p>
-            <ul class="mb-10 space-y-3 inline-block text-left">
+            <ul class="mb-10 space-y-3 inline-block text-left text-lg">
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Custom training programs for your team</li>
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Expert consultation on Rust implementation</li>
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Enterprise support & integration</li>
             </ul>
             <div class="flex justify-center">
-              <button id="company-cta-button" class="bg-white text-slate-800 font-semibold px-8 py-3 rounded-lg shadow hover:bg-slate-100 transition">My Team Needs Training</button>
+              <button id="company-cta-button" class="bg-white text-zinc-900 font-semibold px-8 py-3 rounded-lg shadow hover:bg-zinc-300 transition cursor-pointer">My Team Needs Training</button>
             </div>
           </div>
         </div>
       </div>
       <!-- Right Side: Engineer -->
-      <div class="w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-orange-900 to-orange-700 p-8 md:p-12 text-white">
+      <div class="w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-amber-700 to-amber-600 p-8 md:p-12 text-white">
         <div class="max-w-xl w-full">
           <div class="text-center">
             <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">Are you an engineer?</h1>
-            <p class="text-lg md:text-xl mb-8">Are you struggling to master Rust?</p>
-            <ul class="mb-10 space-y-3 inline-block text-left">
+            <p class="text-lg md:text-xl mb-8">Are you struggling to learn & master Rust?</p>
+            <ul class="mb-10 space-y-3 inline-block text-left text-lg">
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Live, person-to-person Rust training</li>
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Access to Rust recruiter network</li>
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Designed to land you a Rust job…fast</li>
             </ul>
             <div class="flex justify-center">
-              <button id="engineer-cta-button" class="bg-white text-orange-900 font-semibold px-8 py-3 rounded-lg shadow hover:bg-orange-100 transition">Start Learning</button>
+              <button id="engineer-cta-button" class="bg-white text-amber-600 font-semibold px-8 py-3 rounded-lg shadow hover:bg-amber-200 transition cursor-pointer">Start Learning</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Footer -->
-    <footer class="absolute bottom-0 left-0 right-0 text-center text-slate-400 text-sm py-4 z-50">
+    <footer class="absolute bottom-0 right-0 text-right text-amber-100/30 py-4 pr-8 z-50">
       © 2025 LET'S GET RUSTY All rights reserved.
     </footer>
     <script>
