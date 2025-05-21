@@ -428,6 +428,25 @@
         .container {
             margin-top: 0;
         }
+        @keyframes banner-slide-in {
+            0% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            80% {
+                opacity: 1;
+                transform: translateX(-10%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            .banner.slide-in {
+                animation: banner-slide-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -741,6 +760,14 @@
                     event.preventDefault();
                     window.location.href = window.location.pathname;
                 });
+            }
+
+            const welcomeBanner = document.getElementById('welcome-banner');
+            if (welcomeBanner) {
+                welcomeBanner.classList.add('slide-in');
+                setTimeout(() => {
+                    welcomeBanner.classList.remove('slide-in');
+                }, 700);
             }
         });
 
