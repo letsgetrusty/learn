@@ -18,8 +18,8 @@
         </div>
         <!-- Navigation Links -->
         <div class="flex space-x-6 md:space-x-8 text-base md:text-md text-white">
-          <a href="#" class="hover:underline">Home</a>
-          <a href="#" class="hover:underline">Contact</a>
+          <a href="#" id="home-button" class="hover:underline">Home</a>
+          <a href="#" id="contact-button" class="hover:underline">Contact</a>
         </div>
       </div>
     </nav>
@@ -37,7 +37,7 @@
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Enterprise support & integration</li>
             </ul>
             <div class="flex justify-center">
-              <button class="bg-white text-slate-800 font-semibold px-8 py-3 rounded-lg shadow hover:bg-slate-100 transition">My Team Needs Training</button>
+              <button id="company-cta-button" class="bg-white text-slate-800 font-semibold px-8 py-3 rounded-lg shadow hover:bg-slate-100 transition">My Team Needs Training</button>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@
               <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Designed to land you a Rust job…fast</li>
             </ul>
             <div class="flex justify-center">
-              <button class="bg-white text-orange-900 font-semibold px-8 py-3 rounded-lg shadow hover:bg-orange-100 transition">Start Learning</button>
+              <button id="engineer-cta-button" class="bg-white text-orange-900 font-semibold px-8 py-3 rounded-lg shadow hover:bg-orange-100 transition">Start Learning</button>
             </div>
           </div>
         </div>
@@ -64,5 +64,31 @@
     <footer class="absolute bottom-0 left-0 right-0 text-center text-slate-400 text-sm py-4 z-50">
       © 2025 LET'S GET RUSTY All rights reserved.
     </footer>
+    <script>
+    function addButtonHandler(id, handler) {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.addEventListener('click', function(event) {
+                event.preventDefault();
+                handler();
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        addButtonHandler('home-button', function() {
+            window.location.href = window.location.pathname;
+        });
+        addButtonHandler('contact-button', function() {
+            window.location.href = 'mailto:bogdan@letsgetrusty.com?subject=My%20team%20can%20definitely%20use%20some%20help%20from%20you%20:)&body=Hi%20Bogdan,%0A%0AMy%20team%20needs%20corporate%20Rust%20training%20and/or%20consultation.%20Are%20you%20able%20to%20help?%0A%0ALet%27s%20have%20a%20chat%20:)%0A%0ABest,%0A';
+        });
+        addButtonHandler('company-cta-button', function() {
+            window.location.href = 'mailto:bogdan@letsgetrusty.com?subject=My%20team%20can%20definitely%20use%20some%20help%20from%20you%20:)&body=Hi%20Bogdan,%0A%0AMy%20team%20needs%20corporate%20Rust%20training%20and/or%20consultation.%20Are%20you%20able%20to%20help?%0A%0ALet%27s%20have%20a%20chat%20:)%0A%0ABest,%0A';
+        });
+        addButtonHandler('engineer-cta-button', function() {
+            window.location.href = `https://product.letsgetrusty.com${window.location.pathname}`;
+        });
+    });
+    </script>
   </body>
 </html>
