@@ -282,7 +282,7 @@
         }
         .curriculum-button {
             margin: 2rem auto 1.5rem auto;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 0.6rem;
             background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
             color: #fff;
             border: none;
@@ -479,6 +479,12 @@
         .emoji-shadow {
             text-shadow: 1px 1px 4px rgba(0,0,0,0.10);
         }
+        .desktop-only { display: block; margin: 1.5rem auto; width: 90%; }
+        .mobile-only { display: none; }
+        @media (max-width: 1024px) {
+            .desktop-only { display: none; }
+            .mobile-only { display: block; margin: 1.5rem auto; width: 90%; }
+        }
     </style>
 </head>
 <body>
@@ -543,8 +549,9 @@
                             <p>How you can also have a killer Rust career</p>
                         </div>
                     </div>
-                    <button class="curriculum-button" id="curriculum-button"><span class="emoji-shadow">👉</span> View Curriculum for Rust Live Accelerator</button>
+                    <button class="curriculum-button desktop-only" id="curriculum-button-desktop"><span class="emoji-shadow">👉</span> View Curriculum for Rust Live Accelerator</button>
                 </div>
+                <button class="curriculum-button mobile-only" id="curriculum-button-mobile"><span class="emoji-shadow">👉</span> View Curriculum for Rust Live Accelerator</button>
             </div>
             <div class="video-container" id="video-container">
                 <div class="video-player" id="video-player">
@@ -858,7 +865,11 @@
             document.getElementById('video-info').style.display = '';
             document.getElementById('video-curriculum').style.display = 'none';
         }
-        document.getElementById('curriculum-button').addEventListener('click', function(e) {
+        document.getElementById('curriculum-button-desktop').addEventListener('click', function(e) {
+            e.preventDefault();
+            showCurriculumInPlayer();
+        });
+        document.getElementById('curriculum-button-mobile').addEventListener('click', function(e) {
             e.preventDefault();
             showCurriculumInPlayer();
         });
