@@ -224,11 +224,17 @@
             box-shadow: 0 4px 16px var(--shadow-color);
             order: 1;
             border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
         }
         .playlist-header {
             padding: 1.5rem 1.5rem 1rem 1.5rem;
             border-bottom: 1px solid var(--border-color);
             background-color: var(--secondary-color);
+        }
+        .playlist-content {
+            flex: 1;
+            overflow-y: auto;
         }
         .playlist-header h2 {
             font-size: 1.15rem;
@@ -273,6 +279,29 @@
             font-size: 0.92rem;
             color: var(--text-secondary);
             font-weight: 500;
+        }
+        .curriculum-button {
+            margin: 2rem auto 1.5rem auto;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: max-content;
+            min-width: 180px;
+        }
+        .curriculum-button:hover {
+            background: linear-gradient(90deg, var(--accent-hover), var(--accent-color));
+            box-shadow: 0 4px 16px var(--shadow-color);
+            transform: translateY(-2px) scale(1.03);
         }
 
         .video-container {
@@ -482,37 +511,40 @@
                 <div class="playlist-header">
                     <h2>Playlist</h2>
                 </div>
-                <div class="playlist-item active" data-video-id="VIDEO_ID_1" role="listitem" tabindex="0">
-                    <span class="playlist-item-number" aria-hidden="true">01</span>
-                    <div class="playlist-item-info">
-                        <h3>The 3-step Rust roadmap revisited</h3>
-                        <p>Exact steps to becoming a Rust developer</p>
+                <div class="playlist-content">
+                    <div class="playlist-item active" data-video-id="VIDEO_ID_1" role="listitem" tabindex="0">
+                        <span class="playlist-item-number" aria-hidden="true">01</span>
+                        <div class="playlist-item-info">
+                            <h3>The 3-step Rust roadmap revisited</h3>
+                            <p>Exact steps to becoming a Rust developer</p>
+                        </div>
                     </div>
-                </div>
-                <div class="playlist-item" data-video-id="VIDEO_ID_2">
-                    <span class="playlist-item-number">02</span>
-                    <div class="playlist-item-info">
-                        <h3>Top 4 mistakes when learning Rust</h3>
-                        <p>A few big no-no's when learning Rust</p>
+                    <div class="playlist-item" data-video-id="VIDEO_ID_2">
+                        <span class="playlist-item-number">02</span>
+                        <div class="playlist-item-info">
+                            <h3>Top 4 mistakes when learning Rust</h3>
+                            <p>A few big no-no's when learning Rust</p>
+                        </div>
                     </div>
-                </div>
-                <div class="playlist-item" data-video-id="VIDEO_ID_3">
-                    <span class="playlist-item-number">03</span>
-                    <div class="playlist-item-info">
-                        <h3>Understanding the Rust job market</h3>
-                        <p>Where & how Rust is used in the real world</p>
+                    <div class="playlist-item" data-video-id="VIDEO_ID_3">
+                        <span class="playlist-item-number">03</span>
+                        <div class="playlist-item-info">
+                            <h3>Understanding the Rust job market</h3>
+                            <p>Where & how Rust is used in the real world</p>
+                        </div>
                     </div>
-                </div>
-                <div class="playlist-item" data-video-id="VIDEO_ID_4">
-                    <span class="playlist-item-number">04</span>
-                    <div class="playlist-item-info">
-                        <h3>Why & how our students succeed in Rust</h3>
-                        <p>How you can also have a killer Rust career</p>
+                    <div class="playlist-item" data-video-id="VIDEO_ID_4">
+                        <span class="playlist-item-number">04</span>
+                        <div class="playlist-item-info">
+                            <h3>Why & how our students succeed in Rust</h3>
+                            <p>How you can also have a killer Rust career</p>
+                        </div>
                     </div>
+                    <button class="curriculum-button" id="curriculum-button">👉 View Curriculum for Rust Live Accelerator</button>
                 </div>
             </div>
-            <div class="video-container">
-                <div class="video-player">
+            <div class="video-container" id="video-container">
+                <div class="video-player" id="video-player">
                     <video id="main-video" 
                             width="100%" 
                             height="100%" 
@@ -520,9 +552,12 @@
                         <source src="https://d11n7da8rpqbjy.cloudfront.net/letsgetrusty/31009813_17476423026503-step_roadmap.mp4" type="video/mp4">
                     </video>
                 </div>
-                <div class="video-info">
+                <div class="video-info" id="video-info">
                     <h2 id="video-title">Loading...</h2>
                     <p id="video-description">Select a video from the playlist to start learning.</p>
+                </div>
+                <div class="video-curriculum" id="video-curriculum" style="display:none;height:100%;min-height:400px;background:var(--card-bg);border-radius:16px;overflow:hidden;">
+                    <iframe src="curriculum.html" style="width:100%;height:100%;min-height:400px;border:none;background:transparent;"></iframe>
                 </div>
             </div>
         </div>
@@ -800,6 +835,36 @@
 
         // Initialize banner
         initBanner();
+
+        function sendThemeToCurriculumIframe() {
+            const iframe = document.querySelector('#video-container iframe');
+            if (iframe && iframe.contentWindow) {
+                const isDark = !document.body.classList.contains('light-mode');
+                iframe.contentWindow.postMessage({ type: 'theme', theme: isDark ? 'dark' : 'light' }, '*');
+            }
+        }
+        // Curriculum in video section
+        function showCurriculumInPlayer() {
+            document.getElementById('video-player').style.display = 'none';
+            document.getElementById('video-info').style.display = 'none';
+            document.getElementById('video-curriculum').style.display = 'block';
+            sendThemeToCurriculumIframe();
+        }
+        function showVideoPlayer() {
+            document.getElementById('video-player').style.display = '';
+            document.getElementById('video-info').style.display = '';
+            document.getElementById('video-curriculum').style.display = 'none';
+        }
+        document.getElementById('curriculum-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            showCurriculumInPlayer();
+        });
+        // Playlist item click restores video player and loads correct video
+        document.querySelectorAll('.playlist-item').forEach(item => {
+            item.addEventListener('click', function() {
+                showVideoPlayer();
+            });
+        });
     </script>
 </body>
 </html>
