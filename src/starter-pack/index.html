@@ -853,13 +853,20 @@
                 iframe.contentWindow.postMessage({ type: 'theme', theme: isDark ? 'dark' : 'light' }, '*');
             }
         }
-        // Curriculum in video section
+        // Ensure theme is sent after showing curriculum
         function showCurriculumInPlayer() {
             document.getElementById('video-player').style.display = 'none';
             document.getElementById('video-info').style.display = 'none';
             document.getElementById('video-curriculum').style.display = 'block';
-            sendThemeToCurriculumIframe();
+            setTimeout(sendThemeToCurriculumIframe, 100); // Always send theme after showing
         }
+        // Also send theme after toggling theme or system theme
+        themeToggle.addEventListener('click', function() {
+            setTimeout(sendThemeToCurriculumIframe, 100);
+        });
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+            setTimeout(sendThemeToCurriculumIframe, 100);
+        });
         function showVideoPlayer() {
             document.getElementById('video-player').style.display = '';
             document.getElementById('video-info').style.display = '';
