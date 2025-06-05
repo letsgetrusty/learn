@@ -89,6 +89,33 @@
             font-size: 1rem;
             max-width: 600px;
             margin: 0 auto;
+            font-weight: 500;
+        }
+
+        .info-note {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            box-sizing: border-box;
+        }
+
+        .info-note .info-icon {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .info-note p {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         .curriculum-section {
@@ -154,6 +181,11 @@
             <p>Our program is structured into <b>3 distinct phases</b> designed to take you from a Rust beginner to becoming a high-performing, highly-paid Rust developer: <b>Onboarding</b>, <b>Immersion</b>, and <b>Career Camp</b>.</p>
         </div>
 
+        <div class="info-note">
+            <span class="info-icon">ℹ️</span>
+            <p>Important Note: This sample curriculum reflects the default path many students follow. However, your personal roadmap will be fully customized during your upcoming 1-on-1 enrollment call. Depending on your background, interests, and goals, your experience may look quite different.</p>
+        </div>
+
         <div class="curriculum-section">
             <h2><span style="font-size:1.1em;vertical-align:middle;">🧭</span> Phase 1: Onboarding — Tailored Roadmap to Rust Mastery <span style="font-weight:400;font-size:0.9em;">(2 to 6 weeks)</span></h2>
             <p>This is a highly personalized program. We'll align the program with your personal goals, background, and timeline. We'll make sure you hit the ground running quickly, with not only resources but with 100% clarity as well, for what's to come in the next few months.</p>
@@ -189,9 +221,9 @@
                 <li><b>Embedded Systems:</b> Create a custom embedded database optimized for resource-constrained environments that simulates realistic, real-world limitations.</li>
                 <li><b>Blockchain / Web3:</b> Implement a performant, custom decentralized ledger in Rust that focuses on networking, cryptographic integrity, and data persistence.</li>
             </ul>
-            <p>Each student’s capstone is different, and this is where your growth accelerates.</p>
-            <p>This is the part of the program where you'll confront the Rust features, patterns, or specific domain usages you’ve either been most excited about or most intimidated by. Maybe it’s advanced macros, FFI in unsafe Rust, lifetime gymnastics, advanced async coordination in microservices, etc.</p>
-            <p>We’ll work closely with you to push your boundaries in a structured way, giving you the support you need to implement the pieces you've been avoiding or craving.</p>
+            <p>Each student's capstone is different, and this is where your growth accelerates.</p>
+            <p>This is the part of the program where you'll confront the Rust features, patterns, or specific domain usages you've either been most excited about or most intimidated by. Maybe it's advanced macros, FFI in unsafe Rust, lifetime gymnastics, advanced async coordination in microservices, etc.</p>
+            <p>We'll work closely with you to push your boundaries in a structured way, giving you the support you need to implement the pieces you've been avoiding or craving.</p>
             <p>We'll constantly check in on your code progress, provide feedback, unblock technical hurdles, and help you scope your project tightly to make it impressive yet feasible.</p>
         </div>
 
