@@ -855,6 +855,12 @@
         }
         // Ensure theme is sent after showing curriculum
         function showCurriculumInPlayer() {
+            // Pause the video if it's playing
+            const videoPlayer = document.querySelector('.video-player');
+            const video = videoPlayer.querySelector('video');
+            if (video) {
+                video.pause();
+            }
             document.getElementById('video-player').style.display = 'none';
             document.getElementById('video-info').style.display = 'none';
             document.getElementById('video-curriculum').style.display = 'block';
