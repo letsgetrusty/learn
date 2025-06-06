@@ -695,19 +695,15 @@
                 return canvas.toDataURL();
             }
 
-            function createVideoElement(container, videoUrl) {
+            function createVideoElement(container, videoUrl, videoTitle) {
                 const video = document.createElement('video');
                 video.controls = true;
                 video.style.cssText = 'width: 100%; height: 100%; display: block;';
-                
                 // Set poster using the current video's title
-                const currentVideoId = playlistItems[0].dataset.videoId;
-                video.poster = createVideoPoster(VIDEO_DATA[currentVideoId].title);
-                
+                video.poster = createVideoPoster(videoTitle);
                 const source = document.createElement('source');
                 source.src = videoUrl;
                 source.type = 'video/mp4';
-                
                 video.appendChild(source);
                 container.appendChild(video);
             }
@@ -765,7 +761,7 @@
                         createComingSoonMessage(videoContainer, video.releaseDate);
                         break;
                     case 'custom':
-                        createVideoElement(videoContainer, video.videoId);
+                        createVideoElement(videoContainer, video.videoId, video.title);
                         break;
                     case 'youtube':
                         createIframe(videoContainer, `https://www.youtube.com/embed/${video.videoId}?autoplay=1&rel=0`);
