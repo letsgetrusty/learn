@@ -68,7 +68,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1.5rem;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
         }
 
         .header {
@@ -172,6 +172,65 @@
                 padding: 1.25rem;
             }
         }
+
+        .testimonials-section {
+            margin-top: 2.5rem;
+            padding: 2rem 0 0 0;
+            text-align: center;
+            position: relative;
+        }
+        .testimonials-section::before {
+            content: "";
+            display: block;
+            margin: 0 auto 2rem auto;
+            width: 500px;
+            border-top: 1px solid var(--border-color);
+            border-radius: 2px;
+        }
+        .testimonials-section h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        .testimonials-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .testimonial {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            max-width: 340px;
+            min-width: 220px;
+            height: 180px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 0.75rem;
+        }
+        .testimonial-name {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.98rem;
+            text-align: right;
+            align-self: flex-end;
+        }
+        @media (max-width: 768px) {
+            .testimonials-list {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -183,7 +242,7 @@
 
         <div class="info-note">
             <span class="info-icon">ℹ️</span>
-            <p>Important Note: This sample curriculum reflects the default path many students follow. However, your personal roadmap will be fully customized during your upcoming 1-on-1 enrollment call. Depending on your background, interests, and goals, your experience may look quite different.</p>
+            <p>Important Note: This preview curriculum reflects the default path many students follow. However, your personal roadmap will be highly customized during our upcoming 1-on-1 enrollment call. Depending on your goals and experience level, your roadmap may end up looking quite different.</p>
         </div>
 
         <div class="curriculum-section">
@@ -244,6 +303,12 @@
             <p>You'll receive a private career progress tracker, and we'll expect you to spend at least 1 focused hour per weekday job hunting — whether that's sending applications, prepping for interviews, or tightening your materials.<br>
             Every week, during our live Career Camp Office Hours, we help you troubleshoot, course-correct, and most importantly, land your dream Rust job!</p>
         </div>
+
+        <div class="testimonials-section">
+            <h2>Student Success Stories</h2>
+            <div class="testimonials-list"></div>
+        </div>
+        <br>
     </div>
 
     <script>
@@ -261,6 +326,50 @@
         });
         // Request theme from parent on load
         window.parent.postMessage({ type: 'requestTheme' }, '*');
+
+        // Testimonials JSON and rendering
+        const TESTIMONIALS = [
+        {
+            text: "\"I'd highly recommend this program to anyone who wants to learn & master Rust quickly!\"",
+            name: "Jordan @ Meta"
+          },
+          {
+            text: "Building performance-critical data processing pipelines in Rust as a principal architect.",
+            name: "Ryan @ ElasticSearch"
+          },
+          {
+            text: "Now building safe, performant embedded systems as senior Rust engineer!",
+            name: "Sean @ Toyota"
+          },
+          {
+            text: "Senior quant engineer using Rust for financial data analysis for institutional clients.",
+            name: "Nick @ Morgan Stanley"
+          },
+          {
+            text: "Building layer-1 blockchain infrastructure as a junior Rust engineer at her startup.",
+            name: "Cynthia @ Nethermind"
+          },
+          {
+            text: "Backend engineer now guiding his team members to navigate tricky aspects of Rust.",
+            name: "Akinyele @ GitLab"
+          }
+        ];
+
+        function renderTestimonials() {
+          const container = document.querySelector('.testimonials-list');
+          if (!container) return;
+          container.innerHTML = '';
+          TESTIMONIALS.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'testimonial';
+            div.innerHTML = `
+              <div class="testimonial-name">${t.name}</div>
+              <p class="testimonial-text">${t.text}</p>
+            `;
+            container.appendChild(div);
+          });
+        }
+        document.addEventListener('DOMContentLoaded', renderTestimonials);
     </script>
 </body>
 </html> 
