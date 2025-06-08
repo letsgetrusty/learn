@@ -1,4 +1,3 @@
-<!-- TODO: To be removed once /curriculum is live -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -318,7 +317,6 @@
             const isDark = mode === 'dark';
             document.body.classList.toggle('light-mode', !isDark);
         }
-
         // Listen for theme messages from parent
         window.addEventListener('message', function(event) {
             if (event.data && event.data.type === 'theme') {

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#181c23">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Rust Career Starter Pack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #111827;
+            --secondary-color: #232936;
+            --accent-color: #ff8e3d;
+            --accent-hover: #ff8e3d;
+            --text-color: #f9fafb;
+            --text-secondary: #a0aec0;
+            --border-color: #232936;
+            --hover-color: #232936;
+            --active-color: #2d3748;
+            --shadow-color: rgba(0, 0, 0, 0.18);
+            --card-bg: #232936;
+            --card-hover: #232936;
+            --header-bg: #111827;
+            --toggle-bg: #2d3748;
+            --toggle-thumb: #ff8e3d;
+            --toggle-border: #2d3748;
+            --header-text-color: #e5e7eb;
+        }
+        
+        .light-mode {
+            --primary-color: #f6f8fa;
+            --secondary-color: #fff;
+            --accent-color: #f97316;
+            --accent-hover: #ea580c;
+            --text-color: #232936;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --hover-color: #f1f5f9;
+            --active-color: #f1f5f9;
+            --shadow-color: rgba(0,0,0,0.06);
+            --card-bg: #fff;
+            --card-hover: #f1f5f9;
+            --header-bg: #fff;
+            --toggle-bg: #e2e8f0;
+            --toggle-thumb: #f97316;
+            --toggle-border: #e2e8f0;
+            --header-text-color: var(--text-color);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: var(--header-bg);
+            color: var(--header-text-color);
+            height: 4.75rem;
+        }
+        .navbar-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100%;
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .navbar-logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.03em;
+            color: var(--accent-color);
+            background: var(--card-bg);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .navbar-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        .navbar-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-left: auto;
+        }
+        .nav-link {
+            color: var(--header-text-color);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.97rem;
+            padding: 0;
+            border-radius: 4px;
+            transition: color 0.18s;
+            display: inline-block;
+            line-height: 1.2;
+        }
+        .nav-link:hover {
+            color: var(--accent-color);
+            background: none;
+        }
+        .nav-link.disabled {
+            color: var(--text-secondary);
+            cursor: default;
+            pointer-events: none;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background: var(--toggle-bg);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            border: 1.5px solid var(--toggle-border);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        .toggle-thumb {
+            position: absolute;
+            top: 1px;
+            left: 20px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            transition: left 0.3s, background 0.3s;
+            box-shadow: 0 1px 4px var(--shadow-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .toggle-switch.active .toggle-thumb {
+            left: 2px;
+            background: var(--accent-color);
+        }
+        .toggle-icon { display: none; }
+
+        #curriculum-iframe {
+            position: fixed;
+            top: 4.75rem;
+            left: 0;
+            width: 100vw;
+            height: calc(100vh - 4.75rem);
+            border: none;
+            background: transparent;
+            z-index: 1;
+            display: block;
+        }
+        @media (max-width: 1024px) {
+            .container {
+                padding: 1rem;
+                padding-top: 7.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-inner">
+            <div class="navbar-left">
+                <div class="navbar-logo" role="img" aria-label="Let's Get Rusty Logo"><img src="lgr_logo.png" alt="Let's Get Rusty Logo"></div>
+            </div>
+            <div class="navbar-center">
+                <a href="#" id="home-button" class="nav-link">Home</a>
+                <a href="https://youtube.com/letsgetrusty" class="nav-link" target="_blank" rel="noopener">YouTube</a>
+                <a href="https://jobs.letsgetrusty.com" class="nav-link" target="_blank" rel="noopener">Job Board</a>
+            </div>
+            <div class="navbar-right">
+                <button class="toggle-switch" id="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+                    <span class="toggle-thumb"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <iframe src="accelerator.html" id="curriculum-iframe"></iframe>
+    <script>
+        // Theme Management
+        const themeToggle = document.getElementById('theme-toggle');
+        const toggleThumb = themeToggle.querySelector('.toggle-thumb');
+        function setTheme(mode) {
+            const isDark = mode === 'dark';
+            document.body.classList.toggle('light-mode', !isDark);
+            themeToggle.classList.toggle('active', !isDark);
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#181c23' : '#f6f8fa');
+            localStorage.setItem('theme', mode);
+            sendThemeToIframe(mode);
+        }
+        function sendThemeToIframe(mode) {
+            const iframe = document.getElementById('curriculum-iframe');
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage({ type: 'theme', theme: mode }, '*');
+            }
+        }
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        setTheme(initialTheme);
+        // Also send theme to iframe on load
+        sendThemeToIframe(initialTheme);
+        // Theme event listeners
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.contains('light-mode');
+            setTheme(isDark ? 'dark' : 'light');
+        });
+        // Listen for theme requests from the iframe and respond with the current theme
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'requestTheme') {
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+                sendThemeToIframe(currentTheme);
+            }
+        });
+    </script>
+</body>
+</html>
