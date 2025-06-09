@@ -280,6 +280,29 @@
             color: var(--text-secondary);
             font-weight: 500;
         }
+        .curriculum-button {
+            margin: 2rem auto 1.5rem auto;
+            padding: 0.75rem 0.6rem;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: max-content;
+            min-width: 180px;
+        }
+        .curriculum-button:hover {
+            background: linear-gradient(90deg, var(--accent-hover), var(--accent-color));
+            box-shadow: 0 4px 16px var(--shadow-color);
+            transform: translateY(-2px) scale(1.03);
+        }
 
         .video-container {
             flex: 2;
@@ -483,7 +506,7 @@
         </div>
     </nav>
     <div class="banner visible" id="welcome-banner">
-        <div class="banner-content">Thanks for applying! Our team will reach out if you're a good fit. Enjoy your free gift below!</div>
+        <div class="banner-content">Congrats, you've applied to join our Rust Live Accelerator program! Enjoy your free gift below!</div>
         <button class="banner-close" id="banner-close" aria-label="Close banner">×</button>
     </div>
     <button class="banner-toggle" id="banner-toggle" aria-label="Show message">&#8249;</button>
@@ -505,7 +528,9 @@
                             <p>Exact steps to becoming a Rust developer</p>
                         </div>
                     </div>
+                    <button class="curriculum-button desktop-only" id="curriculum-button-desktop"><span class="emoji-shadow">👉</span> View Curriculum for Rust Live Accelerator</button>
                 </div>
+                <button class="curriculum-button mobile-only" id="curriculum-button-mobile"><span class="emoji-shadow">👉</span> View Curriculum for Rust Live Accelerator</button>
             </div>
             <div class="video-container" id="video-container">
                 <div class="video-player" id="video-player">
@@ -513,7 +538,7 @@
                             width="100%" 
                             height="100%" 
                             controls>
-                        <source src="https://d11n7da8rpqbjy.cloudfront.net/letsgetrusty/31009896_1749451981776Program_overview_unscheduled.mp4.mp4" type="video/mp4">
+                        <source src="https://d11n7da8rpqbjy.cloudfront.net/letsgetrusty/31009892_1749451483462Program_overview_scheduled.mp4.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="video-info" id="video-info">
@@ -533,7 +558,7 @@
                 title: 'The 3-Step Rust Roadmap',
                 description: 'Exact steps to becoming a Rust developer',
                 source: 'custom',
-                videoId: 'https://d11n7da8rpqbjy.cloudfront.net/letsgetrusty/31009896_1749451981776Program_overview_unscheduled.mp4.mp4'
+                videoId: 'https://d11n7da8rpqbjy.cloudfront.net/letsgetrusty/31009892_1749451483462Program_overview_scheduled.mp4.mp4'
             }
         };
 
@@ -777,6 +802,53 @@
 
         // Initialize banner
         initBanner();
+
+        function sendThemeToCurriculumIframe() {
+            const iframe = document.querySelector('#video-container iframe');
+            if (iframe && iframe.contentWindow) {
+                const isDark = !document.body.classList.contains('light-mode');
+                iframe.contentWindow.postMessage({ type: 'theme', theme: isDark ? 'dark' : 'light' }, '*');
+            }
+        }
+        // Ensure theme is sent after showing curriculum
+        function showCurriculumInPlayer() {
+            // Pause the video if it's playing
+            const videoPlayer = document.querySelector('.video-player');
+            const video = videoPlayer.querySelector('video');
+            if (video) {
+                video.pause();
+            }
+            document.getElementById('video-player').style.display = 'none';
+            document.getElementById('video-info').style.display = 'none';
+            document.getElementById('video-curriculum').style.display = 'block';
+            setTimeout(sendThemeToCurriculumIframe, 100); // Always send theme after showing
+        }
+        // Also send theme after toggling theme or system theme
+        themeToggle.addEventListener('click', function() {
+            setTimeout(sendThemeToCurriculumIframe, 100);
+        });
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+            setTimeout(sendThemeToCurriculumIframe, 100);
+        });
+        function showVideoPlayer() {
+            document.getElementById('video-player').style.display = '';
+            document.getElementById('video-info').style.display = '';
+            document.getElementById('video-curriculum').style.display = 'none';
+        }
+        document.getElementById('curriculum-button-desktop').addEventListener('click', function(e) {
+            e.preventDefault();
+            showCurriculumInPlayer();
+        });
+        document.getElementById('curriculum-button-mobile').addEventListener('click', function(e) {
+            e.preventDefault();
+            showCurriculumInPlayer();
+        });
+        // Playlist item click restores video player and loads correct video
+        document.querySelectorAll('.playlist-item').forEach(item => {
+            item.addEventListener('click', function() {
+                showVideoPlayer();
+            });
+        });
     </script>
 </body>
 </html>
