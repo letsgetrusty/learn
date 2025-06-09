@@ -549,9 +549,9 @@
                             <p>How you can also have a killer Rust career</p>
                         </div>
                     </div>
-                    <button class="curriculum-button desktop-only" id="curriculum-button-desktop"><span class="emoji-shadow">👉</span> View Curriculum for Rust Live Accelerator</button>
+                    <!-- <button class="curriculum-button desktop-only" id="curriculum-button-desktop"><span class="emoji-shadow">👉</span> View Curriculum for Rust Live Accelerator</button> -->
                 </div>
-                <button class="curriculum-button mobile-only" id="curriculum-button-mobile"><span class="emoji-shadow">👉</span> View Curriculum for Rust Live Accelerator</button>
+                <!-- <button class="curriculum-button mobile-only" id="curriculum-button-mobile"><span class="emoji-shadow">👉</span> View Curriculum for Rust Live Accelerator</button> -->
             </div>
             <div class="video-container" id="video-container">
                 <div class="video-player" id="video-player">
@@ -874,14 +874,20 @@
             document.getElementById('video-info').style.display = '';
             document.getElementById('video-curriculum').style.display = 'none';
         }
-        document.getElementById('curriculum-button-desktop').addEventListener('click', function(e) {
-            e.preventDefault();
-            showCurriculumInPlayer();
-        });
-        document.getElementById('curriculum-button-mobile').addEventListener('click', function(e) {
-            e.preventDefault();
-            showCurriculumInPlayer();
-        });
+        var desktopBtn = document.getElementById('curriculum-button-desktop');
+        if (desktopBtn) {
+            desktopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showCurriculumInPlayer();
+            });
+        }
+        var mobileBtn = document.getElementById('curriculum-button-mobile');
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showCurriculumInPlayer();
+            });
+        }
         // Playlist item click restores video player and loads correct video
         document.querySelectorAll('.playlist-item').forEach(item => {
             item.addEventListener('click', function() {
