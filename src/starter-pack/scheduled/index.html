@@ -485,10 +485,18 @@
             .desktop-only { display: none; }
             .mobile-only { display: block; margin: 1.5rem auto; width: 90%; }
         }
+        
+        /* Hide content until DOM is loaded for gift overlay */
+        .content-hidden {
+            opacity: 0;
+            pointer-events: none;
+            filter: blur(8px);
+            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), filter 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <nav class="navbar content-hidden" role="navigation" aria-label="Main navigation">
         <div class="navbar-inner">
             <div class="navbar-left">
                 <div class="navbar-logo" role="img" aria-label="Let's Get Rusty Logo"><img src="/lgr_logo.png" alt="Let's Get Rusty Logo"></div>
@@ -505,12 +513,12 @@
             </div>
         </div>
     </nav>
-    <div class="banner visible" id="welcome-banner">
+    <div class="banner visible content-hidden" id="welcome-banner">
         <div class="banner-content">Congrats, you've applied to join our Rust Live Accelerator program! Enjoy your free gift below!</div>
         <button class="banner-close" id="banner-close" aria-label="Close banner">×</button>
     </div>
     <button class="banner-toggle" id="banner-toggle" aria-label="Show message">&#8249;</button>
-    <div class="container" style="padding-top:7.5rem">
+    <div class="container content-hidden" style="padding-top:7.5rem">
         <div class="header">
             <h1>Rust Career Starter Pack</h1>
             <p>Your journey to becoming a Rust developer starts here</p>
@@ -567,11 +575,12 @@
                     <p id="video-description">Select a video from the playlist to start learning.</p>
                 </div>
                 <div class="video-curriculum" id="video-curriculum" style="display:none;height:100%;min-height:400px;background:var(--card-bg);border-radius:16px;overflow:hidden;">
-                    <iframe src="../curriculum/accelerator.html" style="width:100%;height:100%;min-height:400px;border:none;background:transparent;"></iframe>
+                    <iframe src="../../curriculum/accelerator.html" style="width:100%;height:100%;min-height:400px;border:none;background:transparent;"></iframe>
                 </div>
             </div>
         </div>
     </div>
+    <div id="overlay-container"></div>
     <script>
         // Constants and Configuration
         const VIDEO_DATA = {
@@ -894,6 +903,35 @@
                 showVideoPlayer();
             });
         });
+
+        // Hide content until DOM is loaded for gift overlay
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelector('.navbar').classList.remove('content-hidden');
+                document.querySelector('.container').classList.remove('content-hidden');
+                var banner = document.getElementById('welcome-banner');
+                if (banner) banner.classList.remove('content-hidden');
+            }, 1000);
+        });
+        // Gift overlay script
+        fetch('../../scheduled/gift-overlay.html')
+          .then(res => res.text())
+          .then(html => {
+            const container = document.getElementById('overlay-container');
+            container.innerHTML = html;
+            // Find and execute any <script> tags in the loaded HTML
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(oldScript => {
+              const newScript = document.createElement('script');
+              if (oldScript.src) {
+                newScript.src = oldScript.src;
+              } else {
+                newScript.textContent = oldScript.textContent;
+              }
+              document.body.appendChild(newScript);
+              oldScript.parentNode.removeChild(oldScript);
+            });
+          });
     </script>
 </body>
 </html>

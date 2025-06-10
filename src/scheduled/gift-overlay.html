@@ -1,0 +1,184 @@
+<!-- gift-overlay.html -->
+<div id="gift-overlay" class="gift-overlay" role="region" aria-label="How to Prepare for the Call">
+  <div class="gift-overlay-content">
+    <div class="call-prep-section" style="margin-bottom:2.5rem;">
+      <div style="color:#fff;font-size:1.15rem;font-weight:500;margin-bottom:3rem;text-align:center;">Great! Your call has been confirmed...</div>
+      <div style="font-size:2.3rem;font-weight:800;color:#fff;text-align:center;margin-bottom:0.5rem;letter-spacing:-0.02em;">How to Prepare for the Call:</div>
+      <div style="color:#e5e7eb;font-size:1.15rem;text-align:center;margin-bottom:2.2rem;">Before we meet, take 20–30 minutes to reflect on the following:</div>
+      <div class="call-prep-boxes" style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
+        <div class="call-prep-box">
+          <div style="font-weight:700;font-size:2rem;margin-bottom:0.7rem;">1</div>
+          <div style="font-weight:700;font-size:1.2rem;margin-bottom:0.7rem;">What's your goal?</div>
+          <div style="font-size:0.9rem;color:#e5e7eb;">Where do you want to be in the next 6 months? Be specific. Whether it's landing your first Rust job, crafting a portfolio, or building a Rust startup...</div>
+        </div>
+        <div class="call-prep-box">
+          <div style="font-weight:700;font-size:2rem;margin-bottom:0.7rem;">2</div>
+          <div style="font-weight:700;font-size:1.2rem;margin-bottom:0.7rem;">What's stopping you?</div>
+          <div style="font-size:0.9rem;color:#e5e7eb;">What's missing for you to achieve your goals? Is it lack of structure? No accountability? Too much starting and stopping? What is it? Write them down.</div>
+        </div>
+        <div class="call-prep-box">
+          <div style="font-weight:700;font-size:2rem;margin-bottom:0.7rem;">3</div>
+          <div style="font-weight:700;font-size:1.2rem;margin-bottom:0.7rem;">What needs to change?</div>
+          <div style="font-size:0.9rem;color:#e5e7eb;">More tutorials probably aren't the answer. Be open to the idea that what you <em>think</em> you need — more coding time, more reading — may <em>not</em> be the most effective.</div>
+        </div>
+      </div>
+    </div>
+    <button id="view-gift-btn" class="gift-btn">100% Understood! Now I'm ready for my gift!</button>
+  </div>
+</div>
+<style>
+.gift-overlay {
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(20, 22, 30, 0.85);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transition: opacity 0.4s cubic-bezier(0.4,0,0.2,1), transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+  opacity: 1;
+  transform: scale(1);
+}
+.gift-overlay.hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(24px);
+}
+.gift-overlay-content {
+  text-align: center;
+  width: 100%;
+}
+.call-prep-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fade-in 0.7s cubic-bezier(0.4,0,0.2,1);
+  transition: opacity 0.4s, transform 0.4s;
+  opacity: 1;
+  transform: translateY(0);
+}
+.call-prep-boxes {
+  border-radius: 20px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  background: transparent;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fade-in 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.call-prep-box {
+  background: rgba(40, 42, 54, 0.55);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.13);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  backdrop-filter: blur(6px);
+  padding: 2rem 1.5rem;
+  max-width: 320px;
+  min-width: 240px;
+  flex: 1 1 240px;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  transition: background 0.2s, box-shadow 0.2s;
+  border-top: 1.5px solid rgba(255,255,255,0.10);
+  border-left: 1.5px solid rgba(255,255,255,0.07);
+  animation: fade-in 1.1s cubic-bezier(0.4,0,0.2,1);
+}
+.gift-btn {
+  background: linear-gradient(90deg, #f97316, #ea580c);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  transition: opacity 0.4s 0.15s, transform 0.4s 0.15s;
+  max-width: 90vw;
+  margin: 2.5rem auto 0 auto;
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+.gift-btn:hover {
+  background: linear-gradient(90deg, #ea580c, #f97316);
+  transform: translateY(-2px) scale(1.03);
+}
+.gift-overlay.hide .call-prep-section {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.gift-overlay.hide .gift-btn {
+  opacity: 0;
+  transform: translateY(24px);
+}
+@media (max-width: 900px) {
+  .call-prep-boxes {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+  }
+  .call-prep-box {
+    max-width: 98vw;
+    min-width: 0;
+    width: 100%;
+    margin-bottom: 0.7rem;
+  }
+  .gift-btn {
+    width: 98vw;
+    font-size: 1.1rem;
+    padding: 1.1rem 0.5rem;
+  }
+  .call-prep-section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .gift-overlay-content {
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+  }
+  .gift-overlay {
+    /* padding-top and bottom already set globally */
+  }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+<script>
+var overlay = document.getElementById('gift-overlay');
+var btn = document.getElementById('view-gift-btn');
+if (btn && overlay) {
+  btn.addEventListener('click', function() {
+    overlay.classList.add('hide');
+    // Force a repaint before revealing content
+    void overlay.offsetWidth;
+    // Reveal main content immediately for smooth transition
+    var navbar = document.querySelector('.navbar');
+    if (navbar) navbar.classList.remove('content-hidden');
+    var container = document.querySelector('.container');
+    if (container) container.classList.remove('content-hidden');
+    var banner = document.getElementById('welcome-banner');
+    if (banner) banner.classList.remove('content-hidden');
+    document.body.style.overflow = '';
+    setTimeout(function() {
+      overlay.style.display = 'none';
+    }, 600); // Increased timeout for smoother transition
+  });
+  // Prevent background scroll when overlay is visible
+  if (!overlay.classList.contains('hide')) {
+    document.body.style.overflow = 'hidden';
+  }
+}
+</script> 

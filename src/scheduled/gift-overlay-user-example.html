@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gift Overlay User Example</title>
+    <style>
+        /* Hide content until DOM is loaded for gift overlay */
+        .content-hidden {
+            opacity: 0;
+            pointer-events: none;
+            filter: blur(8px);
+            transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), filter 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
+    </style>
+</head>
+<body>
+    <div class="content-hidden"></div>
+    <div id="overlay-container"></div>
+    <script>
+        // Hide content until DOM is loaded for gift overlay
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelector('.navbar').classList.remove('content-hidden');
+                document.querySelector('.container').classList.remove('content-hidden');
+                var banner = document.getElementById('welcome-banner');
+                if (banner) banner.classList.remove('content-hidden');
+            }, 1000);
+        });
+        // Gift overlay script
+        fetch('../../scheduled/gift-overlay.html')
+          .then(res => res.text())
+          .then(html => {
+            const container = document.getElementById('overlay-container');
+            container.innerHTML = html;
+            // Find and execute any <script> tags in the loaded HTML
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(oldScript => {
+              const newScript = document.createElement('script');
+              if (oldScript.src) {
+                newScript.src = oldScript.src;
+              } else {
+                newScript.textContent = oldScript.textContent;
+              }
+              document.body.appendChild(newScript);
+              oldScript.parentNode.removeChild(oldScript);
+            });
+          });
+    </script>
+</body>
+</html>
