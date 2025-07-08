@@ -12,6 +12,7 @@
     <style>
         :root {
             --primary-color: #111827;
+            --primary-color-rgb: 17, 24, 39;
             --secondary-color: #232936;
             --accent-color: #ff8e3d;
             --accent-hover: #ff8e3d;
@@ -32,6 +33,7 @@
         
         .light-mode {
             --primary-color: #f6f8fa;
+            --primary-color-rgb: 246, 248, 250;
             --secondary-color: #fff;
             --accent-color: #f97316;
             --accent-hover: #ea580c;
@@ -63,6 +65,7 @@
             line-height: 1.6;
             min-height: 100vh;
             transition: background 0.3s, color 0.3s;
+            position: relative;
         }
 
         .container {
@@ -173,6 +176,89 @@
             }
         }
 
+        .guarantees-section {
+            margin-top: 2.5rem;
+            padding: 2rem 0 0 0;
+            text-align: center;
+            position: relative;
+        }
+        .guarantees-section::before {
+            content: "";
+            display: block;
+            margin: 0 auto 2rem auto;
+            width: 500px;
+            border-top: 1px solid var(--border-color);
+            border-radius: 2px;
+        }
+        .guarantees-header {
+            margin-bottom: 2rem;
+        }
+        .guarantees-header h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        .guarantees-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .guarantees-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .guarantee-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            text-align: left;
+        }
+        .guarantee-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .guarantee-card h3 {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .guarantee-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .guarantee-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .guarantee-detail {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding: 1rem;
+            background: var(--primary-color);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+        .guarantee-detail strong {
+            color: var(--text-color);
+        }
+
         .testimonials-section {
             margin-top: 2.5rem;
             padding: 2rem 0 0 0;
@@ -194,41 +280,227 @@
             font-weight: 700;
         }
         .testimonials-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .testimonial {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            max-width: 340px;
-            min-width: 220px;
-            height: 180px;
-            box-shadow: 0 2px 8px var(--shadow-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px var(--shadow-color);
             text-align: left;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 1.5rem;
         }
-        .testimonial-text {
-            font-size: 1rem;
-            color: var(--text-color);
-            margin-bottom: 0.75rem;
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .testimonial-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            background: var(--border-color);
+        }
+        .testimonial-image:not([src]), .testimonial-image[src=""] {
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .testimonial-info {
+            flex: 1;
+        }
+        .testimonial-name-company {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin: 0 0 0.5rem 0;
         }
         .testimonial-name {
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        .testimonial-company {
             color: var(--accent-color);
             font-weight: 600;
-            font-size: 0.98rem;
-            text-align: right;
-            align-self: flex-end;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .testimonial-company::before {
+            content: "@ ";
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .testimonial-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0;
+        }
+        .testimonial-tag {
+            background: var(--primary-color);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+        .testimonial-tag.industry {
+            background: var(--accent-color);
+            color: white;
+        }
+        .testimonial-tag.seniority {
+            background: var(--card-hover);
+            color: var(--text-color);
+        }
+        .testimonial-tag.location {
+            background: var(--hover-color);
+            color: var(--text-color);
+        }
+        .testimonial-tag.specialty {
+            background: var(--secondary-color);
+            color: var(--text-secondary);
+            border: 1px solid var(--accent-color);
+        }
+        .testimonial-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .testimonial-video {
+            width: 100%;
+            height: 250px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--primary-color);
+        }
+        .testimonial-quote {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-style: italic;
+            line-height: 1.6;
+            margin: 0;
+            padding: 1rem;
+            background: var(--primary-color);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .image-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .additional-testimonials-list {
+            margin-top: 2rem;
+        }
+        .image-testimonial {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .image-testimonial img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            object-fit: cover;
+        }
+        
+        /* Mist overlay for infinite testimonials effect */
+        .testimonials-mist-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50vh;
+            background: linear-gradient(to bottom, transparent 0%, rgba(var(--primary-color-rgb), 0.3) 15%, rgba(var(--primary-color-rgb), 0.7) 40%, var(--primary-color) 80%);
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .image-testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
         }
         @media (max-width: 768px) {
+            .guarantees-container {
+                gap: 1.5rem;
+                max-width: 100%;
+            }
+            .guarantee-card {
+                padding: 1.5rem;
+            }
+            .guarantee-icon {
+                font-size: 2rem;
+            }
+            .guarantee-card h3 {
+                font-size: 1.1rem;
+            }
+            .guarantee-detail {
+                padding: 0.75rem;
+            }
             .testimonials-list {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .testimonial {
+                padding: 1.5rem;
+            }
+            .testimonial-header {
                 flex-direction: column;
-                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+            .testimonial-image {
+                width: 80px;
+                height: 80px;
+                align-self: center;
+            }
+            .testimonial-name-company {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+            .testimonial-tags {
+                justify-content: center;
+                gap: 0.4rem;
+            }
+            .testimonial-tag {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .testimonial-video {
+                height: 200px;
+            }
+            .image-testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .image-testimonial img {
+                max-width: 250px;
             }
         }
     </style>
@@ -298,8 +570,34 @@
             <p>You'll track your job hunt in a private dashboard, and we'll hold you accountable to putting in focused time each weekday, whether that's outreach, interview prep, or fine-tuning your materials. Every week, you'll get live support during Career Camp Office Hours to unblock your search, refine your strategy, and ultimately land the Rust job you've been working toward.</p>
         </div>
 
+        <div class="guarantees-section">
+            <div class="guarantees-header">
+                <h2><span style="font-size:1.1em;vertical-align:middle;">🛡️</span> Our Guarantees to You</h2>
+                <p>We're so confident in the value of our program that we back it with these guarantees:</p>
+            </div>
+            <div class="guarantees-container">
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">😍</div>
+                    <h3>100% Satisfaction Guarantee</h3>
+                    <p>If you're not completely satisfied with the program for any reason, you can get a full refund up to <strong>10 days into the Immersion phase</strong>. No questions asked.</p>
+                </div>
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">💼</div>
+                    <h3>Job Placement Guarantee</h3>
+                    <div class="guarantee-details">
+                        <div class="guarantee-detail">
+                            <strong>🇺🇸 US Residents:</strong> If you enroll in Career Camp and don't land a Rust job within 6 months of completion, you can get a full refund. Terms apply.
+                        </div>
+                        <div class="guarantee-detail">
+                            <strong>🌍 International Students:</strong> If you enroll in Career Camp we guarantee to work with you one-on-one until you successfully land a Rust role.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="testimonials-section">
-            <h2>Student Success Stories</h2>
+            <h2>Our Students Love Us!</h2>
             <div class="testimonials-list"></div>
         </div>
         <br>
@@ -322,47 +620,473 @@
 
         // Testimonials JSON and rendering
         const TESTIMONIALS = [
-        {
-            text: "\"I'd highly recommend this program to anyone who wants to learn & master Rust quickly!\"",
-            name: "Jordan @ Meta"
+          {
+            name: "Ryan",
+            company: "ElasticSearch",
+            image: "images/students/ryan.jpg",
+            description: "Principal Architect building performance-critical data processing pipelines in Rust at Elasticsearch.",
+            videoId: "ltGCvAJpa7A",
+            quote: "",
+            tags: [
+              { text: "Distributed Systems", type: "industry" },
+              { text: "📶 Principal", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
           },
           {
-            text: "Building performance-critical data processing pipelines in Rust as a principal architect.",
-            name: "Ryan @ ElasticSearch"
+            name: "Sean",
+            company: "Toyota",
+            image: "images/students/sean.jpg",
+            description: "Senior Rust Engineer building safe, performant embedded systems.",
+            videoId: "hKee-IJbyeM",
+            quote: "",
+            tags: [
+              { text: "Embedded", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
           },
           {
-            text: "Now building safe, performant embedded systems as senior Rust engineer!",
-            name: "Sean @ Toyota"
+            name: "Bruno",
+            company: "METRIX",
+            image: "images/students/bruno.jpg",
+            description: "Senior trading analyst turned Web3 engineer. Built crypto trading software for private clients.",
+            videoId: "lyCepAm-Qcg",
+            quote: "",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇧🇷 Brazil", type: "location" },
+            ]
           },
           {
-            text: "Senior quant engineer using Rust for financial data analysis for institutional clients.",
-            name: "Nick @ Morgan Stanley"
+            name: "Jordan",
+            company: "Meta",
+            image: "images/students/jordan.jpeg",
+            description: "Software engineer at Meta. Currently working on a \"Top-Secret, New Product\" :D",
+            videoId: "ZG7OBmRf9no",
+            quote: "",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
           },
           {
-            text: "Building layer-1 blockchain infrastructure as a junior Rust engineer at her startup.",
-            name: "Cynthia @ Nethermind"
+            name: "Nick",
+            company: "Morgan Stanley",
+            image: "images/students/nick.jpg",
+            description: "Senior Quant Engineer using Rust for financial data analysis.",
+            videoId: "oK0D2WNV8bY",
+            quote: "",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
           },
           {
-            text: "Backend engineer now guiding his team members to navigate tricky aspects of Rust.",
-            name: "Akinyele @ GitLab"
-          }
+            name: "Akinyele",
+            company: "GitLab",
+            image: "images/students/akinyele.jpg",
+            description: "Backend engineer at GitLab. Now guiding his team members to navigate tricky aspects of Rust.",
+            videoId: "VGiCHHF4dvo",
+            quote: "",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Sergey",
+            company: "Align Technology",
+            image: "images/students/sergey.jpg",
+            description: "Senior software engineer who specializes in high-performance data and database engineering.",
+            videoId: "jlujPiZNgCg",
+            quote: "",
+            tags: [
+              { text: "Data Engineering", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇦🇲 Armenia", type: "location" },
+            ]
+          },
+          {
+            name: "Jay",
+            company: "Lunit Cancer Screening",
+            image: "images/students/jay.jpg",
+            description: "AI research team lead using Rust to write low level ML tools.",
+            videoId: "KlY6M-DdREM",
+            quote: "My favorite part of the program was learning all the industry-standard Rust best practices and tools!",
+            tags: [
+              { text: "AI", type: "industry" },
+              { text: "📶 Teach Lead", type: "seniority" },
+              { text: "🇰🇷 South Korea", type: "location" },
+            ]
+          },
+          {
+            name: "Cynthia", 
+            company: "Nethermind ",
+            image: "images/students/cynthia.jpg",
+            description: "Building layer-1 blockchain infrastructure as a junior Rust engineer at her startup.",
+            videoId: "",
+            quote: "",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇿🇦 Africa", type: "location" },
+            ]
+          },
+          {
+            name: "Jiri", 
+            company: "G.M.Project",
+            image: "images/students/jiri.png",
+            description: "Staff software engineer in industrial automation. Using Rust for industrial robotics control.",
+            videoId: "",
+            quote: "",
+            tags: [
+              { text: "Robotics", type: "industry" },
+              { text: "📶 Staff", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "Luis",
+            company: "Wizeline",
+            image: "images/students/luis.jpg",
+            description: "Backend engineer and all-star student during the program hired by Let's Get Rusty at the end.",
+            videoId: "fmTGIlQ0NJY",
+            quote: "",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Staff", type: "seniority" },
+              { text: "🇲🇽 Mexico", type: "location" },
+            ]
+          },
+          {
+            name: "Cezar",
+            company: "Craft Solutions Software",
+            image: "images/students/cezar.jpg",
+            description: "CTO at a financial consultancy. Using Rust to process big data for his company.",
+            videoId: "xY_XBfdtWQg",
+            quote: "",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 CTO", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "Hyun",
+            company: "DESIGN N STUDIO",
+            image: "images/students/hyun.jpg",
+            description: "Introduced Rust to his previous employer's tech stack. Now quit his 9-5 and is working on his own blockchain startup.",
+            videoId: "p7RtGo7R2eY",
+            quote: "",
+            tags: [
+              { text: "Full-stack", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇰🇷 South Korea", type: "location" },
+            ]
+          },
+          {
+            name: "John",
+            company: "GreyOrange",
+            image: "images/students/john.jpg",
+            description: "",
+            videoId: "g7iIWac-CFg",
+            quote: "I'd highly recommend this live program to anyone who wants to learn Rust in a systematic way!",
+            tags: [
+              { text: "Distributed Systems", type: "industry" },
+              { text: "📶 Architect", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Guilherme",
+            company: "Simpdigit",
+            image: "images/students/guilherme.jpg",
+            description: "Data integration tech lead turned blockchain entrepreneur. Using Rust for smart contracts and cryptocurrency validators.",
+            videoId: "btvp-Stps6Y",
+            quote: "",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "Chris",
+            company: "Renavest",
+            image: "images/students/chris.jpg",
+            description: "QA engineer turned Rust engineer and all-star student during the program hired by Let's Get Rusty.",
+            videoId: "A9FZP4M9gsU",
+            quote: "",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇿🇦 Africa", type: "location" },
+            ]
+          },
         ];
 
-        function renderTestimonials() {
+
+        // Image Testimonials - just images, no metadata
+        const IMAGE_TESTIMONIALS = [
+          "images/text/1024357265Bootcamp_Testimonial_-_Marcondes_Viana_Highlighted.png",
+          "images/text/186730255693Bootcamp_Testimonial_-_Mateus_Ramalho_Highlighted.png",
+          "images/text/253875507520Bootcamp_Testimonial_-_Sven_Brettschneider_Highlighted.png",
+          "images/text/92131452631Bootcamp_Testimonial_-_Yitzhak_Bar_Geva_Highlighted.png",
+          "images/text/244956013511Bootcamp_Testimonial_-_Lars_Fredriksen_Highlighted.png",
+          "images/text/994669926025Bootcamp_Testimonial_-_Discord.png",
+          "images/text/603767153126Bootcamp_Testimonial_-_Vedvardhan_Gyanmote.png",
+          "images/text/1482766351625Bootcamp_Testimonial_-_Glen.png",
+          "images/text/49230391828Bootcamp_Testimonial_-_Zach_Johnson_Highlighted.png"
+        ];
+
+        // Additional Video Testimonials - displayed after image testimonials
+        const ADDITIONAL_TESTIMONIALS = [
+          {
+            name: "Nivaldo",
+            company: "Globo",
+            image: "images/students/nivaldo.jpg",
+            description: "",
+            videoId: "ef0Je9sp6DM",
+            quote: "If you started learning Rust and are struggling to land a Rust job, I'd highly recommend this program!",
+            tags: [
+              { text: "DevOps", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇧🇷 Brazil", type: "location" },
+            ]
+          },
+          {
+            name: "Tom", 
+            company: "Deltaray",
+            image: "images/students/tom.jpg",
+            description: "",
+            videoId: "QManSflB1ao",
+            quote: "",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Tech Lead", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "David",
+            company: "Mysten Labs",
+            image: "images/students/david.png", 
+            description: "",
+            videoId: "hKloGmCKokU",
+            quote: "",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Enegineering Manager", type: "seniority" },
+              { text: "🇯🇵 Tokyo", type: "location" },
+            ]
+          },
+          {
+            name: "Maria",
+            company: "SteelSeries",
+            image: "images/students/maria.jpg", 
+            description: "",
+            videoId: "mvFUUKz_FoM",
+            quote: "",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Kyle",
+            company: "Shyft",
+            image: "images/students/kyle.jpg", 
+            description: "",
+            videoId: "utzDIQYIocI",
+            quote: "",
+            tags: [
+              { text: "Mobile", type: "industry" },
+              { text: "📶 Tech Lead", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Leo",
+            company: "Pinpoint",
+            image: "images/students/leo.jpg", 
+            description: "",
+            videoId: "HBl-GOMNbLI",
+            quote: "",
+            tags: [
+              { text: "Full-stack", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "James",
+            company: "Google",
+            image: "images/students/james.jpg", 
+            description: "",
+            videoId: "DUbiPtfBlak",
+            quote: "",
+            tags: [
+              { text: "Security Engineer", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Mateus",
+            company: "Google",
+            image: "images/students/mateus.jpg", 
+            description: "",
+            videoId: "5TFdn4lNiHg",
+            quote: "",
+            tags: [
+              { text: "Mobile", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇧🇷 Brazil", type: "location" },
+            ]
+          },
+        ];
+
+        function renderAllTestimonials() {
           const container = document.querySelector('.testimonials-list');
-          if (!container) return;
+          const section = document.querySelector('.testimonials-section');
+          if (!container || !section) return;
+          
           container.innerHTML = '';
+          
+          // Render video testimonials first
           TESTIMONIALS.forEach(t => {
             const div = document.createElement('div');
             div.className = 'testimonial';
+            const tagsHTML = t.tags.map(tag => 
+              `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
+            ).join('');
+            
+            const videoHTML = t.videoId ? `
+              <iframe 
+                class="testimonial-video" 
+                src="https://www.youtube.com/embed/${t.videoId}" 
+                title="Testimonial from ${t.name}"
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            ` : '';
+            
+            const descriptionHTML = t.description ? `
+              <p class="testimonial-description">${t.description}</p>
+            ` : '';
+            
+            const quoteHTML = t.quote ? `
+              <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
+            ` : '';
+            
             div.innerHTML = `
-              <div class="testimonial-name">${t.name}</div>
-              <p class="testimonial-text">${t.text}</p>
+              <div class="testimonial-header">
+                <img src="${t.image}" alt="${t.name}" class="testimonial-image">
+                <div class="testimonial-info">
+                  <div class="testimonial-name-company">
+                    <h3 class="testimonial-name">${t.name}</h3>
+                    <p class="testimonial-company">${t.company}</p>
+                  </div>
+                  <div class="testimonial-tags">${tagsHTML}</div>
+                </div>
+              </div>
+              ${descriptionHTML}
+              ${videoHTML}
+              ${quoteHTML}
             `;
             container.appendChild(div);
           });
+          
+          // Remove any existing image testimonials grid and additional testimonials
+          const existingGrid = section.querySelector('.image-testimonials-grid');
+          if (existingGrid) {
+            existingGrid.remove();
+          }
+          const existingAdditional = section.querySelector('.additional-testimonials-list');
+          if (existingAdditional) {
+            existingAdditional.remove();
+          }
+          
+          // Render image testimonials after video testimonials in a separate 3-column grid
+          if (IMAGE_TESTIMONIALS.length > 0) {
+            const imageGrid = document.createElement('div');
+            imageGrid.className = 'image-testimonials-grid';
+            
+            IMAGE_TESTIMONIALS.forEach(imagePath => {
+              const div = document.createElement('div');
+              div.className = 'image-testimonial';
+              div.innerHTML = `<img src="${imagePath}" alt="Student testimonial">`;
+              imageGrid.appendChild(div);
+            });
+            
+            // Add the image grid to the testimonials section, not the testimonials list
+            section.appendChild(imageGrid);
+          }
+          
+          // Render additional video testimonials after image testimonials
+          if (ADDITIONAL_TESTIMONIALS.length > 0) {
+            const additionalContainer = document.createElement('div');
+            additionalContainer.className = 'testimonials-list additional-testimonials-list';
+            
+            ADDITIONAL_TESTIMONIALS.forEach(t => {
+              const div = document.createElement('div');
+              div.className = 'testimonial';
+              const tagsHTML = t.tags.map(tag => 
+                `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
+              ).join('');
+              
+              const videoHTML = t.videoId ? `
+                <iframe 
+                  class="testimonial-video" 
+                  src="https://www.youtube.com/embed/${t.videoId}" 
+                  title="Testimonial from ${t.name}"
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen>
+                </iframe>
+              ` : '';
+              
+              const descriptionHTML = t.description ? `
+                <p class="testimonial-description">${t.description}</p>
+              ` : '';
+              
+              const quoteHTML = t.quote ? `
+                <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
+              ` : '';
+              
+              div.innerHTML = `
+                <div class="testimonial-header">
+                  <img src="${t.image}" alt="${t.name}" class="testimonial-image">
+                  <div class="testimonial-info">
+                    <div class="testimonial-name-company">
+                      <h3 class="testimonial-name">${t.name}</h3>
+                      <p class="testimonial-company">${t.company}</p>
+                    </div>
+                    <div class="testimonial-tags">${tagsHTML}</div>
+                  </div>
+                </div>
+                ${descriptionHTML}
+                ${videoHTML}
+                ${quoteHTML}
+              `;
+              additionalContainer.appendChild(div);
+            });
+            
+            section.appendChild(additionalContainer);
+          }
         }
-        document.addEventListener('DOMContentLoaded', renderTestimonials);
+
+        document.addEventListener('DOMContentLoaded', renderAllTestimonials);
     </script>
+    
+    <!-- Mist overlay for infinite testimonials effect -->
+    <div class="testimonials-mist-overlay"></div>
 </body>
 </html> 
