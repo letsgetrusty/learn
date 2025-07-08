@@ -398,6 +398,34 @@
             border-radius: 8px;
             border-left: 3px solid var(--accent-color);
         }
+
+        .image-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .image-testimonial {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .image-testimonial img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            object-fit: cover;
+        }
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .image-testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
         @media (max-width: 768px) {
             .guarantees-container {
                 gap: 1.5rem;
@@ -447,6 +475,13 @@
             }
             .testimonial-video {
                 height: 200px;
+            }
+            .image-testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .image-testimonial img {
+                max-width: 250px;
             }
         }
     </style>
@@ -750,10 +785,28 @@
           },
         ];
 
-        function renderTestimonials() {
+
+        // Image Testimonials - just images, no metadata
+        const IMAGE_TESTIMONIALS = [
+          "images/text/1024357265Bootcamp_Testimonial_-_Marcondes_Viana_Highlighted.png",
+          "images/text/186730255693Bootcamp_Testimonial_-_Mateus_Ramalho_Highlighted.png",
+          "images/text/253875507520Bootcamp_Testimonial_-_Sven_Brettschneider_Highlighted.png",
+          "images/text/92131452631Bootcamp_Testimonial_-_Yitzhak_Bar_Geva_Highlighted.png",
+          "images/text/244956013511Bootcamp_Testimonial_-_Lars_Fredriksen_Highlighted.png",
+          "images/text/994669926025Bootcamp_Testimonial_-_Discord.png",
+          "images/text/603767153126Bootcamp_Testimonial_-_Vedvardhan_Gyanmote.png",
+          "images/text/1482766351625Bootcamp_Testimonial_-_Glen.png",
+          "images/text/49230391828Bootcamp_Testimonial_-_Zach_Johnson_Highlighted.png"
+        ];
+
+        function renderAllTestimonials() {
           const container = document.querySelector('.testimonials-list');
-          if (!container) return;
+          const section = document.querySelector('.testimonials-section');
+          if (!container || !section) return;
+          
           container.innerHTML = '';
+          
+          // Render video testimonials first
           TESTIMONIALS.forEach(t => {
             const div = document.createElement('div');
             div.className = 'testimonial';
@@ -785,8 +838,31 @@
             `;
             container.appendChild(div);
           });
+          
+          // Remove any existing image testimonials grid
+          const existingGrid = section.querySelector('.image-testimonials-grid');
+          if (existingGrid) {
+            existingGrid.remove();
+          }
+          
+          // Render image testimonials after video testimonials in a separate 3-column grid
+          if (IMAGE_TESTIMONIALS.length > 0) {
+            const imageGrid = document.createElement('div');
+            imageGrid.className = 'image-testimonials-grid';
+            
+            IMAGE_TESTIMONIALS.forEach(imagePath => {
+              const div = document.createElement('div');
+              div.className = 'image-testimonial';
+              div.innerHTML = `<img src="${imagePath}" alt="Student testimonial">`;
+              imageGrid.appendChild(div);
+            });
+            
+            // Add the image grid to the testimonials section, not the testimonials list
+            section.appendChild(imageGrid);
+          }
         }
-        document.addEventListener('DOMContentLoaded', renderTestimonials);
+
+        document.addEventListener('DOMContentLoaded', renderAllTestimonials);
     </script>
 </body>
 </html> 
