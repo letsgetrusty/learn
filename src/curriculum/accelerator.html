@@ -709,6 +709,32 @@
             ]
           },
           {
+            name: "Cynthia", 
+            company: "Deltaray",
+            image: "images/students/cynthia.jpg",
+            description: "Building layer-1 blockchain infrastructure as a junior Rust engineer at her startup.",
+            videoId: "",
+            quote: "Additional testimonial quote here",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇿🇦 Africa", type: "location" },
+            ]
+          },
+          {
+            name: "Jiri", 
+            company: "Deltaray",
+            image: "images/students/jiri.png",
+            description: "Staff software engineer in industrial automation.  Using Rust for industrial robotics control.",
+            videoId: "",
+            quote: "Additional testimonial quote here",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇿🇦 Africa", type: "location" },
+            ]
+          },
+          {
             name: "Luis",
             company: "Wizeline",
             image: "images/students/luis.jpg",
@@ -873,6 +899,17 @@
               `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
             ).join('');
             
+            const videoHTML = t.videoId ? `
+              <iframe 
+                class="testimonial-video" 
+                src="https://www.youtube.com/embed/${t.videoId}" 
+                title="Testimonial from ${t.name}"
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            ` : '';
+            
             div.innerHTML = `
               <div class="testimonial-header">
                 <img src="${t.image}" alt="${t.name}" class="testimonial-image">
@@ -885,14 +922,7 @@
                 </div>
               </div>
               <p class="testimonial-description">${t.description}</p>
-              <iframe 
-                class="testimonial-video" 
-                src="https://www.youtube.com/embed/${t.videoId}" 
-                title="Testimonial from ${t.name}"
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
+              ${videoHTML}
               <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
             `;
             container.appendChild(div);
@@ -936,6 +966,17 @@
                 `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
               ).join('');
               
+              const videoHTML = t.videoId ? `
+                <iframe 
+                  class="testimonial-video" 
+                  src="https://www.youtube.com/embed/${t.videoId}" 
+                  title="Testimonial from ${t.name}"
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen>
+                </iframe>
+              ` : '';
+              
               div.innerHTML = `
                 <div class="testimonial-header">
                   <img src="${t.image}" alt="${t.name}" class="testimonial-image">
@@ -948,14 +989,7 @@
                   </div>
                 </div>
                 <p class="testimonial-description">${t.description}</p>
-                <iframe 
-                  class="testimonial-video" 
-                  src="https://www.youtube.com/embed/${t.videoId}" 
-                  title="Testimonial from ${t.name}"
-                  frameborder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen>
-                </iframe>
+                ${videoHTML}
                 <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
               `;
               additionalContainer.appendChild(div);
