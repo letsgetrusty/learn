@@ -550,32 +550,17 @@
 
         // Testimonials JSON and rendering
         const TESTIMONIALS = [
-        {
-            name: "Jordan",
-            company: "Meta",
-            image: "images/students/jordan.jpeg", // Add student photo here
-            description: "Software Engineer building performance-critical data processing pipelines",
-            videoId: "ZG7OBmRf9no", // Replace with actual YouTube video ID
-            quote: "I'd highly recommend this program to anyone who wants to learn & master Rust quickly!",
-            tags: [
-              { text: "Tech", type: "industry" },
-              { text: "Senior", type: "seniority" },
-              { text: "US", type: "location" },
-              { text: "Performance", type: "specialty" }
-            ]
-          },
           {
             name: "Ryan",
             company: "ElasticSearch",
             image: "images/students/ryan.jpg", // Add student photo here
             description: "Principal Architect specializing in distributed systems and search technology",
-            videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+            videoId: "ltGCvAJpa7A", // Replace with actual YouTube video ID
             quote: "The depth of knowledge I gained transformed how I approach system design.",
             tags: [
-              { text: "Search", type: "industry" },
+              { text: "Distributed Systems", type: "industry" },
               { text: "Principal", type: "seniority" },
               { text: "EU", type: "location" },
-              { text: "Architecture", type: "specialty" }
             ]
           },
           {
@@ -583,27 +568,38 @@
             company: "Toyota",
             image: "images/students/sean.jpg", // Add student photo here
             description: "Senior Rust Engineer building safe, performant embedded systems",
-            videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+            videoId: "hKee-IJbyeM", // Replace with actual YouTube video ID
             quote: "From zero Rust experience to leading embedded systems projects in just months.",
             tags: [
-              { text: "Automotive", type: "industry" },
+              { text: "Embedded", type: "industry" },
               { text: "Senior", type: "seniority" },
-              { text: "Japan", type: "location" },
-              { text: "Embedded", type: "specialty" }
+              { text: "US", type: "location" },
             ]
           },
           {
-            name: "Nick",
-            company: "Morgan Stanley",
-            image: "images/students/nick.jpg", // Add student photo here
-            description: "Senior Quant Engineer using Rust for financial data analysis",
-            videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
-            quote: "The performance gains we achieved with Rust exceeded all expectations.",
+            name: "Bruno",
+            company: "METRIX",
+            image: "images/students/bruno.jpg", // Add student photo here
+            description: "Junior Rust Engineer building layer-1 blockchain infrastructure",
+            videoId: "lyCepAm-Qcg", // Replace with actual YouTube video ID
+            quote: "Went from bootcamp graduate to blockchain engineer thanks to this program.",
             tags: [
-              { text: "Finance", type: "industry" },
+              { text: "Blockchain", type: "industry" },
+              { text: "Junior", type: "seniority" },
+              { text: "Brazil", type: "location" },
+            ]
+          },
+          {
+            name: "Jordan",
+            company: "Meta",
+            image: "images/students/jordan.jpeg", // Add student photo here
+            description: "Software Engineer building performance-critical data processing pipelines",
+            videoId: "ZG7OBmRf9no", // Replace with actual YouTube video ID
+            quote: "I'd highly recommend this program to anyone who wants to learn & master Rust quickly!",
+            tags: [
+              { text: "Backend", type: "industry" },
               { text: "Senior", type: "seniority" },
               { text: "US", type: "location" },
-              { text: "Quantitative", type: "specialty" }
             ]
           },
           {
@@ -633,7 +629,21 @@
               { text: "US", type: "location" },
               { text: "Backend", type: "specialty" }
             ]
-          }
+          },
+          {
+            name: "Nick",
+            company: "Morgan Stanley",
+            image: "images/students/nick.jpg", // Add student photo here
+            description: "Senior Quant Engineer using Rust for financial data analysis",
+            videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+            quote: "The performance gains we achieved with Rust exceeded all expectations.",
+            tags: [
+              { text: "Finance", type: "industry" },
+              { text: "Senior", type: "seniority" },
+              { text: "US", type: "location" },
+              { text: "Quantitative", type: "specialty" }
+            ]
+          },
         ];
 
         function renderTestimonials() {
