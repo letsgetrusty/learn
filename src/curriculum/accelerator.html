@@ -12,6 +12,7 @@
     <style>
         :root {
             --primary-color: #111827;
+            --primary-color-rgb: 17, 24, 39;
             --secondary-color: #232936;
             --accent-color: #ff8e3d;
             --accent-hover: #ff8e3d;
@@ -32,6 +33,7 @@
         
         .light-mode {
             --primary-color: #f6f8fa;
+            --primary-color-rgb: 246, 248, 250;
             --secondary-color: #fff;
             --accent-color: #f97316;
             --accent-hover: #ea580c;
@@ -63,6 +65,7 @@
             line-height: 1.6;
             min-height: 100vh;
             transition: background 0.3s, color 0.3s;
+            position: relative;
         }
 
         .container {
@@ -423,6 +426,19 @@
             box-shadow: 0 4px 12px var(--shadow-color);
             object-fit: cover;
         }
+        
+        /* Mist overlay for infinite testimonials effect */
+        .testimonials-mist-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50vh;
+            background: linear-gradient(to bottom, transparent 0%, rgba(var(--primary-color-rgb), 0.3) 15%, rgba(var(--primary-color-rgb), 0.7) 40%, var(--primary-color) 80%);
+            pointer-events: none;
+            z-index: 100;
+        }
+        
         @media (max-width: 1024px) and (min-width: 769px) {
             .image-testimonials-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1069,5 +1085,8 @@
 
         document.addEventListener('DOMContentLoaded', renderAllTestimonials);
     </script>
+    
+    <!-- Mist overlay for infinite testimonials effect -->
+    <div class="testimonials-mist-overlay"></div>
 </body>
 </html> 
