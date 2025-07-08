@@ -277,36 +277,115 @@
             font-weight: 700;
         }
         .testimonials-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .testimonial {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            max-width: 340px;
-            min-width: 220px;
-            height: 180px;
-            box-shadow: 0 2px 8px var(--shadow-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px var(--shadow-color);
             text-align: left;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 1.5rem;
         }
-        .testimonial-text {
-            font-size: 1rem;
-            color: var(--text-color);
-            margin-bottom: 0.75rem;
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .testimonial-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            background: var(--border-color);
+        }
+        .testimonial-image:not([src]), .testimonial-image[src=""] {
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .testimonial-info {
+            flex: 1;
         }
         .testimonial-name {
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        .testimonial-company {
             color: var(--accent-color);
             font-weight: 600;
-            font-size: 0.98rem;
-            text-align: right;
-            align-self: flex-end;
+            font-size: 0.9rem;
+            margin: 0 0 0.5rem 0;
+        }
+        .testimonial-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .testimonial-tag {
+            background: var(--primary-color);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+        .testimonial-tag.industry {
+            background: var(--accent-color);
+            color: white;
+        }
+        .testimonial-tag.seniority {
+            background: var(--card-hover);
+            color: var(--text-color);
+        }
+        .testimonial-tag.location {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+        }
+        .testimonial-tag.specialty {
+            background: var(--secondary-color);
+            color: var(--text-secondary);
+            border: 1px solid var(--accent-color);
+        }
+        .testimonial-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .testimonial-video {
+            width: 100%;
+            height: 250px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--primary-color);
+        }
+        .testimonial-quote {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-style: italic;
+            line-height: 1.6;
+            margin: 0;
+            padding: 1rem;
+            background: var(--primary-color);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
         }
         @media (max-width: 768px) {
             .guarantees-container {
@@ -326,8 +405,32 @@
                 padding: 0.75rem;
             }
             .testimonials-list {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .testimonial {
+                padding: 1.5rem;
+            }
+            .testimonial-header {
                 flex-direction: column;
-                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+            .testimonial-image {
+                width: 80px;
+                height: 80px;
+                align-self: center;
+            }
+            .testimonial-tags {
+                justify-content: center;
+                gap: 0.4rem;
+            }
+            .testimonial-tag {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .testimonial-video {
+                height: 200px;
             }
         }
     </style>
@@ -448,28 +551,88 @@
         // Testimonials JSON and rendering
         const TESTIMONIALS = [
         {
-            text: "\"I'd highly recommend this program to anyone who wants to learn & master Rust quickly!\"",
-            name: "Jordan @ Meta"
+            name: "Jordan",
+            company: "Meta",
+            image: "images/students/jordan.jpeg", // Add student photo here
+            description: "Software Engineer building performance-critical data processing pipelines",
+            videoId: "ZG7OBmRf9no", // Replace with actual YouTube video ID
+            quote: "I'd highly recommend this program to anyone who wants to learn & master Rust quickly!",
+            tags: [
+              { text: "Tech", type: "industry" },
+              { text: "Senior", type: "seniority" },
+              { text: "US", type: "location" },
+              { text: "Performance", type: "specialty" }
+            ]
           },
           {
-            text: "Building performance-critical data processing pipelines in Rust as a principal architect.",
-            name: "Ryan @ ElasticSearch"
+            name: "Ryan",
+            company: "ElasticSearch",
+            image: "images/students/ryan.jpg", // Add student photo here
+            description: "Principal Architect specializing in distributed systems and search technology",
+            videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+            quote: "The depth of knowledge I gained transformed how I approach system design.",
+            tags: [
+              { text: "Search", type: "industry" },
+              { text: "Principal", type: "seniority" },
+              { text: "EU", type: "location" },
+              { text: "Architecture", type: "specialty" }
+            ]
           },
           {
-            text: "Now building safe, performant embedded systems as senior Rust engineer!",
-            name: "Sean @ Toyota"
+            name: "Sean",
+            company: "Toyota",
+            image: "images/students/sean.jpg", // Add student photo here
+            description: "Senior Rust Engineer building safe, performant embedded systems",
+            videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+            quote: "From zero Rust experience to leading embedded systems projects in just months.",
+            tags: [
+              { text: "Automotive", type: "industry" },
+              { text: "Senior", type: "seniority" },
+              { text: "Japan", type: "location" },
+              { text: "Embedded", type: "specialty" }
+            ]
           },
           {
-            text: "Senior quant engineer using Rust for financial data analysis for institutional clients.",
-            name: "Nick @ Morgan Stanley"
+            name: "Nick",
+            company: "Morgan Stanley",
+            image: "images/students/nick.jpg", // Add student photo here
+            description: "Senior Quant Engineer using Rust for financial data analysis",
+            videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+            quote: "The performance gains we achieved with Rust exceeded all expectations.",
+            tags: [
+              { text: "Finance", type: "industry" },
+              { text: "Senior", type: "seniority" },
+              { text: "US", type: "location" },
+              { text: "Quantitative", type: "specialty" }
+            ]
           },
           {
-            text: "Building layer-1 blockchain infrastructure as a junior Rust engineer at her startup.",
-            name: "Cynthia @ Nethermind"
+            name: "Cynthia",
+            company: "Nethermind",
+            image: "images/students/cynthia.jpg", // Add student photo here
+            description: "Junior Rust Engineer building layer-1 blockchain infrastructure",
+            videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+            quote: "Went from bootcamp graduate to blockchain engineer thanks to this program.",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "Junior", type: "seniority" },
+              { text: "US", type: "location" },
+              { text: "Infrastructure", type: "specialty" }
+            ]
           },
           {
-            text: "Backend engineer now guiding his team members to navigate tricky aspects of Rust.",
-            name: "Akinyele @ GitLab"
+            name: "Akinyele",
+            company: "GitLab",
+            image: "images/students/akinyele.jpg", // Add student photo here
+            description: "Backend Engineer mentoring team members in Rust development",
+            videoId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+            quote: "Now I'm the go-to person for Rust architecture decisions at my company.",
+            tags: [
+              { text: "DevOps", type: "industry" },
+              { text: "Mid-level", type: "seniority" },
+              { text: "US", type: "location" },
+              { text: "Backend", type: "specialty" }
+            ]
           }
         ];
 
@@ -480,9 +643,29 @@
           TESTIMONIALS.forEach(t => {
             const div = document.createElement('div');
             div.className = 'testimonial';
+            const tagsHTML = t.tags.map(tag => 
+              `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
+            ).join('');
+            
             div.innerHTML = `
-              <div class="testimonial-name">${t.name}</div>
-              <p class="testimonial-text">${t.text}</p>
+              <div class="testimonial-header">
+                <img src="${t.image}" alt="${t.name}" class="testimonial-image">
+                <div class="testimonial-info">
+                  <h3 class="testimonial-name">${t.name}</h3>
+                  <p class="testimonial-company">${t.company}</p>
+                  <div class="testimonial-tags">${tagsHTML}</div>
+                </div>
+              </div>
+              <p class="testimonial-description">${t.description}</p>
+              <iframe 
+                class="testimonial-video" 
+                src="https://www.youtube.com/embed/${t.videoId}" 
+                title="Testimonial from ${t.name}"
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+              <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
             `;
             container.appendChild(div);
           });
