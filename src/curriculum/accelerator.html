@@ -405,6 +405,9 @@
             gap: 2rem;
             margin-top: 2rem;
         }
+        .additional-testimonials-list {
+            margin-top: 2rem;
+        }
         .image-testimonial {
             display: flex;
             justify-content: center;
@@ -799,6 +802,62 @@
           "images/text/49230391828Bootcamp_Testimonial_-_Zach_Johnson_Highlighted.png"
         ];
 
+        // Additional Video Testimonials - displayed after image testimonials
+        const ADDITIONAL_TESTIMONIALS = [
+          {
+            name: "Nivaldo",
+            company: "Globo",
+            image: "images/students/nivaldo.jpg",
+            description: "Additional student description here",
+            videoId: "ef0Je9sp6DM", // Replace with actual YouTube video ID
+            quote: "If you started learning Rust and are struggling to land a Rust job, I'd highly recommend this program!",
+            tags: [
+              { text: "DevOps", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇧🇷 Brazil", type: "location" },
+            ]
+          },
+          {
+            name: "Tom", 
+            company: "Deltaray",
+            image: "images/students/tom.jpg",
+            description: "Additional student description here",
+            videoId: "QManSflB1ao", // Replace with actual YouTube video ID
+            quote: "Additional testimonial quote here",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Tech Lead", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "David",
+            company: "Mysten Labs",
+            image: "images/students/david.png", 
+            description: "Additional student description here",
+            videoId: "hKloGmCKokU", // Replace with actual YouTube video ID
+            quote: "Additional testimonial quote here",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Enegineering Manager", type: "seniority" },
+              { text: "🇯🇵 Tokyo", type: "location" },
+            ]
+          },
+          {
+            name: "Maria",
+            company: "SteelSeries",
+            image: "images/students/maria.jpg", 
+            description: "Additional student description here",
+            videoId: "mvFUUKz_FoM", // Replace with actual YouTube video ID
+            quote: "Additional testimonial quote here",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+        ];
+
         function renderAllTestimonials() {
           const container = document.querySelector('.testimonials-list');
           const section = document.querySelector('.testimonials-section');
@@ -839,10 +898,14 @@
             container.appendChild(div);
           });
           
-          // Remove any existing image testimonials grid
+          // Remove any existing image testimonials grid and additional testimonials
           const existingGrid = section.querySelector('.image-testimonials-grid');
           if (existingGrid) {
             existingGrid.remove();
+          }
+          const existingAdditional = section.querySelector('.additional-testimonials-list');
+          if (existingAdditional) {
+            existingAdditional.remove();
           }
           
           // Render image testimonials after video testimonials in a separate 3-column grid
@@ -859,6 +922,46 @@
             
             // Add the image grid to the testimonials section, not the testimonials list
             section.appendChild(imageGrid);
+          }
+          
+          // Render additional video testimonials after image testimonials
+          if (ADDITIONAL_TESTIMONIALS.length > 0) {
+            const additionalContainer = document.createElement('div');
+            additionalContainer.className = 'testimonials-list additional-testimonials-list';
+            
+            ADDITIONAL_TESTIMONIALS.forEach(t => {
+              const div = document.createElement('div');
+              div.className = 'testimonial';
+              const tagsHTML = t.tags.map(tag => 
+                `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
+              ).join('');
+              
+              div.innerHTML = `
+                <div class="testimonial-header">
+                  <img src="${t.image}" alt="${t.name}" class="testimonial-image">
+                  <div class="testimonial-info">
+                    <div class="testimonial-name-company">
+                      <h3 class="testimonial-name">${t.name}</h3>
+                      <p class="testimonial-company">${t.company}</p>
+                    </div>
+                    <div class="testimonial-tags">${tagsHTML}</div>
+                  </div>
+                </div>
+                <p class="testimonial-description">${t.description}</p>
+                <iframe 
+                  class="testimonial-video" 
+                  src="https://www.youtube.com/embed/${t.videoId}" 
+                  title="Testimonial from ${t.name}"
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen>
+                </iframe>
+                <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
+              `;
+              additionalContainer.appendChild(div);
+            });
+            
+            section.appendChild(additionalContainer);
           }
         }
 
