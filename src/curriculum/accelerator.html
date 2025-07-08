@@ -862,7 +862,7 @@
             image: "images/students/david.png", 
             description: "Additional student description here",
             videoId: "hKloGmCKokU", // Replace with actual YouTube video ID
-            quote: "Additional testimonial quote here",
+            quote: "",
             tags: [
               { text: "Blockchain", type: "industry" },
               { text: "📶 Enegineering Manager", type: "seniority" },
@@ -874,8 +874,8 @@
             company: "SteelSeries",
             image: "images/students/maria.jpg", 
             description: "Additional student description here",
-            videoId: "mvFUUKz_FoM", // Replace with actual YouTube video ID
-            quote: "Additional testimonial quote here",
+            videoId: "mvFUUKz_FoM",
+            quote: "",
             tags: [
               { text: "Backend", type: "industry" },
               { text: "📶 Mid-level", type: "seniority" },
@@ -910,6 +910,14 @@
               </iframe>
             ` : '';
             
+            const descriptionHTML = t.description ? `
+              <p class="testimonial-description">${t.description}</p>
+            ` : '';
+            
+            const quoteHTML = t.quote ? `
+              <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
+            ` : '';
+            
             div.innerHTML = `
               <div class="testimonial-header">
                 <img src="${t.image}" alt="${t.name}" class="testimonial-image">
@@ -921,9 +929,9 @@
                   <div class="testimonial-tags">${tagsHTML}</div>
                 </div>
               </div>
-              <p class="testimonial-description">${t.description}</p>
+              ${descriptionHTML}
               ${videoHTML}
-              <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
+              ${quoteHTML}
             `;
             container.appendChild(div);
           });
@@ -977,6 +985,14 @@
                 </iframe>
               ` : '';
               
+              const descriptionHTML = t.description ? `
+                <p class="testimonial-description">${t.description}</p>
+              ` : '';
+              
+              const quoteHTML = t.quote ? `
+                <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
+              ` : '';
+              
               div.innerHTML = `
                 <div class="testimonial-header">
                   <img src="${t.image}" alt="${t.name}" class="testimonial-image">
@@ -988,9 +1004,9 @@
                     <div class="testimonial-tags">${tagsHTML}</div>
                   </div>
                 </div>
-                <p class="testimonial-description">${t.description}</p>
+                ${descriptionHTML}
                 ${videoHTML}
-                <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
+                ${quoteHTML}
               `;
               additionalContainer.appendChild(div);
             });
