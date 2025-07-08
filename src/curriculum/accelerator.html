@@ -319,6 +319,12 @@
         .testimonial-info {
             flex: 1;
         }
+        .testimonial-name-company {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin: 0 0 0.5rem 0;
+        }
         .testimonial-name {
             color: var(--text-color);
             font-weight: 700;
@@ -329,13 +335,18 @@
             color: var(--accent-color);
             font-weight: 600;
             font-size: 0.9rem;
-            margin: 0 0 0.5rem 0;
+            margin: 0;
+        }
+        .testimonial-company::before {
+            content: "@ ";
+            color: var(--text-secondary);
+            font-weight: 400;
         }
         .testimonial-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 0.5rem;
+            margin-top: 0;
         }
         .testimonial-tag {
             background: var(--primary-color);
@@ -420,6 +431,11 @@
                 width: 80px;
                 height: 80px;
                 align-self: center;
+            }
+            .testimonial-name-company {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.3rem;
             }
             .testimonial-tags {
                 justify-content: center;
@@ -659,8 +675,10 @@
               <div class="testimonial-header">
                 <img src="${t.image}" alt="${t.name}" class="testimonial-image">
                 <div class="testimonial-info">
-                  <h3 class="testimonial-name">${t.name}</h3>
-                  <p class="testimonial-company">${t.company}</p>
+                  <div class="testimonial-name-company">
+                    <h3 class="testimonial-name">${t.name}</h3>
+                    <p class="testimonial-company">${t.company}</p>
+                  </div>
                   <div class="testimonial-tags">${tagsHTML}</div>
                 </div>
               </div>
