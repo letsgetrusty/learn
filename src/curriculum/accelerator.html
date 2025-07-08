@@ -173,6 +173,89 @@
             }
         }
 
+        .guarantees-section {
+            margin-top: 2.5rem;
+            padding: 2rem 0 0 0;
+            text-align: center;
+            position: relative;
+        }
+        .guarantees-section::before {
+            content: "";
+            display: block;
+            margin: 0 auto 2rem auto;
+            width: 500px;
+            border-top: 1px solid var(--border-color);
+            border-radius: 2px;
+        }
+        .guarantees-header {
+            margin-bottom: 2rem;
+        }
+        .guarantees-header h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        .guarantees-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .guarantees-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .guarantee-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            text-align: left;
+        }
+        .guarantee-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .guarantee-card h3 {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .guarantee-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .guarantee-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .guarantee-detail {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding: 1rem;
+            background: var(--primary-color);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+        .guarantee-detail strong {
+            color: var(--text-color);
+        }
+
         .testimonials-section {
             margin-top: 2.5rem;
             padding: 2rem 0 0 0;
@@ -226,6 +309,22 @@
             align-self: flex-end;
         }
         @media (max-width: 768px) {
+            .guarantees-container {
+                gap: 1.5rem;
+                max-width: 100%;
+            }
+            .guarantee-card {
+                padding: 1.5rem;
+            }
+            .guarantee-icon {
+                font-size: 2rem;
+            }
+            .guarantee-card h3 {
+                font-size: 1.1rem;
+            }
+            .guarantee-detail {
+                padding: 0.75rem;
+            }
             .testimonials-list {
                 flex-direction: column;
                 align-items: center;
@@ -296,6 +395,32 @@
                 <li><b>Salary & Offer Negotiation</b><br><span style="font-weight:400;">Don't leave money on the table. Learn how to negotiate confidently and avoid lowball offers or down-leveled positions.</span></li>
             </ul>
             <p>You'll track your job hunt in a private dashboard, and we'll hold you accountable to putting in focused time each weekday, whether that's outreach, interview prep, or fine-tuning your materials. Every week, you'll get live support during Career Camp Office Hours to unblock your search, refine your strategy, and ultimately land the Rust job you've been working toward.</p>
+        </div>
+
+        <div class="guarantees-section">
+            <div class="guarantees-header">
+                <h2><span style="font-size:1.1em;vertical-align:middle;">🛡️</span> Our Guarantees to You</h2>
+                <p>We're so confident in the value of our program that we back it with these guarantees:</p>
+            </div>
+            <div class="guarantees-container">
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">💯</div>
+                    <h3>100% Satisfaction Guarantee</h3>
+                    <p>If you're not completely satisfied with the program for any reason, you can get a full refund up to <strong>10 days into the immersion period</strong>. No questions asked.</p>
+                </div>
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">🚀</div>
+                    <h3>Job Placement Guarantee</h3>
+                    <div class="guarantee-details">
+                        <div class="guarantee-detail">
+                            <strong>🇺🇸 US Residents:</strong> If you enroll in Career Camp and don't land a Rust job within 6 months of completion, we'll refund your Career Camp investment.
+                        </div>
+                        <div class="guarantee-detail">
+                            <strong>🌍 International Students:</strong> We guarantee to work with you one-on-one until you successfully land a Rust role, with no time limit.
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="testimonials-section">
