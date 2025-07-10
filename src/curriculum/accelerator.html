@@ -258,6 +258,66 @@
             color: var(--text-color);
         }
 
+        .companies-section {
+            margin-top: 2.5rem;
+            padding: 2rem 0 0 0;
+            text-align: center;
+            position: relative;
+        }
+        .companies-section::before {
+            content: "";
+            display: block;
+            margin: 0 auto 2rem auto;
+            width: 500px;
+            border-top: 1px solid var(--border-color);
+            border-radius: 2px;
+        }
+        .companies-section h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .company-logo {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .company-logo:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow-color);
+        }
+        .company-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: filter 0.2s ease;
+        }
+        .light-mode .company-logo {
+            background: var(--card-bg);
+        }
+        .light-mode .company-logo img {
+            filter: brightness(0.9);
+        }
+        .light-mode .company-logo:hover img {
+            filter: brightness(0.7);
+        }
+
         .testimonials-section {
             margin-top: 2.5rem;
             padding: 2rem 0 0 0;
@@ -439,12 +499,24 @@
         }
         
         @media (max-width: 1024px) and (min-width: 769px) {
+            .companies-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
             .image-testimonials-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.5rem;
             }
         }
         @media (max-width: 768px) {
+            .companies-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                max-width: 100%;
+            }
+            .company-logo {
+                padding: 1rem;
+            }
             .guarantees-container {
                 gap: 1.5rem;
                 max-width: 100%;
@@ -591,6 +663,57 @@
                             <strong>🌍 International Students:</strong> If you enroll in Career Camp we guarantee to work with you one-on-one until you successfully land a Rust role.
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="companies-section">
+            <h2>We've trained engineers at top companies!</h2>
+            <div class="companies-grid">
+                <div class="company-logo">
+                    <img src="images/companies/Amazon.png" alt="Amazon">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Google.png" alt="Google">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Microsoft.png" alt="Microsoft">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Meta.png" alt="Meta">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/AWS.png" alt="AWS">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Gitlab.png" alt="GitLab">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Toyota.png" alt="Toyota">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Mastercard.png" alt="Mastercard">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/coinbase.png" alt="Coinbase">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Binance.png" alt="Binance">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Elastic search - 1.png" alt="Elasticsearch">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Morgan-Stanley 1.png" alt="Morgan Stanley">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Helsing 1.png" alt="Helsing">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/GA.png" alt="GA">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/lunit.png" alt="Helsing">
                 </div>
             </div>
         </div>
