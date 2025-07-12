@@ -280,11 +280,12 @@
         }
         .companies-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
             gap: 2rem;
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 1rem;
+            justify-content: center;
         }
         .company-logo {
             background: #ffffff;
@@ -295,6 +296,8 @@
             align-items: center;
             justify-content: center;
             aspect-ratio: 1;
+            max-width: 150px;
+            max-height: 150px;
             box-shadow: 0 4px 12px var(--shadow-color);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
@@ -500,7 +503,6 @@
         
         @media (max-width: 1024px) and (min-width: 769px) {
             .companies-grid {
-                grid-template-columns: repeat(3, 1fr);
                 gap: 1.5rem;
             }
             .image-testimonials-grid {
@@ -510,7 +512,6 @@
         }
         @media (max-width: 768px) {
             .companies-grid {
-                grid-template-columns: repeat(2, 1fr);
                 gap: 1.5rem;
                 max-width: 100%;
             }
@@ -622,7 +623,7 @@
                 <li>Decide on your focus, validate your idea, architect your system, and execute with clean abstractions and maintainability in mind</li>
                 <li>Push into advanced areas like unsafe Rust and FFI, async orchestration in distributed systems, or low-level memory and I/O tuning</li>
                 <li>Get detailed code reviews, architecture feedback, and hands-on support to help you build something you're proud to put on your resume... and show off in interviews</li>
-                <li>By the end, you'll have a working, real-world Rust project that showcases your ability to solve hard problems, write robust systems, and think like a Rust engineer.</li>
+                <li>By the end, you'll have a working, real-world Rust project that showcases your ability to solve hard problems, write robust systems, and think like a Rust engineer</li>
             </ul>
         </div>
 
