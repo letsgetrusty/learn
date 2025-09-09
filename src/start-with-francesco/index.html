@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>Let's Get Rusty</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      @media (min-width: 768px) {
+        .section-flex {
+          transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s, background 0.3s;
+          flex: 1 1 0%;
+        }
+        .section-flex.section-hovered {
+          flex: 51 1 0%;
+          filter: none;
+        }
+        .section-flex.section-shrunk {
+          flex: 49 1 0%;
+        }
+        .section-flex.section-unhovered {
+          filter: brightness(0.7) grayscale(0.1);
+        }
+        .section-flex.section-unhovered .cta-btn,
+        .section-flex.section-unhovered .section-text {
+          opacity: 0.6;
+          transition: opacity 0.3s;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col relative bg-gradient-to-br from-amber-700 to-amber-600">
+    <!-- Navigation -->
+    <nav class="absolute top-0 left-0 right-0 z-50 p-4">
+      <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <img src="/lgr_logo.png" alt="LGR Logo" class="h-10 w-auto mr-3">
+          <span class="text-xl font-bold text-white">Let's Get Rusty</span>
+        </div>
+        <!-- Navigation Links -->
+        <div class="flex space-x-6 md:space-x-8 text-base md:text-md text-white">
+          <a href="#" id="home-button" class="hover:underline">Home</a>
+          <a href="#" id="contact-button" class="hover:underline">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex flex-col md:flex-row flex-grow">
+      <!-- Left Side: Company -->
+      <div class="section-flex w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-800 p-8 md:p-12 py-[100px] text-white">
+        <div class="max-w-xl w-full">
+          <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6 section-text">Are you a company?</h1>
+            <p class="text-lg md:text-xl mb-8 section-text">Are you a team lead, manager, VP or CTO?</p>
+            <ul class="mb-10 space-y-3 inline-block text-left text-lg section-text">
+              <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Custom training programs for your team</li>
+              <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Expert consultation on Rust implementation</li>
+              <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Enterprise support & integration</li>
+            </ul>
+            <div class="flex justify-center">
+              <button id="company-cta-button" class="bg-white text-zinc-900 font-semibold px-8 py-3 rounded-lg shadow hover:bg-zinc-300 transition cursor-pointer cta-btn">My Team Needs Training</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Side: Engineer -->
+      <div class="section-flex w-full md:w-1/2 flex items-center justify-center bg-gradient-to-br from-amber-700 to-amber-600 p-8 md:p-12 py-[100px] text-white">
+        <div class="max-w-xl w-full">
+          <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6 section-text">Are you a developer?</h1>
+            <p class="text-lg md:text-xl mb-8 section-text">Are you struggling to learn & master Rust?</p>
+            <ul class="mb-10 space-y-3 inline-block text-left text-lg section-text">
+              <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Live, person-to-person Rust training</li>
+              <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Access to Rust recruiter network</li>
+              <li class="flex items-center"><span class="text-green-400 mr-3">&#10003;</span>Designed to land you a Rust job…fast</li>
+            </ul>
+            <div class="flex justify-center">
+              <button id="engineer-cta-button" class="bg-white text-amber-600 font-semibold px-8 py-3 rounded-lg shadow hover:bg-amber-200 transition cursor-pointer cta-btn">Start Learning</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="absolute bottom-0 right-0 text-right text-amber-100/30 py-4 pr-8 z-50">
+      © 2025 LET'S GET RUSTY All rights reserved.
+    </footer>
+    <script>
+    function addButtonHandler(id, handler) {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.addEventListener('click', function(event) {
+                event.preventDefault();
+                handler();
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        addButtonHandler('home-button', function() {
+            window.location.href = window.location.pathname;
+        });
+        addButtonHandler('contact-button', function() {
+            window.location.href = 'mailto:bogdan@letsgetrusty.com?subject=My%20team%20can%20definitely%20use%20some%20help%20from%20you%20:)&body=Hi%20Bogdan,%0A%0AMy%20team%20needs%20corporate%20Rust%20training%20and/or%20consultation.%20Are%20you%20able%20to%20help?%0A%0ALet%27s%20have%20a%20chat%20:)%0A%0ABest,%0A';
+        });
+        addButtonHandler('company-cta-button', function() {
+            window.location.href = 'mailto:bogdan@letsgetrusty.com?subject=My%20team%20can%20definitely%20use%20some%20help%20from%20you%20:)&body=Hi%20Bogdan,%0A%0AMy%20team%20needs%20corporate%20Rust%20training%20and/or%20consultation.%20Are%20you%20able%20to%20help?%0A%0ALet%27s%20have%20a%20chat%20:)%0A%0ABest,%0A';
+        });
+        addButtonHandler('engineer-cta-button', function() {
+            window.location.href = `https://product.letsgetrusty.com${window.location.pathname}`;
+        });
+        const sections = document.querySelectorAll('.section-flex');
+        sections.forEach((section, idx) => {
+          section.addEventListener('mouseenter', () => {
+            section.classList.add('section-hovered');
+            sections.forEach((other, i) => {
+              if (i !== idx) {
+                other.classList.add('section-shrunk', 'section-unhovered');
+              }
+            });
+          });
+          section.addEventListener('mouseleave', () => {
+            section.classList.remove('section-hovered');
+            sections.forEach((other, i) => {
+              if (i !== idx) {
+                other.classList.remove('section-shrunk', 'section-unhovered');
+              }
+            });
+          });
+        });
+    });
+    </script>
+  </body>
+</html>
