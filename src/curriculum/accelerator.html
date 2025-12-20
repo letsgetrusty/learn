@@ -76,12 +76,12 @@
 
         .header {
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .header h1 {
             color: var(--text-color);
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
@@ -89,10 +89,41 @@
 
         .header p {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 1.05rem;
             max-width: 600px;
             margin: 0 auto;
             font-weight: 500;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            position: relative;
+        }
+
+        .section-header::before {
+            content: "";
+            display: block;
+            margin: 0 auto 2rem auto;
+            width: 500px;
+            max-width: 80%;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-header h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .info-note {
@@ -510,6 +541,120 @@
                 gap: 1.5rem;
             }
         }
+        /* All-Star Speakers Section */
+        .speakers-section {
+            margin-bottom: 1rem;
+        }
+        .speakers-section h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .speakers-section > p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .speaker-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .speaker-image-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            margin: 0 auto 1rem auto;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #ff6b35 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .speaker-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            color: transparent; /* Hide alt text */
+        }
+        .speaker-name {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+        .speaker-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .speaker-subs {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            flex-grow: 1;
+        }
+        .speaker-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 20px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .speaker-link:hover {
+            background: #e07830;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .speakers-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .speaker-card {
+                padding: 1.25rem 1rem;
+            }
+            .speaker-image-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+            .speaker-name {
+                font-size: 1rem;
+            }
+            .speaker-title {
+                font-size: 0.85rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .companies-grid {
                 gap: 1.5rem;
@@ -580,8 +725,64 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1><span style="font-size:1.3em;vertical-align:middle;">🚀</span> Rust Live Accelerator Curriculum</h1>
-            <p>Our program is structured into <b>3 distinct phases</b> designed to take you from a Rust beginner to becoming a high-performing, highly-paid Rust developer: <b>Onboarding</b>, <b>Immersion</b>, and <b>Career Camp</b>.</p>
+            <h1><span style="font-size:1.3em;vertical-align:middle;">🚀</span> Rust Live Accelerator</h1>
+            <p>The most comprehensive Rust training program in the world.</p>
+        </div>
+
+        <div class="speakers-section">
+            <h2><span style="font-size:1.1em;vertical-align:middle;">🌎</span> World's Most Influential Rust Educators</h2>
+            <p>All-star instructors & speakers, all in one program.</p>
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-image-wrapper">
+                        <img src="images/instructors/bogdan.png" alt="Bogdan" class="speaker-image">
+                    </div>
+                    <div class="speaker-name">Let's Get Rusty</div>
+                    <div class="speaker-title">Bogdan, Rust Creator<br>Let's Get Rusty</div>
+                    <div class="speaker-subs">100k+ subscribers</div>
+                    <a href="https://www.youtube.com/@letsgetrusty" target="_blank" rel="noopener" class="speaker-link">
+                        <span>▶</span> YouTube
+                    </a>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image-wrapper">
+                        <img src="images/instructors/jon.jpg" alt="Jon Gjengset" class="speaker-image">
+                    </div>
+                    <div class="speaker-name">Jon Gjengset</div>
+                    <div class="speaker-title">Popular Book Author<br>"Rust for Rustaceans"</div>
+                    <div class="speaker-subs">100k+ subscribers</div>
+                    <a href="https://www.youtube.com/@jonhoo" target="_blank" rel="noopener" class="speaker-link">
+                        <span>▶</span> YouTube
+                    </a>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image-wrapper">
+                        <img src="images/instructors/tris.jpg" alt="Tris" class="speaker-image">
+                    </div>
+                    <div class="speaker-name">No Boilerplate</div>
+                    <div class="speaker-title">Tris, Rust Creator<br>No Boilerplate</div>
+                    <div class="speaker-subs">200k+ subscribers</div>
+                    <a href="https://www.youtube.com/@NoBoilerplate" target="_blank" rel="noopener" class="speaker-link">
+                        <span>▶</span> YouTube
+                    </a>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image-wrapper">
+                        <img src="images/instructors/ken.png" alt="Ken" class="speaker-image">
+                    </div>
+                    <div class="speaker-name">Code to the Moon</div>
+                    <div class="speaker-title">Ken, Rust Creator<br>Code to the Moon</div>
+                    <div class="speaker-subs">80k+ subscribers</div>
+                    <a href="https://www.youtube.com/@codetothemoon" target="_blank" rel="noopener" class="speaker-link">
+                        <span>▶</span> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2><span style="font-size:1.1em;vertical-align:middle;">📚</span> Curriculum</h2>
+            <p>Three phases designed to take you from Rust beginner to high-performing, highly-paid Rust developer: <b>Onboarding</b>, <b>Immersion</b>, and <b>Career Camp</b>.</p>
         </div>
 
         <div class="info-note">
