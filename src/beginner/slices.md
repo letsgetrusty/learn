@@ -97,7 +97,7 @@ fn main() {
 
 // this function searches an array to find a subarray with the given sum
 // it returns the index where the subarray starts along with the length of the subarray
-// if the array does not include any subarray with the sum, it returns a tuple with length or array
+// if the array does not include any subarray with the sum, it returns a tuple with length of array
 fn find_subarray(nums: &[i32], sum: i32) -> (usize, usize) {
     for len in (1..nums.len() + 1).rev() {
         for start in 0..nums.len() - len + 1 {
