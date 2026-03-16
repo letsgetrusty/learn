@@ -16,6 +16,10 @@ pub fn bigger(a: i32, b: i32) -> i32 {
     // - additional variables
 }
 
+fn main() {
+    print!("{} is bigger than {}", bigger(10, 8), 8);
+}
+
 // Don't mind this for now :)
 #[cfg(test)]
 mod tests {
@@ -43,6 +47,10 @@ pub fn bigger(a: i32, b: i32) -> i32 {
     } else {
         b
     }
+}
+
+fn main() {
+    print!("{} is bigger than {}", bigger(10, 8), 8);
 }
 
 // Don't mind this for now :)

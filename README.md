@@ -27,7 +27,7 @@ To discuss and/or collaborate with other Rust developers, join our [Discord comm
 ```shell
 git clone git@github.com:letsgetrusty/rust-learning-guide.git
 
-cargo install mdbook
+cargo install mdbook --version 0.4.36
 
 cd rust-learning-guide && mdbook serve --open
 ```
