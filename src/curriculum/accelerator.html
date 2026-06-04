@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#181c23">
+    <meta name="theme-color" content="#f6f8fa">
     <link rel="icon" type="image/png" href="favicon.png">
     <title>Rust Live Accelerator Curriculum</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -222,6 +222,10 @@
             color: var(--text-secondary);
             font-size: 0.95rem;
             margin-bottom: 1.25rem;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .immersion-flow {
@@ -233,7 +237,7 @@
             margin-bottom: 1.5rem;
             padding: 1rem 1.25rem;
             background: var(--primary-color);
-            border: 1.5px solid var(--phase-elevated-border);
+            border: 1px solid var(--phase-elevated-border);
             border-radius: 12px;
             box-shadow: var(--phase-elevated-shadow);
             transition: box-shadow 0.2s ease, border-color 0.2s ease;
@@ -305,9 +309,44 @@
             margin: 1.25rem 0;
         }
 
+        .immersion-tools-grid--four {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .immersion-tools-grid--four .immersion-tool-card {
+            padding: 1rem 1.1rem;
+        }
+
+        .immersion-tools-grid--four .immersion-tool-card h4 {
+            font-size: 0.9rem;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .immersion-tools-grid--four .immersion-tool-card p {
+            font-size: 0.85rem;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 1100px) {
+            .immersion-tools-grid--four {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .immersion-tools-grid--four .immersion-tool-card h4 {
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .immersion-tools-grid--four {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .immersion-tool-card {
             background: var(--primary-color);
-            border: 1.5px solid var(--phase-elevated-border);
+            border: 1px solid var(--phase-elevated-border);
             border-radius: 12px;
             padding: 1.25rem;
             box-shadow: var(--phase-elevated-shadow);
@@ -355,7 +394,7 @@
 
         .call-card {
             background: var(--primary-color);
-            border: 1.5px solid var(--phase-elevated-border);
+            border: 1px solid var(--phase-elevated-border);
             border-radius: 12px;
             padding: 1.25rem;
             display: flex;
@@ -406,6 +445,68 @@
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.5;
+        }
+
+        .call-instructor {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .call-instructor-photo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .call-instructor-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            min-width: 0;
+        }
+
+        .call-instructor-info h4 {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .call-instructor-name {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .call-instructor-channel {
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .call-cards-grid--instructors {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 960px) {
+            .call-cards-grid--instructors {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .call-cards-grid--two {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 960px) {
+            .call-cards-grid--two {
+                grid-template-columns: 1fr;
+            }
         }
 
         .call-card-topics {
@@ -959,7 +1060,7 @@
         }
     </style>
 </head>
-<body>
+<body class="light-mode">
     <div class="container">
         <div class="header">
             <h1><span style="font-size:1.3em;vertical-align:middle;">🚀</span> Rust Live Accelerator</h1>
@@ -1022,10 +1123,6 @@
             <p>Three phases designed to take you from Rust beginner to high-performing, highly-paid Rust developer: <b>Onboarding</b>, <b>Immersion</b>, and <b>Career Camp</b>.</p>
         </div>
 
-        <div class="info-note">
-            <span class="info-icon">ℹ️</span>
-            <p><b>Important Note:</b> This curriculum reflects the default path many students follow. Your personal roadmap will be customized during our upcoming 1-on-1 enrollment call.</p>
-        </div>
 
         <div class="curriculum-section">
             <h2><span style="font-size:1.1em;vertical-align:middle;">🧭</span> Phase 1: Onboarding — Tailored Roadmap to Rust Mastery <span style="font-weight:400;font-size:0.9em;">(1 to 5 weeks)</span></h2>
@@ -1060,18 +1157,13 @@
                         <h4>Weekly Momentum Calls</h4>
                     </div>
                     <p>Weekly live calls to build connections, get guidance on your upcoming Immersion project, and get support with the fundamentals.</p>
-                    <div class="topic-tags">
-                        <span class="topic-tag">Community</span>
-                        <span class="topic-tag">Project Planning</span>
-                        <span class="topic-tag">Fundamentals</span>
-                    </div>
                 </div>
             </div>
         </div>
 
         <div class="curriculum-section">
             <h2><span style="font-size:1.1em;vertical-align:middle;">🔧</span> Phase 2: Immersion — Build Production-Grade Rust Software <span style="font-weight:400;font-size:0.9em;">(3 months)</span></h2>
-            <p class="phase-lead">Design and build production-grade Rust software tailored to your niche, goals, or domain — scoped by experts, reviewed by experts, and supported every week.</p>
+            <p class="phase-lead">Design and build production-grade Rust software tailored to your niche, goals, or domain — with expert reviews and mentorship.</p>
 
             <div class="immersion-flow">
                 <div class="flow-step"><span class="flow-step-num">1</span> Scope</div>
@@ -1080,23 +1172,16 @@
                 <span class="flow-arrow">→</span>
                 <div class="flow-step"><span class="flow-step-num">3</span> Review</div>
                 <span class="flow-arrow">→</span>
-                <div class="flow-step"><span class="flow-step-num">4</span> Live Calls</div>
+                <div class="flow-step"><span class="flow-step-num">4</span> Mentorship</div>
             </div>
 
             <div class="immersion-tools-grid">
                 <div class="immersion-tool-card">
                     <div class="immersion-tool-card-header">
                         <span class="tool-icon">🎯</span>
-                        <h4>Personalized Project Roadmap</h4>
+                        <h4>Personalized Projects</h4>
                     </div>
                     <p>Work with our team to scope a project aligned with your experience, goals, and target domain.</p>
-                </div>
-                <div class="immersion-tool-card">
-                    <div class="immersion-tool-card-header">
-                        <span class="tool-icon">⚙️</span>
-                        <h4>Rust Brain Platform</h4>
-                    </div>
-                    <p>Build on <b>Rust Brain</b> — write code, track progress, and learn as you ship your project.</p>
                 </div>
                 <div class="immersion-tool-card">
                     <div class="immersion-tool-card-header">
@@ -1105,17 +1190,28 @@
                     </div>
                     <p>Production-grade feedback on architecture, idiomatic Rust, error handling, and testing.</p>
                 </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🧠</span>
+                        <h4>Rust Brain Platform</h4>
+                    </div>
+                    <p>AI-first learning with tutoring, code review, curriculum guidance, and on-demand project help.</p>
+                </div>
             </div>
 
-            <div class="immersion-subsection-label">Weekly Live Calls</div>
-            <div class="call-cards-grid">
+            <div class="immersion-subsection-label">Live Expert Sessions</div>
+            <div class="call-cards-grid call-cards-grid--instructors">
                 <div class="call-card">
-                    <span class="call-card-tag">Mentorship</span>
-                    <div class="call-card-header">
-                        <span class="call-card-icon">🩺</span>
-                        <h4>Code Clinic</h4>
+                    <span class="call-card-tag">Monthly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/jon.jpg" alt="Jon Gjengset" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Code Clinic</h4>
+                            <span class="call-instructor-name">Jon Gjengset</span>
+                            <span class="call-instructor-channel">Rust for Rustaceans</span>
+                        </div>
                     </div>
-                    <p>Your open mentorship session — bring code, architecture questions, or anything you're stuck on.</p>
+                    <p>Monthly mentorship with Jon — bring code, architecture questions, or anything you're stuck on.</p>
                     <div class="topic-tags">
                         <span class="topic-tag">Code Reviews</span>
                         <span class="topic-tag">Architecture</span>
@@ -1124,12 +1220,34 @@
                     </div>
                 </div>
                 <div class="call-card">
-                    <span class="call-card-tag">Deep Dive</span>
-                    <div class="call-card-header">
-                        <span class="call-card-icon">⚡</span>
-                        <h4>Rust Power Hour</h4>
+                    <span class="call-card-tag">Weekly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/tris.jpg" alt="Tris" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Code Clinic</h4>
+                            <span class="call-instructor-name">Tris</span>
+                            <span class="call-instructor-channel">No Boilerplate</span>
+                        </div>
                     </div>
-                    <p>Topic-based sessions led by experts — go deep on a specific area of Rust engineering.</p>
+                    <p>Weekly open mentorship — bring code, architecture questions, or anything you're stuck on.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Code Reviews</span>
+                        <span class="topic-tag">Architecture</span>
+                        <span class="topic-tag">Q&amp;A</span>
+                        <span class="topic-tag">Debugging</span>
+                    </div>
+                </div>
+                <div class="call-card">
+                    <span class="call-card-tag">Weekly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/ken.png" alt="Ken" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Rust Power Hour</h4>
+                            <span class="call-instructor-name">Ken</span>
+                            <span class="call-instructor-channel">Code to the Moon</span>
+                        </div>
+                    </div>
+                    <p>Weekly topic-based deep dives on a specific area of Rust engineering — led live with room for Q&amp;A.</p>
                     <div class="topic-tags">
                         <span class="topic-tag">Unsafe Rust</span>
                         <span class="topic-tag">Async</span>
@@ -1154,66 +1272,90 @@
                 <div class="flow-step"><span class="flow-step-num">4</span> Offer</div>
             </div>
 
-            <div class="immersion-tools-grid">
+            <div class="immersion-tools-grid immersion-tools-grid--four">
                 <div class="immersion-tool-card">
                     <div class="immersion-tool-card-header">
                         <span class="tool-icon">🤝</span>
                         <h4>Recruiter Strategy</h4>
                     </div>
-                    <p>Connect with our Rust recruiter network and learn how to attract recruiters, book interviews, and align opportunities with your timeline.</p>
+                    <p>Rust recruiter network, outreach, and interview opportunities.</p>
                 </div>
                 <div class="immersion-tool-card">
                     <div class="immersion-tool-card-header">
-                        <span class="tool-icon">📄</span>
-                        <h4>Resume Overhaul</h4>
+                        <span class="tool-icon">🎯</span>
+                        <h4>Positioning &amp; Pipeline</h4>
                     </div>
-                    <p>Build a resume that markets your strengths and Rust experience with clarity — one recruiters can't ignore.</p>
-                </div>
-                <div class="immersion-tool-card">
-                    <div class="immersion-tool-card-header">
-                        <span class="tool-icon">💼</span>
-                        <h4>LinkedIn &amp; GitHub</h4>
-                    </div>
-                    <p>Optimize your online presence to signal credibility, job-readiness, and technical depth.</p>
+                    <p>Market positioning, pipeline tracking, and weekly strategic support.</p>
                 </div>
                 <div class="immersion-tool-card">
                     <div class="immersion-tool-card-header">
                         <span class="tool-icon">🎤</span>
-                        <h4>Interview Coaching</h4>
+                        <h4>Interview Prep</h4>
                     </div>
-                    <p>Personalized prep for behavioral and technical interviews — live sessions, async reviews, and mock interviews.</p>
-                    <div class="topic-tags">
-                        <span class="topic-tag">Behavioral</span>
-                        <span class="topic-tag">Technical</span>
-                        <span class="topic-tag">Mock Interviews</span>
-                    </div>
+                    <p>Behavioral and technical prep — mocks and live feedback.</p>
                 </div>
                 <div class="immersion-tool-card">
                     <div class="immersion-tool-card-header">
                         <span class="tool-icon">💰</span>
-                        <h4>Salary Negotiation</h4>
+                        <h4>Offer Negotiation</h4>
                     </div>
-                    <p>Negotiate confidently and avoid lowball offers or down-leveled positions — don't leave money on the table.</p>
+                    <p>Negotiate confidently — avoid lowballs and down-levels.</p>
                 </div>
             </div>
 
-            <div class="immersion-subsection-label">Stay Accountable</div>
-            <div class="call-cards-grid">
+            <div class="immersion-subsection-label">Live Expert Sessions</div>
+            <div class="call-cards-grid call-cards-grid--instructors">
                 <div class="call-card">
-                    <span class="call-card-tag">Tracking</span>
-                    <div class="call-card-header">
-                        <span class="call-card-icon">📊</span>
-                        <h4>Job Hunt Dashboard</h4>
+                    <span class="call-card-tag">Weekly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/mariya.jpg" alt="Mariya Khmaruk" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Recruiter Sync</h4>
+                            <span class="call-instructor-name">Mariya Khmaruk</span>
+                            <span class="call-instructor-channel">Technical Recruiter · ex-Amazon &amp; AWS</span>
+                        </div>
                     </div>
-                    <p>Track your search in a private dashboard with weekday accountability — outreach, prep, and fine-tuning your materials.</p>
+                    <p>Weekly recruiter sync — FAANG hiring strategy, outreach, interview pipeline, and salary negotiation.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">FAANG Hiring</span>
+                        <span class="topic-tag">Recruiter Outreach</span>
+                        <span class="topic-tag">Interview Pipeline</span>
+                        <span class="topic-tag">Salary Negotiation</span>
+                    </div>
+                </div>
+                <div class="call-card">
+                    <span class="call-card-tag">Monthly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/cameron-whelan.jpg" alt="Cameron Whelan" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Recruiter Sync</h4>
+                            <span class="call-instructor-name">Cameron Whelan</span>
+                            <span class="call-instructor-channel">Rust Recruiter · Let's Get Rusty</span>
+                        </div>
+                    </div>
+                    <p>Monthly recruiter sync — Rust roles, career transitions, and navigating the Rust job market.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Rust Roles</span>
+                        <span class="topic-tag">Career Transitions</span>
+                        <span class="topic-tag">Market Insights</span>
+                    </div>
                 </div>
                 <div class="call-card">
                     <span class="call-card-tag">Weekly</span>
-                    <div class="call-card-header">
-                        <span class="call-card-icon">🏢</span>
-                        <h4>Career Camp Office Hours</h4>
+                    <div class="call-instructor">
+                        <img src="images/instructors/matiman.jpg" alt="Mathias Abdissa" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Career Camp Sync</h4>
+                            <span class="call-instructor-name">Mathias Abdissa</span>
+                            <span class="call-instructor-channel">Program Graduate · Senior Embedded Rust at Ford</span>
+                        </div>
                     </div>
-                    <p>Live weekly support to unblock your search, refine your strategy, and land the Rust job you've been working toward.</p>
+                    <p>Weekly career sync — job search strategy, interview prep, and mentorship from a program alum.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Strategy</span>
+                        <span class="topic-tag">Interview Prep</span>
+                        <span class="topic-tag">Mentorship</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1319,8 +1461,16 @@
                 setTheme(event.data.theme);
             }
         });
-        // Request theme from parent on load
-        window.parent.postMessage({ type: 'requestTheme' }, '*');
+        // Default to light; parent page overrides when embedded in iframe
+        try {
+            if (window.parent === window) {
+                setTheme(localStorage.getItem('theme') || 'light');
+            } else {
+                window.parent.postMessage({ type: 'requestTheme' }, '*');
+            }
+        } catch (e) {
+            setTheme(localStorage.getItem('theme') || 'light');
+        }
 
         // Testimonials JSON and rendering
         const TESTIMONIALS = [

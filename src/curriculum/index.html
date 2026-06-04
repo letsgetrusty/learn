@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#181c23">
+    <meta name="theme-color" content="#f6f8fa">
     <link rel="icon" type="image/png" href="/favicon.png">
     <title>Rust Live Accelerator Curriculum</title>
 
@@ -258,29 +258,21 @@
                 iframe.contentWindow.postMessage({ type: 'theme', theme: mode }, '*');
             }
         }
-        // Initialize theme
+        // Initialize theme (default: light)
         const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        const initialTheme = savedTheme || 'light';
         setTheme(initialTheme);
         // Also send theme to iframe on load
         sendThemeToIframe(initialTheme);
-        // Theme event listeners
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem('theme')) {
-                setTheme(e.matches ? 'dark' : 'light');
-            }
-        });
         themeToggle.addEventListener('click', () => {
-            const isDark = document.body.classList.contains('light-mode');
-            setTheme(isDark ? 'dark' : 'light');
+            const isLight = document.body.classList.contains('light-mode');
+            setTheme(isLight ? 'dark' : 'light');
         });
         // Listen for theme requests from the iframe and respond with the current theme
         window.addEventListener('message', function(event) {
             if (event.data && event.data.type === 'requestTheme') {
                 const savedTheme = localStorage.getItem('theme');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+                const currentTheme = savedTheme || 'light';
                 sendThemeToIframe(currentTheme);
             }
         });
