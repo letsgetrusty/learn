@@ -29,6 +29,10 @@
             --toggle-thumb: #ff8e3d;
             --toggle-border: #2d3748;
             --header-text-color: #e5e7eb;
+            --phase-elevated-border: rgba(255, 255, 255, 0.16);
+            --phase-elevated-shadow: 0 4px 18px rgba(0, 0, 0, 0.32), 0 2px 6px rgba(0, 0, 0, 0.2);
+            --phase-elevated-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.36), 0 3px 8px rgba(0, 0, 0, 0.22);
+            --phase-elevated-border-hover: rgba(255, 142, 61, 0.4);
         }
         
         .light-mode {
@@ -50,6 +54,10 @@
             --toggle-thumb: #f97316;
             --toggle-border: #e2e8f0;
             --header-text-color: var(--text-color);
+            --phase-elevated-border: rgba(0, 0, 0, 0.14);
+            --phase-elevated-shadow: 0 4px 18px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.06);
+            --phase-elevated-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12), 0 3px 8px rgba(0, 0, 0, 0.08);
+            --phase-elevated-border-hover: rgba(249, 115, 22, 0.45);
         }
 
         * {
@@ -165,6 +173,7 @@
             font-size: 1.25rem;
             margin-bottom: 0.75rem;
             font-weight: 700;
+            text-align: center;
         }
 
         .curriculum-section p {
@@ -222,10 +231,17 @@
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-bottom: 1.5rem;
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             background: var(--primary-color);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--phase-elevated-border);
             border-radius: 12px;
+            box-shadow: var(--phase-elevated-shadow);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .immersion-flow:hover {
+            border-color: var(--phase-elevated-border-hover);
+            box-shadow: var(--phase-elevated-shadow-hover);
         }
 
         .flow-step {
@@ -291,9 +307,16 @@
 
         .immersion-tool-card {
             background: var(--primary-color);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--phase-elevated-border);
             border-radius: 12px;
             padding: 1.25rem;
+            box-shadow: var(--phase-elevated-shadow);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .immersion-tool-card:hover {
+            border-color: var(--phase-elevated-border-hover);
+            box-shadow: var(--phase-elevated-shadow-hover);
         }
 
         .immersion-tool-card-header {
@@ -332,12 +355,19 @@
 
         .call-card {
             background: var(--primary-color);
-            border: 1px solid var(--border-color);
+            border: 1.5px solid var(--phase-elevated-border);
             border-radius: 12px;
             padding: 1.25rem;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            box-shadow: var(--phase-elevated-shadow);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .call-card:hover {
+            border-color: var(--phase-elevated-border-hover);
+            box-shadow: var(--phase-elevated-shadow-hover);
         }
 
         .call-card-header {
@@ -999,20 +1029,44 @@
 
         <div class="curriculum-section">
             <h2><span style="font-size:1.1em;vertical-align:middle;">🧭</span> Phase 1: Onboarding — Tailored Roadmap to Rust Mastery <span style="font-weight:400;font-size:0.9em;">(1 to 5 weeks)</span></h2>
-            <p>This is a highly personalized program. We'll align the program with your personal goals, background, and timeline. We'll make sure you hit the ground running quickly, with not only resources but with 100% clarity as well, for what's to come in the next few months.</p>
-            <h3 style="margin-top:1.2em;">Personalized Learning Roadmap</h3>
-            <ul class="curriculum-list">
-                <li>Your Rust journey begins with a private 1-on-1 onboarding call with Bogdan. During this call, we'll map out your goals and design a customized learning roadmap for the months ahead — whether your target is landing your first Rust job, building/leading a Rust project at work, or launching your own Rust startup.</li>
-            </ul>
-            <h3 style="margin-top:1.2em;">Access to our Rust Fundamentals course</h3>
-            <ul class="curriculum-list">
-                <li>You'll also unlock immediate access to our Rust Fundamentals course, a digital course designed to give you a strong foundation in the language. It's not just theory — this course is designed to be the type of reference material you'll keep coming back to as we build real Rust systems together.</li>
-            </ul>
-            <h3 style="margin-top:1.2em;">Weekly Momentum Calls</h3>
-            <ul class="curriculum-list">
-                <li>Weekly live calls during the Onboarding phase designed to help you build connections, get personalized guidance on your immersion project, and get support with the Rust Fundamentals course.</li>
-            </ul>
-            <p>With the proper onboarding with personalized resources and guidance, we'll be able to eliminate any guesswork and help you focus on what matters most to *you* in your personal Rust journey.</p>
+            <p class="phase-lead">Get a personalized roadmap, build your Rust foundation, and join the community — so you hit Immersion with clarity and momentum.</p>
+
+            <div class="immersion-flow">
+                <div class="flow-step"><span class="flow-step-num">1</span> Roadmap</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">2</span> Fundamentals</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">3</span> Momentum</div>
+            </div>
+
+            <div class="immersion-tools-grid">
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🗺️</span>
+                        <h4>Personalized Learning Roadmap</h4>
+                    </div>
+                    <p>Start with a private 1-on-1 call with Bogdan to map your goals and design a custom roadmap — whether you're targeting your first Rust job, a project at work, or your own startup.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">📖</span>
+                        <h4>Rust Fundamentals Course</h4>
+                    </div>
+                    <p>Unlock immediate access to our Rust Fundamentals course — a strong foundation you'll keep coming back to as you build real systems.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🤝</span>
+                        <h4>Weekly Momentum Calls</h4>
+                    </div>
+                    <p>Weekly live calls to build connections, get guidance on your upcoming Immersion project, and get support with the fundamentals.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Community</span>
+                        <span class="topic-tag">Project Planning</span>
+                        <span class="topic-tag">Fundamentals</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="curriculum-section">
@@ -1088,17 +1142,80 @@
 
         <div class="curriculum-section">
             <h2><span style="font-size:1.1em;vertical-align:middle;">🎯</span>(Bonus) Phase 3: Career Camp — Land Your Dream Rust Job <span style="font-weight:400;font-size:0.9em;">(3 months)</span></h2>
-            <p>Let's be honest... technical skills alone won't get you hired. We've seen plenty of capable developers stay stuck. Not because they couldn't build great software — but because they didn't know how to position themselves, communicate their value, or navigate the hiring process.</p>
-            <p> Career Camp is where that changes. You'll get the strategy, feedback, and structure you need to turn your Rust skills into interviews, offers, and income.</p>
-            <b>What We Cover:</b>
-            <ul class="curriculum-list">
-                <li><b>Recruiter & Hiring Manager Strategy</b><br><span style="font-weight:400;">Connect with our Rust recruiter network, and learn how to attract recruiters, book interviews, and align job opportunities with your job search timeline.</span></li>
-                <li><b>Complete Resume Overhaul</b><br><span style="font-weight:400;">Create a resume that markets your strengths and Rust experience with clarity and power — one that recruiters can't ignore.</span></li>
-                <li><b>LinkedIn & GitHub Optimization</b><br><span style="font-weight:400;">Build a professional online presence that signals credibility, job-readiness, and technical depth.</span></li>
-                <li><b>Interview Coaching</b><br><span style="font-weight:400;">Get personalized support on both behavioral and technical interviews. We'll do live prep, async reviews, and mock interviews to sharpen your performance.</span></li>
-                <li><b>Salary & Offer Negotiation</b><br><span style="font-weight:400;">Don't leave money on the table. Learn how to negotiate confidently and avoid lowball offers or down-leveled positions.</span></li>
-            </ul>
-            <p>You'll track your job hunt in a private dashboard, and we'll hold you accountable to putting in focused time each weekday, whether that's outreach, interview prep, or fine-tuning your materials. Every week, you'll get live support during Career Camp Office Hours to unblock your search, refine your strategy, and ultimately land the Rust job you've been working toward.</p>
+            <p class="phase-lead">Technical skills alone won't get you hired — Career Camp gives you the strategy, feedback, and structure to turn your Rust skills into interviews, offers, and income.</p>
+
+            <div class="immersion-flow">
+                <div class="flow-step"><span class="flow-step-num">1</span> Position</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">2</span> Outreach</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">3</span> Interview</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">4</span> Offer</div>
+            </div>
+
+            <div class="immersion-tools-grid">
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🤝</span>
+                        <h4>Recruiter Strategy</h4>
+                    </div>
+                    <p>Connect with our Rust recruiter network and learn how to attract recruiters, book interviews, and align opportunities with your timeline.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">📄</span>
+                        <h4>Resume Overhaul</h4>
+                    </div>
+                    <p>Build a resume that markets your strengths and Rust experience with clarity — one recruiters can't ignore.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">💼</span>
+                        <h4>LinkedIn &amp; GitHub</h4>
+                    </div>
+                    <p>Optimize your online presence to signal credibility, job-readiness, and technical depth.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🎤</span>
+                        <h4>Interview Coaching</h4>
+                    </div>
+                    <p>Personalized prep for behavioral and technical interviews — live sessions, async reviews, and mock interviews.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Behavioral</span>
+                        <span class="topic-tag">Technical</span>
+                        <span class="topic-tag">Mock Interviews</span>
+                    </div>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">💰</span>
+                        <h4>Salary Negotiation</h4>
+                    </div>
+                    <p>Negotiate confidently and avoid lowball offers or down-leveled positions — don't leave money on the table.</p>
+                </div>
+            </div>
+
+            <div class="immersion-subsection-label">Stay Accountable</div>
+            <div class="call-cards-grid">
+                <div class="call-card">
+                    <span class="call-card-tag">Tracking</span>
+                    <div class="call-card-header">
+                        <span class="call-card-icon">📊</span>
+                        <h4>Job Hunt Dashboard</h4>
+                    </div>
+                    <p>Track your search in a private dashboard with weekday accountability — outreach, prep, and fine-tuning your materials.</p>
+                </div>
+                <div class="call-card">
+                    <span class="call-card-tag">Weekly</span>
+                    <div class="call-card-header">
+                        <span class="call-card-icon">🏢</span>
+                        <h4>Career Camp Office Hours</h4>
+                    </div>
+                    <p>Live weekly support to unblock your search, refine your strategy, and land the Rust job you've been working toward.</p>
+                </div>
+            </div>
         </div>
 
         <div class="guarantees-section">
