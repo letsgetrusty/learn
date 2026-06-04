@@ -193,6 +193,213 @@
             font-weight: bold;
         }
 
+        .immersion-highlight {
+            background: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+        }
+
+        .immersion-highlight p {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .phase-lead {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .immersion-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .flow-step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--accent-color);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .flow-arrow {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        .immersion-subsection-label {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .topic-tag {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            padding: 0.2rem 0.6rem;
+        }
+
+        .immersion-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1.25rem 0;
+        }
+
+        .immersion-tool-card {
+            background: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .immersion-tool-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .immersion-tool-card .tool-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .immersion-tool-card h4 {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .immersion-tool-card p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .call-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.25rem 0;
+        }
+
+        .call-card {
+            background: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .call-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .call-card-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .call-card h4 {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .call-card-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            background: rgba(var(--primary-color-rgb), 0.5);
+            border: 1px solid var(--accent-color);
+            border-radius: 999px;
+            padding: 0.15rem 0.65rem;
+            margin-bottom: 0.25rem;
+            width: fit-content;
+        }
+
+        .call-card p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .call-card-topics {
+            list-style: none;
+            margin: 0.25rem 0 0 0;
+            padding: 0;
+        }
+
+        .call-card-topics li {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.25rem;
+        }
+
+        .call-card-topics li:before {
+            content: "→";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -809,27 +1016,74 @@
         </div>
 
         <div class="curriculum-section">
-            <h2><span style="font-size:1.1em;vertical-align:middle;">🔧</span> Phase 2: Immersion — Build a Production-Grade Rust Portfolio <span style="font-weight:400;font-size:0.9em;">(3 months)</span></h2>
-            <p>This is where your Rust transformation happens. You'll spend the first half of Immersion building a production-grade, idiomatic application in Rust following our structured guidance and support. Then, you'll spend the 2nd half of Immersion developing a personally tailored capstone project.</p>
-            <h3 style="margin-top:1.2em;">1st half of Immersion: Closely Guided In-depth Project</h3>
-            <p>This is where we put your Rust knowledge into action. You'll work closely with us to implement a sophisticated, pre-defined Rust system — using idiomatic patterns, best practices, and real-world development workflows. We'll simulate an actual engineering environment, including sprint-based planning, task assignments, and collaborative problem solving.</p>
-            <ul class="curriculum-list">
-                <li>Architect Rust applications with type-driven design, modularity, and long-term maintainability in mind</li>
-                <li>Apply test-driven development as a design tool, not just a testing strategy</li>
-                <li>Craft fluent, expressive APIs using advanced patterns and ergonomic abstractions</li>
-                <li>Build highly concurrent systems using async Rust</li>
-                <li>Navigate and integrate Rust's production-grade crates for logging, config, observability, and security</li>
-                <li>Design robust failure modes with custom error types, contextual tracing, and structured logging for real-world debugging</li>
-            </ul>
-            <h3 style="margin-top:1.2em;">2nd half of Immersion: Personally Tailored Capstone</h3>
-            <p>This is where you level up from Rust learner to Rust engineer. You'll design and build your own advanced Rust system from the ground up. While you'll still receive full, hands-on support from us, expect to be consistently challenged, especially around your architecture decisions, technical tradeoffs, and project execution.</p>
-            <ul class="curriculum-list">
-                <li>Choose from high-impact, recruiter-attracting career tracks (e.g. backend infrastructure, embedded systems, blockchain, etc.)... or propose your own</li>
-                <li>Decide on your focus, validate your idea, architect your system, and execute with clean abstractions and maintainability in mind</li>
-                <li>Push into advanced areas like unsafe Rust and FFI, async orchestration in distributed systems, or low-level memory and I/O tuning</li>
-                <li>Get detailed code reviews, architecture feedback, and hands-on support to help you build something you're proud to put on your resume... and show off in interviews</li>
-                <li>By the end, you'll have a working, real-world Rust project that showcases your ability to solve hard problems, write robust systems, and think like a Rust engineer</li>
-            </ul>
+            <h2><span style="font-size:1.1em;vertical-align:middle;">🔧</span> Phase 2: Immersion — Build Production-Grade Rust Software <span style="font-weight:400;font-size:0.9em;">(3 months)</span></h2>
+            <p class="phase-lead">Design and build production-grade Rust software tailored to your niche, goals, or domain — scoped by experts, reviewed by experts, and supported every week.</p>
+
+            <div class="immersion-flow">
+                <div class="flow-step"><span class="flow-step-num">1</span> Scope</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">2</span> Build</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">3</span> Review</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">4</span> Live Calls</div>
+            </div>
+
+            <div class="immersion-tools-grid">
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🎯</span>
+                        <h4>Personalized Project Roadmap</h4>
+                    </div>
+                    <p>Work with our team to scope a project aligned with your experience, goals, and target domain.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">⚙️</span>
+                        <h4>Rust Brain Platform</h4>
+                    </div>
+                    <p>Build on <b>Rust Brain</b> — write code, track progress, and learn as you ship your project.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🔍</span>
+                        <h4>Expert Code Reviews</h4>
+                    </div>
+                    <p>Production-grade feedback on architecture, idiomatic Rust, error handling, and testing.</p>
+                </div>
+            </div>
+
+            <div class="immersion-subsection-label">Weekly Live Calls</div>
+            <div class="call-cards-grid">
+                <div class="call-card">
+                    <span class="call-card-tag">Mentorship</span>
+                    <div class="call-card-header">
+                        <span class="call-card-icon">🩺</span>
+                        <h4>Code Clinic</h4>
+                    </div>
+                    <p>Your open mentorship session — bring code, architecture questions, or anything you're stuck on.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Code Reviews</span>
+                        <span class="topic-tag">Architecture</span>
+                        <span class="topic-tag">Q&amp;A</span>
+                        <span class="topic-tag">Debugging</span>
+                    </div>
+                </div>
+                <div class="call-card">
+                    <span class="call-card-tag">Deep Dive</span>
+                    <div class="call-card-header">
+                        <span class="call-card-icon">⚡</span>
+                        <h4>Rust Power Hour</h4>
+                    </div>
+                    <p>Topic-based sessions led by experts — go deep on a specific area of Rust engineering.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Unsafe Rust</span>
+                        <span class="topic-tag">Async</span>
+                        <span class="topic-tag">Crates</span>
+                        <span class="topic-tag">AI Workflows</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="curriculum-section">
