@@ -401,10 +401,10 @@
         /* NEW: Shipped-systems grid (proof: serious systems, not toys) */
         .shipped-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
         }
-        @media (max-width: 760px) {
+        @media (max-width: 860px) {
             .shipped-grid { grid-template-columns: 1fr; }
         }
         .shipped-card {
@@ -485,22 +485,41 @@
             margin-top: auto;
         }
         .shipped-attribution-photo {
-            width: 38px;
-            height: 38px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             background: rgba(249, 115, 22, 0.08);
             border: 1.5px solid rgba(249, 115, 22, 0.35);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-color);
             flex-shrink: 0;
+            overflow: hidden;
         }
-        .shipped-attribution-photo svg {
-            width: 20px;
-            height: 20px;
-            stroke-width: 1.75;
+        .shipped-attribution-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
+        /* Group variant: 2 side-by-side avatars */
+        .shipped-attribution-photo--group {
+            width: 88px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            overflow: visible;
+            position: relative;
+        }
+        .shipped-attribution-photo--group img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(249, 115, 22, 0.35);
+            background: rgba(249, 115, 22, 0.08);
+            position: absolute;
+            top: 0;
+            object-fit: cover;
+        }
+        .shipped-attribution-photo--group img:nth-child(1) { left: 0; }
+        .shipped-attribution-photo--group img:nth-child(2) { left: 46px; transform: scaleX(-1); }
         .shipped-attribution-info {
             display: flex;
             flex-direction: column;
@@ -1343,8 +1362,8 @@
 
         <!-- PROOF #3: LGR's own AI-powered internal tools, claim: "We already use AI systems to run our own business." -->
         <div class="section-header">
-            <h2>We Already Use AI to Run Our Own Business</h2>
-            <p>We've been building AI tools internally to run LGR for a long time. We'll show you the same patterns we're using in our own systems.</p>
+            <h2>We Don't Just Teach AI Systems. We've Built Them.</h2>
+            <p>We've been building AI systems for a long time to run LGR. We'll teach you the same best practices and industry standards we use in our production systems.</p>
         </div>
         <div class="curriculum-section">
             <div class="tools-showcase-grid">
@@ -1370,8 +1389,9 @@
                 <div class="tool-showcase-card">
                     <div class="tool-showcase-screenshot"><img src="/curriculum/images/tools/flow.png" alt="Flow paid-ads attribution and diagnostics dashboard"></div>
                     <div class="tool-showcase-body">
-                        <h4>Flow</h4>
-                        <p>Our internal AI-powered platform for paid-ads attribution and diagnostics, tracks campaign performance, event quality, and conversion data across channels in real time.</p>
+                        <h4>Flow AI</h4>
+                        <p>Our internal AI-powered platform for paid-ads attribution. Tracks campaign performance across channels in real time.</p>
+                        <a href="https://flow.letsgetrusty.com/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.3rem; color: var(--accent-color); font-size: 0.82rem; font-weight: 600; text-decoration: none;">Experience Flow AI →</a>
                         <div class="tool-impact">
                             <span class="tool-impact-icon">📈</span>
                             <span>Increased revenue by 43%</span>
@@ -1406,7 +1426,7 @@
                         <p>Our internal voice dictation tool, a Rust + Tauri rebuild inspired by Wispr Flow, with RAG over LGR's knowledge base for context-aware transcription and replies.</p>
                         <div class="tool-impact">
                             <span class="tool-impact-icon">⚡</span>
-                            <span>~10× lighter than Wispr Flow</span>
+                            <span>~5× more performant than Wispr Flow</span>
                         </div>
                         <div class="tool-stack-tags">
                             <span class="tool-stack-tag">Rust</span>
@@ -1428,7 +1448,7 @@
             <div class="shipped-grid">
 
                 <div class="shipped-card">
-                    <h4>Weavegraph</h4>
+                    <h4>Weave Graph</h4>
                     <p class="shipped-desc">A Rust framework for orchestrating AI agents as concurrent graphs, with versioned state, event streaming, and SQLite/Postgres persistence. Published on crates.io for the community to use in production.</p>
                     <a href="https://github.com/Idleness76/weavegraph" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.3rem; color: var(--accent-color); font-size: 0.82rem; font-weight: 600; text-decoration: none;">View on GitHub →</a>
                     <div class="shipped-stack">
@@ -1437,7 +1457,10 @@
                         <span class="shipped-stack-tag">Agent workflows</span>
                     </div>
                     <div class="shipped-attribution">
-                        <div class="shipped-attribution-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                        <div class="shipped-attribution-photo shipped-attribution-photo--group">
+                            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=weavegraph-alpha&hair=variant03&beard=variant04" alt="">
+                            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=ariel-weavegraph&hair=variant07&glasses=variant02" alt="">
+                        </div>
                         <div class="shipped-attribution-info">
                             <span class="shipped-attribution-name">Jim &amp; Ariel</span>
                             <span class="shipped-attribution-role">Rust Accelerator Alumni</span>
@@ -1446,7 +1469,7 @@
                 </div>
 
                 <div class="shipped-card">
-                    <h4>CRM Chat</h4>
+                    <h4>CRM AI</h4>
                     <p class="shipped-desc">An AI-powered personal CRM that aggregates conversations from Telegram, generates per-contact summaries, and surfaces promises, plans, and recurring discussion topics.</p>
                     <a href="https://github.com/nickcomua/crm-chat" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.3rem; color: var(--accent-color); font-size: 0.82rem; font-weight: 600; text-decoration: none;">View on GitHub →</a>
                     <div class="shipped-stack">
@@ -1455,7 +1478,7 @@
                         <span class="shipped-stack-tag">AI summarization</span>
                     </div>
                     <div class="shipped-attribution">
-                        <div class="shipped-attribution-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                        <div class="shipped-attribution-photo"><img src="https://api.dicebear.com/7.x/notionists/svg?seed=crmchat-sigma&hair=variant42&glasses=variant05" alt=""></div>
                         <div class="shipped-attribution-info">
                             <span class="shipped-attribution-name">Mykola</span>
                             <span class="shipped-attribution-role">Rust Accelerator Alumni</span>
@@ -1464,7 +1487,7 @@
                 </div>
 
                 <div class="shipped-card">
-                    <h4>Promptwho</h4>
+                    <h4>Prompt Who</h4>
                     <p class="shipped-desc">A Rust-built LLM attribution harness, tracks which AI conversations produced committed code and links that chat history back to the codebase.</p>
                     <a href="https://github.com/dk0d/promptwho" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.3rem; color: var(--accent-color); font-size: 0.82rem; font-weight: 600; text-decoration: none;">View on GitHub →</a>
                     <div class="shipped-stack">
@@ -1473,28 +1496,10 @@
                         <span class="shipped-stack-tag">Dev tooling</span>
                     </div>
                     <div class="shipped-attribution">
-                        <div class="shipped-attribution-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                        <div class="shipped-attribution-photo"><img src="https://api.dicebear.com/7.x/notionists/svg?seed=promptwho-omega&hair=variant55&beard=variant09" alt=""></div>
                         <div class="shipped-attribution-info">
                             <span class="shipped-attribution-name">Daniel</span>
                             <span class="shipped-attribution-role">Senior Tech Lead</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="shipped-card">
-                    <h4>Poker Tutor</h4>
-                    <p class="shipped-desc">An AI-powered Texas Hold'em coach that gives real-time strategic feedback as you play, helping players sharpen their game hand by hand.</p>
-                    <a href="https://pokertutor.ai" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.3rem; color: var(--accent-color); font-size: 0.82rem; font-weight: 600; text-decoration: none;">Visit pokertutor.ai →</a>
-                    <div class="shipped-stack">
-                        <span class="shipped-stack-tag">AI coaching</span>
-                        <span class="shipped-stack-tag">Real-time</span>
-                        <span class="shipped-stack-tag">Strategy</span>
-                    </div>
-                    <div class="shipped-attribution">
-                        <div class="shipped-attribution-photo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                        <div class="shipped-attribution-info">
-                            <span class="shipped-attribution-name">Bogdan</span>
-                            <span class="shipped-attribution-role">Founder · Let's Get Rusty</span>
                         </div>
                     </div>
                 </div>
@@ -1544,10 +1549,10 @@
             </div>
 
             <h2 style="margin-top:1.5rem;">Weekly Group Calls</h2>
-            <p class="phase-lead">Two 90-minute live sessions every week, one for technical deep dives, one for live code review.</p>
+            <p class="phase-lead">Two full-hour live sessions every week, one for technical deep dives, one for live code review.</p>
             <div class="call-cards-grid">
                 <div class="call-card">
-                    <span class="call-card-tag">Weekly · 90 min · Rotating</span>
+                    <span class="call-card-tag">Weekly · 60 min · Rotating</span>
                     <div class="call-card-header">
                         <span class="call-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg></span>
                         <h4>Rust + AI Engineering Lab</h4>
@@ -1555,7 +1560,7 @@
                     <p>Educational deep dives, alternating each week between the Rust AI ecosystem (candle, ort, retrieval, agents, streaming) and AI dev workflows (Claude Code, agent design, evals, observability). Lecture-style with hands-on segments.</p>
                 </div>
                 <div class="call-card">
-                    <span class="call-card-tag">Weekly · 90 min</span>
+                    <span class="call-card-tag">Weekly · 60 min</span>
                     <div class="call-card-header">
                         <span class="call-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
                         <h4>Implementation Clinic</h4>
