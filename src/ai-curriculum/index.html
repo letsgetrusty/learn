@@ -695,11 +695,29 @@
             left: 0;
             font-weight: 700;
         }
+        /* Zigzag layout: cards at 2/3 width alternating sides */
+        .week-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+        }
+        .week-row--right {
+            grid-template-columns: 1fr 2fr;
+        }
+        .week-row--right .week-card {
+            grid-column: 2;
+        }
         @media (max-width: 760px) {
             .week-card {
                 grid-template-columns: 1fr;
                 gap: 0.5rem;
                 padding: 1.1rem 1.25rem;
+            }
+            .week-row,
+            .week-row--right {
+                grid-template-columns: 1fr;
+            }
+            .week-row--right .week-card {
+                grid-column: auto;
             }
         }
 
@@ -1480,7 +1498,7 @@
                     <div class="shipped-attribution">
                         <div class="shipped-attribution-photo"><img src="https://api.dicebear.com/7.x/notionists/svg?seed=crmchat-sigma&hair=variant42&glasses=variant05" alt=""></div>
                         <div class="shipped-attribution-info">
-                            <span class="shipped-attribution-name">Mykola</span>
+                            <span class="shipped-attribution-name">Nick</span>
                             <span class="shipped-attribution-role">Rust Accelerator Alumni</span>
                         </div>
                     </div>
@@ -1557,7 +1575,7 @@
                         <span class="call-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg></span>
                         <h4>Rust + AI Engineering Lab</h4>
                     </div>
-                    <p>Educational deep dives, alternating each week between the Rust AI ecosystem (candle, ort, retrieval, agents, streaming) and AI dev workflows (Claude Code, agent design, evals, observability). Lecture-style with hands-on segments.</p>
+                    <p>Educational deep dives, alternating each week between the Rust AI ecosystem and AI dev workflows (agent design, evals, token optimization, etc.). Lecture-style with hands-on segments.</p>
                 </div>
                 <div class="call-card">
                     <span class="call-card-tag">Weekly · 60 min</span>
@@ -1565,12 +1583,12 @@
                         <span class="call-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
                         <h4>Implementation Clinic</h4>
                     </div>
-                    <p>Live debugging and code review. Real Rust, real AI calls, real bugs, the unglamorous work that turns a prototype into something you'd defend in an interview.</p>
+                    <p>Live debugging and code review. We'll review student code, troubleshoot issues, and work through the engineering decisions that come up when building a real system.</p>
                 </div>
             </div>
 
-            <h2 style="margin-top:1.5rem;">Async Support</h2>
-            <div class="call-cards-grid" style="grid-template-columns:1fr;">
+            <h2 style="margin-top:1.5rem;">24/7 Async Support</h2>
+            <div class="call-cards-grid" style="grid-template-columns: minmax(0, 520px); justify-content: center;">
                 <div class="call-card">
                     <span class="call-card-tag">All 6 weeks</span>
                     <div class="call-card-header">
@@ -1589,48 +1607,67 @@
         </div>
         <div class="curriculum-section">
             <div class="week-timeline">
-                <div class="week-card">
-                    <div class="week-card-header">
-                        <span class="week-badge">Week 1</span>
-                        <h4>Project scoped &amp; locked in</h4>
-                        <p class="summary">By the end of this week, you'll have a real project chosen, scoped, and locked in, with success criteria written down.</p>
+
+                <div class="week-row">
+                    <div class="week-card">
+                        <div class="week-card-header">
+                            <span class="week-badge">Week 1</span>
+                            <h4>AI workflow &amp; project scoping</h4>
+                            <p class="summary">By the end of this week, you'll have a real project chosen, scoped, and locked in, with success criteria written down.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="week-card">
-                    <div class="week-card-header">
-                        <span class="week-badge">Week 2</span>
-                        <h4>Architecture reviewed &amp; signed off</h4>
-                        <p class="summary">By the end of this week, you'll have a system architecture reviewed by the instructor team and signed off, ready to build against.</p>
+
+                <div class="week-row week-row--right">
+                    <div class="week-card">
+                        <div class="week-card-header">
+                            <span class="week-badge">Week 2</span>
+                            <h4>Architecture design &amp; AI best practices in Rust</h4>
+                            <p class="summary">By the end of this week, you'll have a system architecture reviewed by the instructor team and signed off, ready to build against.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="week-card">
-                    <div class="week-card-header">
-                        <span class="week-badge">Week 3</span>
-                        <h4>Core Rust + AI pipeline running end-to-end</h4>
-                        <p class="summary">By the end of this week, the core Rust + AI pipeline is running end-to-end against real or realistic data.</p>
+
+                <div class="week-row">
+                    <div class="week-card">
+                        <div class="week-card-header">
+                            <span class="week-badge">Week 3</span>
+                            <h4>Core Rust + AI pipeline running end-to-end</h4>
+                            <p class="summary">By the end of this week, the core Rust + AI pipeline is running end-to-end against real or realistic data.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="week-card">
-                    <div class="week-card-header">
-                        <span class="week-badge">Week 4</span>
-                        <h4>Reliability, perf &amp; observability layer in place</h4>
-                        <p class="summary">By the end of this week, the system has a proper reliability, performance, and observability layer, not just a happy path.</p>
+
+                <div class="week-row week-row--right">
+                    <div class="week-card">
+                        <div class="week-card-header">
+                            <span class="week-badge">Week 4</span>
+                            <h4>LLM reliability, performance, and token optimization in Rust</h4>
+                            <p class="summary">By the end of this week, the system has a proper reliability, performance, and observability layer, not just a happy path.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="week-card">
-                    <div class="week-card-header">
-                        <span class="week-badge">Week 5</span>
-                        <h4>Deployed to a production-like environment</h4>
-                        <p class="summary">By the end of this week, the system is deployed in a production-like environment, not just running on your laptop.</p>
+
+                <div class="week-row">
+                    <div class="week-card">
+                        <div class="week-card-header">
+                            <span class="week-badge">Week 5</span>
+                            <h4>Scaling & monitoring Rust AI systems</h4>
+                            <p class="summary">By the end of this week, the system is deployed in a production-like environment, not just running on your laptop.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="week-card">
-                    <div class="week-card-header">
-                        <span class="week-badge">Week 6</span>
-                        <h4>Case study &amp; walkthrough narrative done</h4>
-                        <p class="summary">By the end of this week, the case study, system diagram, and "walk me through this" narrative are polished and ready to use.</p>
+
+                <div class="week-row week-row--right">
+                    <div class="week-card">
+                        <div class="week-card-header">
+                            <span class="week-badge">Week 6</span>
+                            <h4>Future-proofing & platform agnostic designs</h4>
+                            <p class="summary">By the end of this week, the system is architected to swap LLM providers, models, and runtimes without rewrites.</p>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -1642,14 +1679,14 @@
         <div class="curriculum-section">
             <div class="bonus-grid">
                 <div class="bonus-card">
-                    <span class="bonus-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-                    <h4>Lifetime Alumni Community + Network</h4>
-                    <p>Lifetime access to our alumni community and professional network. Senior Rust engineers, hiring managers, and recruiters who actively tap this network for AI-skilled hires.</p>
-                </div>
-                <div class="bonus-card">
                     <span class="bonus-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg></span>
                     <h4>1-Year Rust Brain Access</h4>
-                    <p>Lightweight AI mentor access for Rust questions long after the intensive ends.</p>
+                    <p>AI mentorship platform for Rust questions long after the intensive ends.</p>
+                </div>
+                <div class="bonus-card">
+                    <span class="bonus-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                    <h4>Lifetime Alumni Community + Network</h4>
+                    <p>Lifetime access to our alumni community and professional network.</p>
                 </div>
             </div>
         </div>
@@ -1737,6 +1774,10 @@
                 <details class="faq-item">
                     <summary>Is this about getting an AI job, a promotion, or building a product?</summary>
                     <div class="faq-answer">All three. The final 1-on-1 is explicitly built around mapping your project to roles, promotion narrative, or a client/product pitch. Your call.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>Is there a risk-free guarantee?</summary>
+                    <div class="faq-answer">Yes. We offer a 7-day risk-free guarantee. If you join the cohort and decide it isn't the right fit within the first 7 days, you can opt out and get a full refund. No questions asked.</div>
                 </details>
             </div>
         </div>
