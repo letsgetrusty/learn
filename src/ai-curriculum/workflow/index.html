@@ -1086,6 +1086,46 @@
             height: 22px;
             stroke-width: 1.75;
         }
+        /* Two-step flow inside the 1-on-1 review card */
+        .workflow-review-steps {
+            list-style: none;
+            counter-reset: step;
+            margin: 0.25rem 0 0 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+        .workflow-review-steps li {
+            counter-increment: step;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .workflow-review-steps li::before {
+            content: counter(step);
+            flex-shrink: 0;
+            width: 1.3rem;
+            height: 1.3rem;
+            border-radius: 50%;
+            background: transparent;
+            border: 1.5px solid rgba(249, 115, 22, 0.45);
+            color: var(--accent-color);
+            font-size: 0.72rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            margin-top: 0.08rem;
+        }
+        .workflow-review-steps li strong {
+            color: var(--text-color);
+            font-weight: 700;
+        }
         .call-card h4 {
             color: var(--text-color);
             font-size: 1rem;
@@ -1670,7 +1710,10 @@
                         <span class="call-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
                         <h4>One private review with the instructor team</h4>
                     </div>
-                    <p>Submit a 3–5 minute Loom of your workflow first. The call is focused: unblock the last hard problem, then green-light the final shape of your shipped workflow.</p>
+                    <ol class="workflow-review-steps">
+                        <li>Submit a 3–5 minute Loom of your workflow first.</li>
+                        <li>Your 1-1 private call is focused. Unblock the last hard problem, then green-light the final shape of your shipped workflow.</li>
+                    </ol>
                 </div>
             </div>
 
@@ -1793,13 +1836,13 @@
                 </details>
                 <details class="faq-item">
                     <summary>Is there a risk-free guarantee?</summary>
-                    <div class="faq-answer">Yes. We offer a 7-day risk-free guarantee. If you join the cohort and decide it isn't the right fit within the first 7 days, you can opt out and get a full refund. No questions asked.</div>
+                    <div class="faq-answer">Yes. We offer a 5-day risk-free guarantee. If you join the cohort and decide it isn't the right fit within the first 5 days, you can opt out and get a full refund.</div>
                 </details>
             </div>
         </div>
 
         <div class="cta-block">
-            <h2>Ready to ship production-grade AI systems?</h2>
+            <h2>Ready to master AI-powered development workflows?</h2>
             <p>20 seats. 21 days. One optimized AI-powered development workflow, with the eval harnesses and velocity metrics to prove it ships faster than your baseline.</p>
             <a href="https://letsgetrusty.com" target="_blank" rel="noopener" class="cta-button">Apply now →</a>
         </div>
