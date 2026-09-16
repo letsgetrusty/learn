@@ -34,7 +34,7 @@
             --phase-elevated-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.36), 0 3px 8px rgba(0, 0, 0, 0.22);
             --phase-elevated-border-hover: rgba(255, 142, 61, 0.4);
         }
-        
+
         .light-mode {
             --primary-color: #f6f8fa;
             --primary-color-rgb: 246, 248, 250;
@@ -535,11 +535,11 @@
             .container {
                 padding: 1rem;
             }
-            
+
             .header h1 {
                 font-size: 1.5rem;
             }
-            
+
             .curriculum-section {
                 padding: 1.25rem;
             }
@@ -857,7 +857,7 @@
             box-shadow: 0 4px 12px var(--shadow-color);
             object-fit: cover;
         }
-        
+
         /* Mist overlay for infinite testimonials effect */
         .testimonials-mist-overlay {
             position: absolute;
@@ -869,7 +869,7 @@
             pointer-events: none;
             z-index: 100;
         }
-        
+
         @media (max-width: 1024px) and (min-width: 769px) {
             .companies-grid {
                 gap: 1.5rem;
@@ -1142,7 +1142,7 @@
                         <span class="tool-icon">🗺️</span>
                         <h4>Personalized Learning Roadmap</h4>
                     </div>
-                    <p>Start with a private 1-on-1 call with Bogdan to map your goals and design a custom roadmap — whether you're targeting your first Rust job, a project at work, or your own startup.</p>
+                    <p>Start with a private 1-on-1 call with our team to map your goals and action plan — whether you're targeting your first Rust job, a project at work, or your own startup.</p>
                 </div>
                 <div class="immersion-tool-card">
                     <div class="immersion-tool-card-header">
@@ -1727,7 +1727,7 @@
         // Additional Video Testimonials - displayed after image testimonials
         const ADDITIONAL_TESTIMONIALS = [
          {
-            name: "Cynthia", 
+            name: "Cynthia",
             company: "Nethermind ",
             image: "images/students/cynthia.jpg",
             description: "Building layer-1 blockchain infrastructure as a junior Rust engineer at her startup.",
@@ -1740,7 +1740,7 @@
             ]
           },
           {
-            name: "Jiri", 
+            name: "Jiri",
             company: "G.M.Project",
             image: "images/students/jiri.png",
             description: "Staff software engineer in industrial automation. Using Rust for industrial robotics control.",
@@ -1766,7 +1766,7 @@
             ]
           },
           {
-            name: "Tom", 
+            name: "Tom",
             company: "Deltaray",
             image: "images/students/tom.jpg",
             description: "",
@@ -1781,7 +1781,7 @@
           {
             name: "David",
             company: "Mysten Labs",
-            image: "images/students/david.png", 
+            image: "images/students/david.png",
             description: "",
             videoId: "hKloGmCKokU",
             quote: "The platform is very user friendly so it’s easy for the students to navigate and with a very great learning path.",
@@ -1794,7 +1794,7 @@
           {
             name: "Maria",
             company: "E-Sport Gaming",
-            image: "images/students/maria.jpg", 
+            image: "images/students/maria.jpg",
             description: "",
             videoId: "mvFUUKz_FoM",
             quote: "I went from having very basic knowledge in Rust to being able to build a full-fledged microservice application.",
@@ -1807,7 +1807,7 @@
           {
             name: "Kyle",
             company: "Shyft",
-            image: "images/students/kyle.jpg", 
+            image: "images/students/kyle.jpg",
             description: "",
             videoId: "utzDIQYIocI",
             quote: "I can say it’s super beginner friendly and also it has more than enough content for even seasoned developers for advanced concepts.",
@@ -1820,7 +1820,7 @@
           {
             name: "Leo",
             company: "Pinpoint",
-            image: "images/students/leo.jpg", 
+            image: "images/students/leo.jpg",
             description: "",
             videoId: "HBl-GOMNbLI",
             quote: "Going through the bootcamp really helped solidify the basic concepts and it also served as a very good path into the more advanced concepts within the Rust programming language.",
@@ -1833,7 +1833,7 @@
           {
             name: "James",
             company: "Google",
-            image: "images/students/james.jpg", 
+            image: "images/students/james.jpg",
             description: "",
             videoId: "DUbiPtfBlak",
             quote: "Rust is a really good replacement for C and C++, and I wanted to future proof myself and stay competitive in the job market.",
@@ -1846,7 +1846,7 @@
           {
             name: "Mateus",
             company: "Indaband",
-            image: "images/students/mateus.jpg", 
+            image: "images/students/mateus.jpg",
             description: "",
             videoId: "5TFdn4lNiHg",
             quote: "This was the first time I have ever participated in an English course and it was an amazing experience",
@@ -1862,36 +1862,36 @@
           const container = document.querySelector('.testimonials-list');
           const section = document.querySelector('.testimonials-section');
           if (!container || !section) return;
-          
+
           container.innerHTML = '';
-          
+
           // Render video testimonials first
           TESTIMONIALS.forEach(t => {
             const div = document.createElement('div');
             div.className = 'testimonial';
-            const tagsHTML = t.tags.map(tag => 
+            const tagsHTML = t.tags.map(tag =>
               `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
             ).join('');
-            
+
             const videoHTML = t.videoId ? `
-              <iframe 
-                class="testimonial-video" 
-                src="https://www.youtube.com/embed/${t.videoId}" 
+              <iframe
+                class="testimonial-video"
+                src="https://www.youtube.com/embed/${t.videoId}"
                 title="Testimonial from ${t.name}"
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
               </iframe>
             ` : '';
-            
+
             const descriptionHTML = t.description ? `
               <p class="testimonial-description">${t.description}</p>
             ` : '';
-            
+
             const quoteHTML = t.quote ? `
               <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
             ` : '';
-            
+
             div.innerHTML = `
               <div class="testimonial-header">
                 <img src="${t.image}" alt="${t.name}" class="testimonial-image">
@@ -1909,7 +1909,7 @@
             `;
             container.appendChild(div);
           });
-          
+
           // Remove any existing image testimonials grid and additional testimonials
           const existingGrid = section.querySelector('.image-testimonials-grid');
           if (existingGrid) {
@@ -1919,54 +1919,54 @@
           if (existingAdditional) {
             existingAdditional.remove();
           }
-          
+
           // Render image testimonials after video testimonials in a separate 3-column grid
           if (IMAGE_TESTIMONIALS.length > 0) {
             const imageGrid = document.createElement('div');
             imageGrid.className = 'image-testimonials-grid';
-            
+
             IMAGE_TESTIMONIALS.forEach(imagePath => {
               const div = document.createElement('div');
               div.className = 'image-testimonial';
               div.innerHTML = `<img src="${imagePath}" alt="Student testimonial">`;
               imageGrid.appendChild(div);
             });
-            
+
             // Add the image grid to the testimonials section, not the testimonials list
             section.appendChild(imageGrid);
           }
-          
+
           // Render additional video testimonials after image testimonials
           if (ADDITIONAL_TESTIMONIALS.length > 0) {
             const additionalContainer = document.createElement('div');
             additionalContainer.className = 'testimonials-list additional-testimonials-list';
-            
+
             ADDITIONAL_TESTIMONIALS.forEach(t => {
               const div = document.createElement('div');
               div.className = 'testimonial';
-              const tagsHTML = t.tags.map(tag => 
+              const tagsHTML = t.tags.map(tag =>
                 `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
               ).join('');
-              
+
               const videoHTML = t.videoId ? `
-                <iframe 
-                  class="testimonial-video" 
-                  src="https://www.youtube.com/embed/${t.videoId}" 
+                <iframe
+                  class="testimonial-video"
+                  src="https://www.youtube.com/embed/${t.videoId}"
                   title="Testimonial from ${t.name}"
-                  frameborder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen>
                 </iframe>
               ` : '';
-              
+
               const descriptionHTML = t.description ? `
                 <p class="testimonial-description">${t.description}</p>
               ` : '';
-              
+
               const quoteHTML = t.quote ? `
                 <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
               ` : '';
-              
+
               div.innerHTML = `
                 <div class="testimonial-header">
                   <img src="${t.image}" alt="${t.name}" class="testimonial-image">
@@ -1984,15 +1984,15 @@
               `;
               additionalContainer.appendChild(div);
             });
-            
+
             section.appendChild(additionalContainer);
           }
         }
 
         document.addEventListener('DOMContentLoaded', renderAllTestimonials);
     </script>
-    
+
     <!-- Mist overlay for infinite testimonials effect -->
     <div class="testimonials-mist-overlay"></div>
 </body>
-</html> 
+</html>
