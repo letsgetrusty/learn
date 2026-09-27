@@ -1094,7 +1094,13 @@
 
         <div class="intro-video-section">
             <div class="intro-video-wrapper">
-                <div id="intro-video"></div>
+                <iframe
+                    src="https://www.youtube-nocookie.com/embed/GijU8jLzFjQ?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&controls=0"
+                    title="Rust Live Accelerator — Start Here"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
 
@@ -2015,37 +2021,5 @@
     <!-- Mist overlay for infinite testimonials effect -->
     <div class="testimonials-mist-overlay"></div>
 
-    <!-- Intro video: YouTube IFrame API to suppress the end-screen "more videos" grid -->
-    <script>
-        function onYouTubeIframeAPIReady() {
-            new YT.Player('intro-video', {
-                host: 'https://www.youtube-nocookie.com',
-                videoId: 'GijU8jLzFjQ',
-                width: '100%',
-                height: '100%',
-                playerVars: {
-                    rel: 0,
-                    modestbranding: 1,
-                    iv_load_policy: 3,
-                    playsinline: 1
-                },
-                events: {
-                    onStateChange: function (event) {
-                        // When the video ends, reset to the first frame so YouTube
-                        // never shows its grid of suggested videos.
-                        if (event.data === YT.PlayerState.ENDED) {
-                            event.target.seekTo(0);
-                            event.target.pauseVideo();
-                        }
-                    }
-                }
-            });
-        }
-        (function () {
-            var tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            document.head.appendChild(tag);
-        })();
-    </script>
 </body>
 </html>
