@@ -103,6 +103,31 @@
             font-weight: 500;
         }
 
+        .intro-video-section {
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .intro-video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--phase-elevated-shadow);
+            border: 1px solid var(--border-color);
+            background: #000;
+        }
+
+        .intro-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -1067,21 +1092,26 @@
             <p>The most comprehensive Rust training program in the world.</p>
         </div>
 
+        <div class="intro-video-section">
+            <div class="intro-video-wrapper">
+                <iframe
+                    src="https://fast.wistia.net/embed/iframe/6wq4gr7zsk?seo=true&videoFoam=false"
+                    title="Curriculum Intro Video"
+                    allow="autoplay; fullscreen"
+                    allowtransparency="true"
+                    frameborder="0"
+                    scrolling="no"
+                    class="wistia_embed"
+                    name="wistia_embed"
+                    msallowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
         <div class="speakers-section">
             <h2><span style="font-size:1.1em;vertical-align:middle;">🌎</span> World's Most Influential Rust Educators</h2>
             <p>All-star instructors & speakers, all in one program.</p>
             <div class="speakers-grid">
-                <div class="speaker-card">
-                    <div class="speaker-image-wrapper">
-                        <img src="images/instructors/bogdan.png" alt="Bogdan" class="speaker-image">
-                    </div>
-                    <div class="speaker-name">Let's Get Rusty</div>
-                    <div class="speaker-title">Bogdan, Rust Creator<br>Let's Get Rusty</div>
-                    <div class="speaker-subs">150k+ subscribers</div>
-                    <a href="https://www.youtube.com/@letsgetrusty" target="_blank" rel="noopener" class="speaker-link">
-                        <span>▶</span> YouTube
-                    </a>
-                </div>
                 <div class="speaker-card">
                     <div class="speaker-image-wrapper">
                         <img src="images/instructors/jon.jpg" alt="Jon Gjengset" class="speaker-image">
@@ -1308,19 +1338,18 @@
                 <div class="call-card">
                     <span class="call-card-tag">Weekly</span>
                     <div class="call-instructor">
-                        <img src="images/instructors/mariya.jpg" alt="Mariya" class="call-instructor-photo">
+                        <img src="images/instructors/matiman.jpg" alt="Mathias" class="call-instructor-photo">
                         <div class="call-instructor-info">
-                            <h4>Recruiter Sync</h4>
-                            <span class="call-instructor-name">Mariya</span>
-                            <span class="call-instructor-channel">Technical Recruiter · ex-Amazon &amp; AWS</span>
+                            <h4>Career Camp Sync</h4>
+                            <span class="call-instructor-name">Mathias</span>
+                            <span class="call-instructor-channel">Program Graduate · Senior Rust Engineer</span>
                         </div>
                     </div>
-                    <p>Weekly recruiter sync — FAANG hiring strategy, outreach, interview pipeline, and salary negotiation.</p>
+                    <p>Weekly career sync — job search strategy, interview prep, and mentorship from a program alum.</p>
                     <div class="topic-tags">
-                        <span class="topic-tag">FAANG Hiring</span>
-                        <span class="topic-tag">Recruiter Outreach</span>
-                        <span class="topic-tag">Interview Pipeline</span>
-                        <span class="topic-tag">Salary Negotiation</span>
+                        <span class="topic-tag">Strategy</span>
+                        <span class="topic-tag">Interview Prep</span>
+                        <span class="topic-tag">Mentorship</span>
                     </div>
                 </div>
                 <div class="call-card">
@@ -1341,20 +1370,21 @@
                     </div>
                 </div>
                 <div class="call-card">
-                    <span class="call-card-tag">Weekly</span>
+                    <span class="call-card-tag">On-Demand</span>
                     <div class="call-instructor">
-                        <img src="images/instructors/matiman.jpg" alt="Mathias" class="call-instructor-photo">
+                        <img src="images/instructors/jordan-nunez.jpg" alt="Jordan Nunez" class="call-instructor-photo">
                         <div class="call-instructor-info">
-                            <h4>Career Camp Sync</h4>
-                            <span class="call-instructor-name">Mathias</span>
-                            <span class="call-instructor-channel">Program Graduate · Senior Embedded Rust at Ford</span>
+                            <h4>Resume Makeover</h4>
+                            <span class="call-instructor-name">Jordan</span>
+                            <span class="call-instructor-channel">Technical Recruiter · Let's Get Rusty</span>
                         </div>
                     </div>
-                    <p>Weekly career sync — job search strategy, interview prep, and mentorship from a program alum.</p>
+                    <p>Personalized resume makeovers — get line-by-line feedback to pass recruiter screens and stand out for Rust roles.</p>
                     <div class="topic-tags">
-                        <span class="topic-tag">Strategy</span>
-                        <span class="topic-tag">Interview Prep</span>
-                        <span class="topic-tag">Mentorship</span>
+                        <span class="topic-tag">Resume Review</span>
+                        <span class="topic-tag">ATS Optimization</span>
+                        <span class="topic-tag">Recruiter Screens</span>
+                        <span class="topic-tag">Positioning</span>
                     </div>
                 </div>
             </div>
@@ -1994,5 +2024,8 @@
 
     <!-- Mist overlay for infinite testimonials effect -->
     <div class="testimonials-mist-overlay"></div>
+
+    <!-- Wistia player helper (intro video) -->
+    <script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
 </body>
 </html>
