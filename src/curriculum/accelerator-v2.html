@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f8fa">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Rust Live Accelerator Curriculum (Proposed V2)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #111827;
+            --primary-color-rgb: 17, 24, 39;
+            --secondary-color: #232936;
+            --accent-color: #ff8e3d;
+            --accent-hover: #ff8e3d;
+            --text-color: #f9fafb;
+            --text-secondary: #a0aec0;
+            --border-color: #232936;
+            --hover-color: #232936;
+            --active-color: #2d3748;
+            --shadow-color: rgba(0, 0, 0, 0.18);
+            --card-bg: #232936;
+            --card-hover: #232936;
+            --header-bg: #111827;
+            --toggle-bg: #2d3748;
+            --toggle-thumb: #ff8e3d;
+            --toggle-border: #2d3748;
+            --header-text-color: #e5e7eb;
+            --phase-elevated-border: rgba(255, 255, 255, 0.16);
+            --phase-elevated-shadow: 0 4px 18px rgba(0, 0, 0, 0.32), 0 2px 6px rgba(0, 0, 0, 0.2);
+            --phase-elevated-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.36), 0 3px 8px rgba(0, 0, 0, 0.22);
+            --phase-elevated-border-hover: rgba(255, 142, 61, 0.4);
+        }
+
+        .light-mode {
+            --primary-color: #f6f8fa;
+            --primary-color-rgb: 246, 248, 250;
+            --secondary-color: #fff;
+            --accent-color: #f97316;
+            --accent-hover: #ea580c;
+            --text-color: #232936;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --hover-color: #f1f5f9;
+            --active-color: #f1f5f9;
+            --shadow-color: rgba(0,0,0,0.06);
+            --card-bg: #fff;
+            --card-hover: #f1f5f9;
+            --header-bg: #fff;
+            --toggle-bg: #e2e8f0;
+            --toggle-thumb: #f97316;
+            --toggle-border: #e2e8f0;
+            --header-text-color: var(--text-color);
+            --phase-elevated-border: rgba(0, 0, 0, 0.14);
+            --phase-elevated-shadow: 0 4px 18px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.06);
+            --phase-elevated-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12), 0 3px 8px rgba(0, 0, 0, 0.08);
+            --phase-elevated-border-hover: rgba(249, 115, 22, 0.45);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: var(--text-color);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        .intro-video-section {
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .intro-video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--phase-elevated-shadow);
+            border: 1px solid var(--border-color);
+            background: #000;
+        }
+
+        .intro-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            position: relative;
+        }
+
+        .section-header::before {
+            content: "";
+            display: block;
+            margin: 0 auto 2rem auto;
+            width: 500px;
+            max-width: 80%;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-header h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .info-note {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            box-sizing: border-box;
+        }
+
+        .info-note .info-icon {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .info-note p {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .curriculum-section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .curriculum-section h2 {
+            color: var(--text-color);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .curriculum-section p {
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .curriculum-list {
+            list-style: none;
+        }
+
+        .curriculum-list li {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .curriculum-list li:before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .immersion-highlight {
+            background: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+        }
+
+        .immersion-highlight p {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .phase-lead {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .immersion-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem 1.25rem;
+            background: var(--primary-color);
+            border: 1px solid var(--phase-elevated-border);
+            border-radius: 12px;
+            box-shadow: var(--phase-elevated-shadow);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .immersion-flow:hover {
+            border-color: var(--phase-elevated-border-hover);
+            box-shadow: var(--phase-elevated-shadow-hover);
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .flow-step-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--accent-color);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .flow-arrow {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        .immersion-subsection-label {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .topic-tag {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            padding: 0.2rem 0.6rem;
+        }
+
+        .immersion-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1.25rem 0;
+        }
+
+        .immersion-tools-grid--four {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .immersion-tools-grid--four .immersion-tool-card {
+            padding: 1rem 1.1rem;
+        }
+
+        .immersion-tools-grid--four .immersion-tool-card h4 {
+            font-size: 0.9rem;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .immersion-tools-grid--four .immersion-tool-card p {
+            font-size: 0.85rem;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 1100px) {
+            .immersion-tools-grid--four {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .immersion-tools-grid--four .immersion-tool-card h4 {
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .immersion-tools-grid--four {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .immersion-tool-card {
+            background: var(--primary-color);
+            border: 1px solid var(--phase-elevated-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--phase-elevated-shadow);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .immersion-tool-card:hover {
+            border-color: var(--phase-elevated-border-hover);
+            box-shadow: var(--phase-elevated-shadow-hover);
+        }
+
+        .immersion-tool-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .immersion-tool-card .tool-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .immersion-tool-card h4 {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .immersion-tool-card p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .call-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.25rem 0;
+        }
+
+        .call-card {
+            background: var(--primary-color);
+            border: 1px solid var(--phase-elevated-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: var(--phase-elevated-shadow);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .call-card:hover {
+            border-color: var(--phase-elevated-border-hover);
+            box-shadow: var(--phase-elevated-shadow-hover);
+        }
+
+        .call-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .call-card-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .call-card h4 {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .call-card-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            background: rgba(var(--primary-color-rgb), 0.5);
+            border: 1px solid var(--accent-color);
+            border-radius: 999px;
+            padding: 0.15rem 0.65rem;
+            margin-bottom: 0.25rem;
+            width: fit-content;
+        }
+
+        .call-card p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .call-instructor {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .call-instructor-photo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .call-instructor-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            min-width: 0;
+        }
+
+        .call-instructor-info h4 {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .call-instructor-name {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .call-instructor-channel {
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .call-cards-grid--instructors {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 960px) {
+            .call-cards-grid--instructors {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .call-cards-grid--two {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 960px) {
+            .call-cards-grid--two {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .call-card-topics {
+            list-style: none;
+            margin: 0.25rem 0 0 0;
+            padding: 0;
+        }
+
+        .call-card-topics li {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.25rem;
+        }
+
+        .call-card-topics li:before {
+            content: "→";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .curriculum-section {
+                padding: 1.25rem;
+            }
+        }
+
+        .guarantees-section {
+            margin-top: 2.5rem;
+            padding: 2rem 0 0 0;
+            text-align: center;
+            position: relative;
+        }
+        .guarantees-section::before {
+            content: "";
+            display: block;
+            margin: 0 auto 2rem auto;
+            width: 500px;
+            border-top: 1px solid var(--border-color);
+            border-radius: 2px;
+        }
+        .guarantees-header {
+            margin-bottom: 2rem;
+        }
+        .guarantees-header h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        .guarantees-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .guarantees-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .guarantee-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            text-align: left;
+        }
+        .guarantee-icon {
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        .guarantee-card h3 {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .guarantee-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .guarantee-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .guarantee-detail {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding: 1rem;
+            background: var(--primary-color);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+        .guarantee-detail strong {
+            color: var(--text-secondary);
+        }
+
+        .companies-section {
+            margin-top: 2.5rem;
+            padding: 2rem 0 0 0;
+            text-align: center;
+            position: relative;
+        }
+        .companies-section::before {
+            content: "";
+            display: block;
+            margin: 0 auto 2rem auto;
+            width: 500px;
+            border-top: 1px solid var(--border-color);
+            border-radius: 2px;
+        }
+        .companies-section h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            justify-content: center;
+        }
+        .company-logo {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+            max-width: 150px;
+            max-height: 150px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .company-logo:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow-color);
+        }
+        .company-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: filter 0.2s ease;
+        }
+        .light-mode .company-logo {
+            background: var(--card-bg);
+        }
+        .light-mode .company-logo img {
+            filter: brightness(0.9);
+        }
+        .light-mode .company-logo:hover img {
+            filter: brightness(0.7);
+        }
+
+        .testimonials-section {
+            margin-top: 2.5rem;
+            padding: 2rem 0 0 0;
+            text-align: center;
+            position: relative;
+        }
+        .testimonials-section::before {
+            content: "";
+            display: block;
+            margin: 0 auto 2rem auto;
+            width: 500px;
+            border-top: 1px solid var(--border-color);
+            border-radius: 2px;
+        }
+        .testimonials-section h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        .testimonials-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .testimonial {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .testimonial-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+            background: var(--border-color);
+        }
+        .testimonial-image:not([src]), .testimonial-image[src=""] {
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .testimonial-info {
+            flex: 1;
+        }
+        .testimonial-name-company {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin: 0 0 0.5rem 0;
+        }
+        .testimonial-name {
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        .testimonial-company {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .testimonial-company::before {
+            content: "@ ";
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .testimonial-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0;
+        }
+        .testimonial-tag {
+            background: var(--primary-color);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+        .testimonial-tag.industry {
+            background: var(--accent-color);
+            color: white;
+        }
+        .testimonial-tag.seniority {
+            background: var(--card-hover);
+            color: var(--text-color);
+        }
+        .testimonial-tag.location {
+            background: var(--hover-color);
+            color: var(--text-color);
+        }
+        .testimonial-tag.specialty {
+            background: var(--secondary-color);
+            color: var(--text-secondary);
+            border: 1px solid var(--accent-color);
+        }
+        .testimonial-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .testimonial-video {
+            width: 100%;
+            height: 250px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--primary-color);
+        }
+        .testimonial-quote {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-style: italic;
+            line-height: 1.6;
+            margin: 0;
+            padding: 1rem;
+            background: var(--primary-color);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .image-testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .additional-testimonials-list {
+            margin-top: 2rem;
+        }
+        .image-testimonial {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .image-testimonial img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            object-fit: cover;
+        }
+
+        /* Mist overlay for infinite testimonials effect */
+        .testimonials-mist-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50vh;
+            background: linear-gradient(to bottom, transparent 0%, rgba(var(--primary-color-rgb), 0.3) 15%, rgba(var(--primary-color-rgb), 0.7) 40%, var(--primary-color) 80%);
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .companies-grid {
+                gap: 1.5rem;
+            }
+            .image-testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        /* All-Star Speakers Section */
+        .speakers-section {
+            margin-bottom: 1rem;
+        }
+        .speakers-section h2 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .speakers-section > p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .speaker-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .speaker-image-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            margin: 0 auto 1rem auto;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #ff6b35 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .speaker-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            color: transparent; /* Hide alt text */
+        }
+        .speaker-name {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+        .speaker-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .speaker-subs {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            flex-grow: 1;
+        }
+        .speaker-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 20px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .speaker-link:hover {
+            background: #e07830;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .speakers-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .speaker-card {
+                padding: 1.25rem 1rem;
+            }
+            .speaker-image-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+            .speaker-name {
+                font-size: 1rem;
+            }
+            .speaker-title {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .companies-grid {
+                gap: 1.5rem;
+                max-width: 100%;
+            }
+            .company-logo {
+                padding: 1rem;
+            }
+            .guarantees-container {
+                gap: 1.5rem;
+                max-width: 100%;
+            }
+            .guarantee-card {
+                padding: 1.5rem;
+            }
+            .guarantee-icon {
+                font-size: 2rem;
+            }
+            .guarantee-card h3 {
+                font-size: 1.1rem;
+            }
+            .guarantee-detail {
+                padding: 0.75rem;
+            }
+            .testimonials-list {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .testimonial {
+                padding: 1.5rem;
+            }
+            .testimonial-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .testimonial-image {
+                width: 80px;
+                height: 80px;
+                align-self: center;
+            }
+            .testimonial-name-company {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+            .testimonial-tags {
+                justify-content: center;
+                gap: 0.4rem;
+            }
+            .testimonial-tag {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .testimonial-video {
+                height: 200px;
+            }
+            .image-testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .image-testimonial img {
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="container">
+        <div class="header">
+            <h1><span style="font-size:1.3em;vertical-align:middle;">🚀</span> Rust Live Accelerator</h1>
+            <p>The most comprehensive Rust training program in the world.</p>
+        </div>
+
+        <div class="intro-video-section">
+            <div class="intro-video-wrapper">
+                <div id="intro-video"></div>
+            </div>
+        </div>
+
+        <div class="speakers-section">
+            <h2><span style="font-size:1.1em;vertical-align:middle;">🌎</span> World's Most Influential Rust Educators</h2>
+            <p>All-star instructors & speakers, all in one program.</p>
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-image-wrapper">
+                        <img src="images/instructors/jon.jpg" alt="Jon Gjengset" class="speaker-image">
+                    </div>
+                    <div class="speaker-name">Jon Gjengset</div>
+                    <div class="speaker-title">Popular Book Author<br>"Rust for Rustaceans"</div>
+                    <div class="speaker-subs">100k+ subscribers</div>
+                    <a href="https://www.youtube.com/@jonhoo" target="_blank" rel="noopener" class="speaker-link">
+                        <span>▶</span> YouTube
+                    </a>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image-wrapper">
+                        <img src="images/instructors/tris.jpg" alt="Tris" class="speaker-image">
+                    </div>
+                    <div class="speaker-name">No Boilerplate</div>
+                    <div class="speaker-title">Tris, Rust Creator<br>No Boilerplate</div>
+                    <div class="speaker-subs">250k+ subscribers</div>
+                    <a href="https://www.youtube.com/@NoBoilerplate" target="_blank" rel="noopener" class="speaker-link">
+                        <span>▶</span> YouTube
+                    </a>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image-wrapper">
+                        <img src="images/instructors/ken.png" alt="Ken" class="speaker-image">
+                    </div>
+                    <div class="speaker-name">Code to the Moon</div>
+                    <div class="speaker-title">Ken, Rust Creator<br>Code to the Moon</div>
+                    <div class="speaker-subs">80k+ subscribers</div>
+                    <a href="https://www.youtube.com/@codetothemoon" target="_blank" rel="noopener" class="speaker-link">
+                        <span>▶</span> YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2><span style="font-size:1.1em;vertical-align:middle;">📚</span> Curriculum</h2>
+            <p>Three phases designed to take you from Rust beginner to high-performing, highly-paid Rust developer: <b>Onboarding</b>, <b>Immersion</b>, and <b>Career Camp</b>.</p>
+        </div>
+
+
+        <div class="curriculum-section">
+            <h2><span style="font-size:1.1em;vertical-align:middle;">🧭</span> Phase 1: Onboarding — Tailored Roadmap to Rust Mastery <span style="font-weight:400;font-size:0.9em;">(1 to 5 weeks)</span></h2>
+            <p class="phase-lead">Get a personalized roadmap, build your Rust foundation, and join the community — so you hit Immersion with clarity and momentum.</p>
+
+            <div class="immersion-flow">
+                <div class="flow-step"><span class="flow-step-num">1</span> Roadmap</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">2</span> Fundamentals</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">3</span> Momentum</div>
+            </div>
+
+            <div class="immersion-tools-grid">
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🗺️</span>
+                        <h4>Personalized Learning Roadmap</h4>
+                    </div>
+                    <p>Start with a private 1-on-1 call with our team to map your goals and action plan — whether you're targeting your first Rust job, a project at work, or your own startup.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">📖</span>
+                        <h4>Rust Fundamentals Course</h4>
+                    </div>
+                    <p>Unlock immediate access to our Rust Fundamentals course — a strong foundation you'll keep coming back to as you build real systems.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🤝</span>
+                        <h4>Weekly Momentum Calls</h4>
+                    </div>
+                    <p>Weekly live calls to build connections, get guidance on your upcoming Immersion project, and get support with the fundamentals.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="curriculum-section">
+            <h2><span style="font-size:1.1em;vertical-align:middle;">🔧</span> Phase 2: Immersion — Build Production-Grade Rust Software <span style="font-weight:400;font-size:0.9em;">(3 months)</span></h2>
+            <p class="phase-lead">Design and build production-grade Rust software tailored to your niche, goals, or domain — with expert reviews and mentorship.</p>
+
+            <div class="immersion-flow">
+                <div class="flow-step"><span class="flow-step-num">1</span> Scope</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">2</span> Build</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">3</span> Review</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">4</span> Mentorship</div>
+            </div>
+
+            <div class="immersion-tools-grid">
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🎯</span>
+                        <h4>Personalized Projects</h4>
+                    </div>
+                    <p>Work with our team to scope a project aligned with your experience, goals, and target domain.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🔍</span>
+                        <h4>Expert Code Reviews</h4>
+                    </div>
+                    <p>Production-grade feedback on architecture, idiomatic Rust, error handling, and testing.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🧠</span>
+                        <h4>Rust Brain Platform</h4>
+                    </div>
+                    <p>AI-first learning with tutoring, code review, curriculum guidance, and on-demand project help.</p>
+                </div>
+            </div>
+
+            <div class="immersion-subsection-label">Live Expert Sessions</div>
+            <div class="call-cards-grid call-cards-grid--instructors">
+                <div class="call-card">
+                    <span class="call-card-tag">Monthly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/jon.jpg" alt="Jon Gjengset" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Code Clinic</h4>
+                            <span class="call-instructor-name">Jon Gjengset</span>
+                            <span class="call-instructor-channel">Rust for Rustaceans</span>
+                        </div>
+                    </div>
+                    <p>Monthly mentorship with Jon — bring code, architecture questions, or anything you're stuck on.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Code Reviews</span>
+                        <span class="topic-tag">Architecture</span>
+                        <span class="topic-tag">Q&amp;A</span>
+                        <span class="topic-tag">Debugging</span>
+                    </div>
+                </div>
+                <div class="call-card">
+                    <span class="call-card-tag">Weekly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/tris.jpg" alt="Tris" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Code Clinic</h4>
+                            <span class="call-instructor-name">Tris</span>
+                            <span class="call-instructor-channel">No Boilerplate</span>
+                        </div>
+                    </div>
+                    <p>Weekly open mentorship — bring code, architecture questions, or anything you're stuck on.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Code Reviews</span>
+                        <span class="topic-tag">Architecture</span>
+                        <span class="topic-tag">Q&amp;A</span>
+                        <span class="topic-tag">Debugging</span>
+                    </div>
+                </div>
+                <div class="call-card">
+                    <span class="call-card-tag">Weekly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/ken.png" alt="Ken" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Rust Power Hour</h4>
+                            <span class="call-instructor-name">Ken</span>
+                            <span class="call-instructor-channel">Code to the Moon</span>
+                        </div>
+                    </div>
+                    <p>Weekly topic-based deep dives on a specific area of Rust engineering — led live with room for Q&amp;A.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Unsafe Rust</span>
+                        <span class="topic-tag">Async</span>
+                        <span class="topic-tag">Crates</span>
+                        <span class="topic-tag">AI Workflows</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="curriculum-section">
+            <h2><span style="font-size:1.1em;vertical-align:middle;">🎯</span>(Bonus) Phase 3: Career Camp — Land Your Dream Rust Job <span style="font-weight:400;font-size:0.9em;">(3 months)</span></h2>
+            <p class="phase-lead">Technical skills alone won't get you hired — Career Camp gives you the strategy, feedback, and structure to turn your Rust skills into interviews, offers, and income.</p>
+
+            <div class="immersion-flow">
+                <div class="flow-step"><span class="flow-step-num">1</span> Position</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">2</span> Outreach</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">3</span> Interview</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step"><span class="flow-step-num">4</span> Offer</div>
+            </div>
+
+            <div class="immersion-tools-grid immersion-tools-grid--four">
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🤝</span>
+                        <h4>Recruiter Strategy</h4>
+                    </div>
+                    <p>Rust recruiter network, outreach, and interview opportunities.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🎯</span>
+                        <h4>Positioning &amp; Pipeline</h4>
+                    </div>
+                    <p>Market positioning, pipeline tracking, and weekly strategic support.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">🎤</span>
+                        <h4>Interview Prep</h4>
+                    </div>
+                    <p>Behavioral and technical prep — mocks and live feedback.</p>
+                </div>
+                <div class="immersion-tool-card">
+                    <div class="immersion-tool-card-header">
+                        <span class="tool-icon">💰</span>
+                        <h4>Offer Negotiation</h4>
+                    </div>
+                    <p>Negotiate confidently — avoid lowballs and down-levels.</p>
+                </div>
+            </div>
+
+            <div class="immersion-subsection-label">Live Expert Sessions</div>
+            <div class="call-cards-grid call-cards-grid--instructors">
+                <div class="call-card">
+                    <span class="call-card-tag">Weekly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/jordan-nunez.jpg" alt="Jordan Nunez" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Live Resume Reviews</h4>
+                            <span class="call-instructor-name">Jordan</span>
+                            <span class="call-instructor-channel">Technical Recruiter · Let's Get Rusty</span>
+                        </div>
+                    </div>
+                    <p>Weekly live resume reviews — get line-by-line feedback to pass recruiter screens, beat ATS filters, and stand out for Rust roles.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Resume Review</span>
+                        <span class="topic-tag">ATS Optimization</span>
+                        <span class="topic-tag">Recruiter Screens</span>
+                        <span class="topic-tag">Positioning</span>
+                    </div>
+                </div>
+                <div class="call-card">
+                    <span class="call-card-tag">Monthly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/cameron-whelan.jpg" alt="Cameron" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Recruiter Sync</h4>
+                            <span class="call-instructor-name">Cameron</span>
+                            <span class="call-instructor-channel">Rust Recruiter · Let's Get Rusty</span>
+                        </div>
+                    </div>
+                    <p>Monthly recruiter sync — Rust roles, career transitions, and navigating the Rust job market.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Rust Roles</span>
+                        <span class="topic-tag">Career Transitions</span>
+                        <span class="topic-tag">Market Insights</span>
+                    </div>
+                </div>
+                <div class="call-card">
+                    <span class="call-card-tag">Weekly</span>
+                    <div class="call-instructor">
+                        <img src="images/instructors/matiman.jpg" alt="Mathias" class="call-instructor-photo">
+                        <div class="call-instructor-info">
+                            <h4>Career Camp Sync</h4>
+                            <span class="call-instructor-name">Mathias</span>
+                            <span class="call-instructor-channel">Program Graduate · Senior Embedded Rust at Ford</span>
+                        </div>
+                    </div>
+                    <p>Weekly career sync — job search strategy, interview prep, and mentorship from a program alum.</p>
+                    <div class="topic-tags">
+                        <span class="topic-tag">Strategy</span>
+                        <span class="topic-tag">Interview Prep</span>
+                        <span class="topic-tag">Mentorship</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="guarantees-section">
+            <div class="guarantees-header">
+                <h2><span style="font-size:1.1em;vertical-align:middle;">🛡️</span> Our Guarantees to You</h2>
+                <p>We're so confident in the value of our program that we back it with these guarantees:</p>
+            </div>
+            <div class="guarantees-container">
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">😍</div>
+                    <h3>100% Satisfaction Guarantee</h3>
+                    <p>If you're not completely satisfied with the program for any reason, you can request a full refund within the first <strong>14 days of the program</strong>. No questions asked.</p>
+                    <div class="guarantee-details">
+                        <div class="guarantee-detail">
+                            <strong>After 14 days:</strong> No refunds will be issued. If life circumstances arise (e.g., you get busy or need a break), we offer a <strong>deferment option</strong> — you can pause and resume your participation for up to <strong>12 months</strong> from your original start date.
+                        </div>
+                    </div>
+                </div>
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">💼</div>
+                    <h3>Job Placement Guarantee</h3>
+                    <div class="guarantee-details">
+                        <div class="guarantee-detail">
+                            <strong>🇺🇸 US Residents:</strong> If you're enrolled in the Career Camp and don't land a Rust job within 6 months of completion, you can get a full refund. Terms apply.
+                        </div>
+                        <div class="guarantee-detail">
+                            <strong>🌍 International Students:</strong> If you're enrolled in the Career Camp, we guarantee to work with you indefinitely until you successfully land a Rust role.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="companies-section">
+            <h2>We've Trained Engineers at Top Companies!</h2>
+            <div class="companies-grid">
+                <div class="company-logo">
+                    <img src="images/companies/Amazon.png" alt="Amazon">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Google.png" alt="Google">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Microsoft.png" alt="Microsoft">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Meta.png" alt="Meta">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/AWS.png" alt="AWS">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Gitlab.png" alt="GitLab">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Toyota.png" alt="Toyota">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Mastercard.png" alt="Mastercard">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/coinbase.png" alt="Coinbase">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Binance.png" alt="Binance">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Elastic search - 1.png" alt="Elasticsearch">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Morgan-Stanley 1.png" alt="Morgan Stanley">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/Helsing 1.png" alt="Helsing">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/GA.png" alt="GA">
+                </div>
+                <div class="company-logo">
+                    <img src="images/companies/lunit.png" alt="Helsing">
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonials-section">
+            <h2>Our Students Love Us!</h2>
+            <div class="testimonials-list"></div>
+        </div>
+        <br>
+    </div>
+
+    <script>
+        // Theme Management
+        function setTheme(mode) {
+            const isDark = mode === 'dark';
+            document.body.classList.toggle('light-mode', !isDark);
+        }
+        // Listen for theme messages from parent
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'theme') {
+                setTheme(event.data.theme);
+            }
+        });
+        // Default to light; parent page overrides when embedded in iframe
+        try {
+            if (window.parent === window) {
+                setTheme(localStorage.getItem('theme') || 'light');
+            } else {
+                window.parent.postMessage({ type: 'requestTheme' }, '*');
+            }
+        } catch (e) {
+            setTheme(localStorage.getItem('theme') || 'light');
+        }
+
+        // Testimonials JSON and rendering
+        const TESTIMONIALS = [
+          {
+            name: "Ryan",
+            company: "ElasticSearch",
+            image: "images/students/ryan.jpg",
+            description: "Principal Architect building performance-critical data processing pipelines in Rust at Elasticsearch.",
+            videoId: "ltGCvAJpa7A",
+            quote: "Rust may not be as unfamiliar as you think and honestly that expert guidance that you get in the program is going to help you master Rust.",
+            tags: [
+              { text: "Distributed Systems", type: "industry" },
+              { text: "📶 Principal", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Sean",
+            company: "Toyota",
+            image: "images/students/sean.jpg",
+            description: "Senior Rust Engineer building safe, performant embedded systems in the automotive industry.",
+            videoId: "hKee-IJbyeM",
+            quote: "I was able to take the typestate pattern and apply it to state machine I was working on in my actual job.",
+            tags: [
+              { text: "Embedded", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Nariman",
+            company: "H2O Nodes",
+            image: "images/students/nariman.jpg",
+            description: "Full stack dev who got his first Rust role in Web3.",
+            videoId: "GDlXfIk-Hrc",
+            quote: "After being through Rust Accelerator program, I landed my Rust job in Web3 space and making $50 per hour.",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Tech Lead", type: "seniority" },
+              { text: "🇬🇪 Georgia", type: "location" },
+            ]
+          },
+          {
+            name: "Bruno",
+            company: "METRIX",
+            image: "images/students/bruno.jpg",
+            description: "Senior trading analyst turned Web3 engineer. Built crypto trading software for private clients.",
+            videoId: "lyCepAm-Qcg",
+            quote: "Today I'm completely different than I was three months ago!",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇧🇷 Brazil", type: "location" },
+            ]
+          },
+          {
+            name: "Jordan",
+            company: "Meta",
+            image: "images/students/jordan.jpeg",
+            description: "Software engineer at Meta. Currently working on a \"Top-Secret, New Product\" :D",
+            videoId: "ZG7OBmRf9no",
+            quote: "My favorite part about the accelerator was to meet new people",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Nick",
+            company: "Morgan Stanley",
+            image: "images/students/nick.jpg",
+            description: "Senior Quant Engineer using Rust for financial data analysis.",
+            videoId: "oK0D2WNV8bY",
+            quote: "The projects get increasingly more complex and I think you'll be in a perfect position to then be able to take on projects on your own.",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Akinyele",
+            company: "GitLab",
+            image: "images/students/akinyele.jpg",
+            description: "Backend engineer at GitLab. Now guiding his team members to navigate tricky aspects of Rust.",
+            videoId: "VGiCHHF4dvo",
+            quote: "I would recommend the accelerator program to anyone wanting to further their Rust skills",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Ray",
+            company: "Mastercard",
+            image: "images/students/ray.jpg",
+            description: "Backend engineer at Mastercard with 10+ YOE, turned to Rust as a more robust alternative to Java.",
+            videoId: "vke5M03ncvE",
+            quote: "My favorite part of the Accelerator is that every sprint will give us small practical chunks to work on.",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇬🇧 UK", type: "location" },
+            ]
+          },
+          {
+            name: "Jakub",
+            company: "BTL Medical Development",
+            image: "images/students/jakub.jpg",
+            description: "Senior engineer now leading Rust adoption at his medical device company after the program.",
+            videoId: "s7ZRuqafVXg",
+            quote: "I really like the sprints with tasks, live calls and personalized mentoring with 1-to-1 calls with Bogdan.",
+            tags: [
+              { text: "Medical Technology", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "Sergey",
+            company: "Align Technology",
+            image: "images/students/sergey.jpg",
+            description: "Senior software engineer who specializes in high-performance data and database engineering.",
+            videoId: "jlujPiZNgCg",
+            quote: "This accelerator also gave me the confidence that I'm truly ready to work with Rust.",
+            tags: [
+              { text: "Data Engineering", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇦🇲 Armenia", type: "location" },
+            ]
+          },
+          {
+            name: "Jay",
+            company: "Lunit Cancer Screening",
+            image: "images/students/jay.jpg",
+            description: "AI research team lead using Rust to write low level ML tools.",
+            videoId: "KlY6M-DdREM",
+            quote: "My favorite part of the program was learning all the industry-standard Rust best practices and tools!",
+            tags: [
+              { text: "AI", type: "industry" },
+              { text: "📶 Teach Lead", type: "seniority" },
+              { text: "🇰🇷 South Korea", type: "location" },
+            ]
+          },
+          {
+            name: "Luis",
+            company: "Wizeline",
+            image: "images/students/luis.jpg",
+            description: "Backend engineer and all-star student during the program hired by Let's Get Rusty at the end.",
+            videoId: "fmTGIlQ0NJY",
+            quote: "If you want to speed up the process of learning Rust I highly recommend you join the live Accelerator program. You are not going to regret it.",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Staff", type: "seniority" },
+              { text: "🇲🇽 Mexico", type: "location" },
+            ]
+          },
+          {
+            name: "Cezar",
+            company: "Craft Solutions Software",
+            image: "images/students/cezar.jpg",
+            description: "CTO at a financial consultancy. Using Rust to process big data for his company.",
+            videoId: "xY_XBfdtWQg",
+            quote: "The Capstone project pushed me to the limit. It was hard but not unbearable — it was challenging, it gave me my first practical experience with something bigger than a tutorial project.",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 CTO", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "Hyun",
+            company: "DESIGN N STUDIO",
+            image: "images/students/hyun.jpg",
+            description: "Introduced Rust to his previous employer's tech stack. Now quit his 9-5 and is working on his own blockchain startup.",
+            videoId: "p7RtGo7R2eY",
+            quote: "Being in a program with many developers with many different backgrounds I found it really helpful to see how different approaches could be taken for one thing.",
+            tags: [
+              { text: "Full-stack", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇰🇷 South Korea", type: "location" },
+            ]
+          },
+          {
+            name: "John",
+            company: "GreyOrange",
+            image: "images/students/john.jpg",
+            description: "Using Rust to build high-performance distributed systems!",
+            videoId: "g7iIWac-CFg",
+            quote: "I'd highly recommend this live program to anyone who wants to learn Rust in a systematic way!",
+            tags: [
+              { text: "Distributed Systems", type: "industry" },
+              { text: "📶 Architect", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Guilherme",
+            company: "Simpdigit",
+            image: "images/students/guilherme.jpg",
+            description: "Data integration tech lead turned blockchain entrepreneur. Using Rust for smart contracts and cryptocurrency validators.",
+            videoId: "btvp-Stps6Y",
+            quote: "I would recommend the Accelerator, specifically for the folks that are in the blockchain space and focusing on high performance programming.",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "Chris",
+            company: "Renavest",
+            image: "images/students/chris.jpg",
+            description: "QA engineer turned Rust engineer and all-star student during the program hired by Let's Get Rusty.",
+            videoId: "A9FZP4M9gsU",
+            quote: "My favorite part of the program was the structured content that allowed me to build a load balancer from scratch in Rust.",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇿🇦 Africa", type: "location" },
+            ]
+          },
+          {
+            name: "Stepan",
+            company: "EPAM System",
+            image: "images/students/stepan.jpg",
+            description: "A full stack tech lead who joined the program to learn Rust for low level systems programming.",
+            videoId: "Q793ezy6KTA",
+            quote: "My favorite part is actaully you get hands on experience with projects!",
+            tags: [
+              { text: "Full Stack", type: "industry" },
+              { text: "📶 Tech Lead", type: "seniority" },
+              { text: "🇺🇦 Ukraine", type: "location" },
+            ]
+          },
+        ];
+
+
+        // Image Testimonials - just images, no metadata
+        const IMAGE_TESTIMONIALS = [
+          "images/text/1024357265Bootcamp_Testimonial_-_Marcondes_Viana_Highlighted.png",
+          "images/text/186730255693Bootcamp_Testimonial_-_Mateus_Ramalho_Highlighted.png",
+          "images/text/253875507520Bootcamp_Testimonial_-_Sven_Brettschneider_Highlighted.png",
+          "images/text/92131452631Bootcamp_Testimonial_-_Yitzhak_Bar_Geva_Highlighted.png",
+          "images/text/244956013511Bootcamp_Testimonial_-_Lars_Fredriksen_Highlighted.png",
+          "images/text/994669926025Bootcamp_Testimonial_-_Discord.png",
+          "images/text/603767153126Bootcamp_Testimonial_-_Vedvardhan_Gyanmote.png",
+          "images/text/1482766351625Bootcamp_Testimonial_-_Glen.png",
+          "images/text/49230391828Bootcamp_Testimonial_-_Zach_Johnson_Highlighted.png"
+        ];
+
+        // Additional Video Testimonials - displayed after image testimonials
+        const ADDITIONAL_TESTIMONIALS = [
+         {
+            name: "Cynthia",
+            company: "Nethermind ",
+            image: "images/students/cynthia.jpg",
+            description: "Building layer-1 blockchain infrastructure as a junior Rust engineer at her startup.",
+            videoId: "",
+            quote: "",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇿🇦 Africa", type: "location" },
+            ]
+          },
+          {
+            name: "Jiri",
+            company: "G.M.Project",
+            image: "images/students/jiri.png",
+            description: "Staff software engineer in industrial automation. Using Rust for industrial robotics control.",
+            videoId: "",
+            quote: "",
+            tags: [
+              { text: "Robotics", type: "industry" },
+              { text: "📶 Staff", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "Nivaldo",
+            company: "Globo",
+            image: "images/students/nivaldo.jpg",
+            description: "",
+            videoId: "ef0Je9sp6DM",
+            quote: "If you started learning Rust and are struggling to land a Rust job, I'd highly recommend this program!",
+            tags: [
+              { text: "DevOps", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇧🇷 Brazil", type: "location" },
+            ]
+          },
+          {
+            name: "Tom",
+            company: "Deltaray",
+            image: "images/students/tom.jpg",
+            description: "",
+            videoId: "QManSflB1ao",
+            quote: "You are encouraged to follow along just not by only looking at the videos but doing the exercises, diving into the projects and building something real for your own.",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Tech Lead", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "David",
+            company: "Mysten Labs",
+            image: "images/students/david.png",
+            description: "",
+            videoId: "hKloGmCKokU",
+            quote: "The platform is very user friendly so it’s easy for the students to navigate and with a very great learning path.",
+            tags: [
+              { text: "Blockchain", type: "industry" },
+              { text: "📶 Enegineering Manager", type: "seniority" },
+              { text: "🇯🇵 Tokyo", type: "location" },
+            ]
+          },
+          {
+            name: "Maria",
+            company: "E-Sport Gaming",
+            image: "images/students/maria.jpg",
+            description: "",
+            videoId: "mvFUUKz_FoM",
+            quote: "I went from having very basic knowledge in Rust to being able to build a full-fledged microservice application.",
+            tags: [
+              { text: "Backend", type: "industry" },
+              { text: "📶 Mid-level", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Kyle",
+            company: "Shyft",
+            image: "images/students/kyle.jpg",
+            description: "",
+            videoId: "utzDIQYIocI",
+            quote: "I can say it’s super beginner friendly and also it has more than enough content for even seasoned developers for advanced concepts.",
+            tags: [
+              { text: "Mobile", type: "industry" },
+              { text: "📶 Tech Lead", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Leo",
+            company: "Pinpoint",
+            image: "images/students/leo.jpg",
+            description: "",
+            videoId: "HBl-GOMNbLI",
+            quote: "Going through the bootcamp really helped solidify the basic concepts and it also served as a very good path into the more advanced concepts within the Rust programming language.",
+            tags: [
+              { text: "Full-stack", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇪🇺 EU", type: "location" },
+            ]
+          },
+          {
+            name: "James",
+            company: "Google",
+            image: "images/students/james.jpg",
+            description: "",
+            videoId: "DUbiPtfBlak",
+            quote: "Rust is a really good replacement for C and C++, and I wanted to future proof myself and stay competitive in the job market.",
+            tags: [
+              { text: "Security Engineer", type: "industry" },
+              { text: "📶 Senior", type: "seniority" },
+              { text: "🇺🇸 US", type: "location" },
+            ]
+          },
+          {
+            name: "Mateus",
+            company: "Indaband",
+            image: "images/students/mateus.jpg",
+            description: "",
+            videoId: "5TFdn4lNiHg",
+            quote: "This was the first time I have ever participated in an English course and it was an amazing experience",
+            tags: [
+              { text: "Mobile", type: "industry" },
+              { text: "📶 Junior", type: "seniority" },
+              { text: "🇧🇷 Brazil", type: "location" },
+            ]
+          },
+        ];
+
+        function renderAllTestimonials() {
+          const container = document.querySelector('.testimonials-list');
+          const section = document.querySelector('.testimonials-section');
+          if (!container || !section) return;
+
+          container.innerHTML = '';
+
+          // Render video testimonials first
+          TESTIMONIALS.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'testimonial';
+            const tagsHTML = t.tags.map(tag =>
+              `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
+            ).join('');
+
+            const videoHTML = t.videoId ? `
+              <iframe
+                class="testimonial-video"
+                src="https://www.youtube.com/embed/${t.videoId}"
+                title="Testimonial from ${t.name}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            ` : '';
+
+            const descriptionHTML = t.description ? `
+              <p class="testimonial-description">${t.description}</p>
+            ` : '';
+
+            const quoteHTML = t.quote ? `
+              <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
+            ` : '';
+
+            div.innerHTML = `
+              <div class="testimonial-header">
+                <img src="${t.image}" alt="${t.name}" class="testimonial-image">
+                <div class="testimonial-info">
+                  <div class="testimonial-name-company">
+                    <h3 class="testimonial-name">${t.name}</h3>
+                    <p class="testimonial-company">${t.company}</p>
+                  </div>
+                  <div class="testimonial-tags">${tagsHTML}</div>
+                </div>
+              </div>
+              ${descriptionHTML}
+              ${videoHTML}
+              ${quoteHTML}
+            `;
+            container.appendChild(div);
+          });
+
+          // Remove any existing image testimonials grid and additional testimonials
+          const existingGrid = section.querySelector('.image-testimonials-grid');
+          if (existingGrid) {
+            existingGrid.remove();
+          }
+          const existingAdditional = section.querySelector('.additional-testimonials-list');
+          if (existingAdditional) {
+            existingAdditional.remove();
+          }
+
+          // Render image testimonials after video testimonials in a separate 3-column grid
+          if (IMAGE_TESTIMONIALS.length > 0) {
+            const imageGrid = document.createElement('div');
+            imageGrid.className = 'image-testimonials-grid';
+
+            IMAGE_TESTIMONIALS.forEach(imagePath => {
+              const div = document.createElement('div');
+              div.className = 'image-testimonial';
+              div.innerHTML = `<img src="${imagePath}" alt="Student testimonial">`;
+              imageGrid.appendChild(div);
+            });
+
+            // Add the image grid to the testimonials section, not the testimonials list
+            section.appendChild(imageGrid);
+          }
+
+          // Render additional video testimonials after image testimonials
+          if (ADDITIONAL_TESTIMONIALS.length > 0) {
+            const additionalContainer = document.createElement('div');
+            additionalContainer.className = 'testimonials-list additional-testimonials-list';
+
+            ADDITIONAL_TESTIMONIALS.forEach(t => {
+              const div = document.createElement('div');
+              div.className = 'testimonial';
+              const tagsHTML = t.tags.map(tag =>
+                `<span class="testimonial-tag ${tag.type}">${tag.text}</span>`
+              ).join('');
+
+              const videoHTML = t.videoId ? `
+                <iframe
+                  class="testimonial-video"
+                  src="https://www.youtube.com/embed/${t.videoId}"
+                  title="Testimonial from ${t.name}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              ` : '';
+
+              const descriptionHTML = t.description ? `
+                <p class="testimonial-description">${t.description}</p>
+              ` : '';
+
+              const quoteHTML = t.quote ? `
+                <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
+              ` : '';
+
+              div.innerHTML = `
+                <div class="testimonial-header">
+                  <img src="${t.image}" alt="${t.name}" class="testimonial-image">
+                  <div class="testimonial-info">
+                    <div class="testimonial-name-company">
+                      <h3 class="testimonial-name">${t.name}</h3>
+                      <p class="testimonial-company">${t.company}</p>
+                    </div>
+                    <div class="testimonial-tags">${tagsHTML}</div>
+                  </div>
+                </div>
+                ${descriptionHTML}
+                ${videoHTML}
+                ${quoteHTML}
+              `;
+              additionalContainer.appendChild(div);
+            });
+
+            section.appendChild(additionalContainer);
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', renderAllTestimonials);
+    </script>
+
+    <!-- Mist overlay for infinite testimonials effect -->
+    <div class="testimonials-mist-overlay"></div>
+
+    <!-- Intro video: YouTube IFrame API to suppress the end-screen "more videos" grid -->
+    <script>
+        function onYouTubeIframeAPIReady() {
+            new YT.Player('intro-video', {
+                host: 'https://www.youtube-nocookie.com',
+                videoId: 'GijU8jLzFjQ',
+                width: '100%',
+                height: '100%',
+                playerVars: {
+                    rel: 0,
+                    modestbranding: 1,
+                    iv_load_policy: 3,
+                    playsinline: 1
+                },
+                events: {
+                    onStateChange: function (event) {
+                        // When the video ends, reset to the first frame so YouTube
+                        // never shows its grid of suggested videos.
+                        if (event.data === YT.PlayerState.ENDED) {
+                            event.target.seekTo(0);
+                            event.target.pauseVideo();
+                        }
+                    }
+                }
+            });
+        }
+        (function () {
+            var tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            document.head.appendChild(tag);
+        })();
+    </script>
+</body>
+</html>
